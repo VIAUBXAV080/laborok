@@ -1,3 +1,0 @@
-# Házi feladat információk
-
-TODO
