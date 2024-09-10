@@ -1042,6 +1042,7 @@ fun getState(): GameState {
 Ez egy egyszerű getter függvény, amely vissza adja a játék jelenlegi állapotát.
 
 Ezen kívűl meg kell valósítanunk egy egyszerű Sealed Class-t ami magáért az Eventekért fog felelni. 
+
 *   Start Game
 *   Pause Game
 *   Reset Game
@@ -2326,3 +2327,261 @@ Ha mindent jól csináltunk, a játéknak működnie kellene az elindítás utá
 Próbálj meg összeszedni 5 pontot, majd lescreenshotolni és azt beadni feladatmegoldásként!
 
 **FELADAT BEADÁS**
+
+
+!!!example "BEADANDÓ (x pont)"
+    Készíts **képernyő képet** a játékról, amelyen látszik az **elkészült oldal, valahány pont a játék során vagy a gameOver felirat** (emulátoron, készüléket tükrözve vagy képernyőfelvétellel), egy **ahhoz tartozó kódrészlet**, valamint a **neptun kódod a kódban valahol kommentként**. A képeket a megoldásban a repository-ba fx.png néven töltsd föl.
+
+## High Scores / Database
+
+A következő feladatban az adabázis részét fogjuk megvalósítani az alkalmazásnak, ennek a segítségével tudjuk elérni, hogy a játék végén, egy adatbázisba elmentsük a játék adatait (Név, pont, nehézség formában). Ehhez szükségünk lesz egy **Dao**-ra, egy **DataBase**-re, illetve egy **Entity**-re is. Ezeknek a segítségével fogjuk elvégezni az adatok tárolását, valamint az adatbázis adatainak a módosítását.
+
+Először hozzunk létre egy új Packaget a gyökérmappában `data` néven. Korábban a labor elején már hozzáadtuk a szükséges függőségeket, így most könnyen elkezdhetjük a kódunk megírását, illetve az adatbázis felépítését. 
+
+### Dao
+A következő lépés, hogy az entitáshoz kapcsolódó alapműveleteket is támogassuk a Room könyvtár segítségével. Ezt egy DAO (Data Access Object) komponenssel fogjuk megvalósítani. A DAO egy - szintén nem csak Android alatt alkalmazott - tervezési minta, amelynek a lényege, hogy az egy entitáshoz kapcsolódó összes adatbázisműveleteket egy komponensbe gyűjtjük össze. Ez egyrészt jól áttekinthető, illetve ha az adatbázist le szeretnénk cserélni más technológiára, akkor elvileg elegendő lenne a DAO komponens módosítása, bár ilyen jellegű módosításra manapság általában nincs szükség.
+
+Hozzunk létre egy data.dao package-et, és ebben hozzunk létre egy `TopScoresDao` interfacet, majd vegyük fel az alábbit:
+
+```kotlin
+@Dao
+interface TopScoreDao {
+    @Query("SELECT * FROM topscore ORDER BY score DESC")
+    fun getAll(): Flow<List<TopScore>>
+
+    @Insert
+    suspend fun insert(topScore: TopScore)
+
+    @Update
+    suspend fun update(topScore: TopScore)
+
+    @Delete
+    suspend fun delete(topScore: TopScore)
+
+    @Query("DELETE FROM topscore")
+    suspend fun deleteAll()
+}
+```
+
+Láthatjuk, hogy egyrészt maga az interfész is meg van jelölve, mint DAO komponens, másrészt az egyes műveleteken is Room annotációk vannak. A Room az annotációból, illetve az annotált metódus paramétereiből és visszatérési értékéből ki tudja következtetni a szándékunkat.
+
+Ezután egy repository komponenst készítünk. Ez némileg úgy tűnik, mintha nem adna hozzá túl sokat a DAO-hoz, azonban fontos célja, hogy a felsőbb rétegeket függetlenítse a Roomtól, hogy ne közvetlen attól függjenek. 
+
+### Entity
+Készítsünk el egy `data.entity` Packaget, majd ebben hozzunk létre egy új Kotlin File-t `TopScore` néven, majd vegyük fel az alábbi kódot:
+
+```kotlin
+@Entity(tableName = "topscore")
+data class TopScore(
+    @ColumnInfo(name = "id") @PrimaryKey(autoGenerate = true) var id: Long? = null,
+    @ColumnInfo(name = "name") var name: String,
+    @ColumnInfo(name = "difficulty") var difficulty: String,
+    @ColumnInfo(name = "score") var score: Int
+)
+```
+
+Látható, hogy itt is használtuk a Room Annotációkat, mégpedig a `ColumnInfo`-t. Ennek a segítségével hozunk létre új oszlopokat, az adott táblában, majd megadjuk az egyes oszlopok neveit. Az első oszlopra rárakjuk a `PrimaryKey` annotációt, amellyel megmondjuk az adatbázisnak, hogy automatikussan generáljon egy azonosítót az egyes elemeknek.
+
+### DataBase
+Utolsó lépésként hozzuk létre a DataBase osztályt. Ehhez hozzuk létre az alábbi Packaget - `data.database`, majd ebben egy `TopScoreDatabase` Kotlin file-t és írjuk bele az alábbit:
+
+```kotlin
+@Database(entities = [TopScore::class], version = 1)
+abstract class TopScoreDatabase : RoomDatabase() {
+    abstract fun topScoreDao(): TopScoreDao
+    
+    companion object{
+        @Volatile
+        private var INSTANCE: TopScoreDatabase? = null
+
+        fun getDatabase(context: Context): TopScoreDatabase{
+            return INSTANCE ?: synchronized(this){
+                Room.databaseBuilder(context, TopScoreDatabase::class.java, "topscore_database")
+                    .fallbackToDestructiveMigration()
+                    .build()
+                    .also { INSTANCE = it }
+            }
+        }
+    }
+}
+```
+Ez az osztály egy Abstract osztály lesz, és szintén megkapja a Room egy annotációját, mégpedig a `Database` annotációt. Ez fogja jelezni, hogy itt egy adatbázis helyezkedik el az annotáció alatt. Az adatbázisnak egy verziót is adnunk kell, erre azért van szükség, hogy ha később változtatjuk a felépítését, akkor itt lehessen új verziót megadni. Ahhoz, hogy tudjuk használni az adatbázisunkat módosítani kell egy pár fájlt. Ezek rendre:
+
+1.  **Application.kt**
+2.  MainActivity.kt
+3.  SnakeViewModel.kt
+4.  AndroidManifest.xml
+5.  **AppModule.kt**
+
+Ezek közül kettő még nem lett létrehozva. Ezekre azért van szükség, hogy használhassuk a Dependency Injectiont. Első sorban módosítsuk a SnakeViewModel.kt fájlt, úgy, hogy használja a HiltViewModel annotációt. Ehhez nyissuk meg a ViewModel osztályunkat, és módosítsuk a következők szerint:
+
+```kotlin
+@HiltViewModel
+class SnakeViewModel @Inject constructor(
+    private val topScoreDao: TopScoreDao
+): ViewModel(){
+
+    //Top Scores
+    val topScores: Flow<List<TopScore>> = topScoreDao.getAll()
+
+    //PlayerName (Delete Previous)
+    private val _playerName = MutableStateFlow("")
+    val playerName: StateFlow<String> = _playerName.asStateFlow()
+
+    //...
+
+    //Set Player Name
+    fun setPlayerName(name: String){
+        _playerName.value = name
+    }
+
+
+    //..
+
+    //Game Update
+    private fun updateGame(state: SnakeState) : SnakeState {
+        //...
+
+        //GAME OVER - SNAKE HIT ITSELF OR WALL
+        if (
+            //...
+        ){
+            //DATABASE INSERT
+            viewModelScope.launch {
+                topScoreDao.insert(
+                    TopScore(
+                        name = playerName.value,
+                        score = state.snake.size -1,
+                        difficulty = gameDifficulty.value.toString()
+                    )
+                )
+            }
+            return state.copy(isGameOver = true)
+        }
+
+        //...
+    }
+    //...
+
+}
+```
+
+A fenti kódban, módosítottuk a viewModelt olyan szinten, hogy már megkapta a Hilt annotációját, valamint egy paramétert is kapott. Ez a Dao lesz, amit jelenleg a programunk nem fog tudni értelmezni, ugyanis ehhez létre kell hozunk egy AppModule fájlt, amiben leírjuk, hogy milyen módon kell átadnia ezt a paramétert.
+
+Ehhez hozzunk létre egy új Packaget `di` néven, majd ebben egy új Kotlin Filet, `AppModule` néven, és töltsük ki a következővel:
+
+```kotlin
+@Module
+@InstallIn(SingletonComponent::class)
+object AppModule {
+    @Provides
+    @Singleton
+    fun provideTopScoreDao(@ApplicationContext appContext: Context): TopScoreDao {
+        return TopScoreDatabase.getDatabase(appContext).topScoreDao()
+    }
+}
+```
+
+Az AppModule objektumon belül rakunk két annotációt a provideTopScoreDao függvény-re, amely majd egy TopScoreDao objektumot ad vissza a meghívás után. Mivel ApplicationContext-et tud biztosítani, így ennek a segítségével meghívjuk a getDatabase függvény-t ezzel a paraméterrel, majd legkérdezzük a Dao-t, így megkapva a szükséges paraméterünket.
+
+Ahhoz, hogy a Dependency Injectionunk működjön globálisan az alkalmazás szintjén inicializálnunk kell a Daggert, hogy létrejöjjön egy kontextus, amelyben a függőségeket menedzseli. Ehhez hozzunk létre a gyökérmappában egy új Kotlin File-t `Application` néven, majd írjuk bele a következő egyszerű kódot:
+
+```kotlin
+@HiltAndroidApp
+class MyApplication : Application()
+```
+
+Azonban ahhoz, hogy ez működjön a Manifest állományt módosítanunk kell úgy, hogy ez az Application be legyen regisztrálva mint Application. Ehhez nyissuk meg és módosítsuk a következőek szerint:
+
+```xml
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <application
+        android:name=".MyApplication"
+        
+        ...
+       
+        >
+        <activity
+            ...
+            >
+            <intent-filter>
+                ...
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
+```
+
+Most már csak egy annotációt kell rárakni a MainActivity-re, hogy az adatbázis mentés sikeres legyen. Azonban ahhoz, hogy az eremdények láthatóak legyenek a HighScore Screen-en még pár lépés hátra van.
+
+Első sorban módosítsuk a MainActivity-nket.:
+
+```kotlin
+@AndroidEntryPoint
+class MainActivity : ComponentActivity() {
+    //...
+}
+```
+
+Végül módosítsuk úgy a `HighScoreScreen` file-t hogy használja ezt az adatbázist. Ehhez nyissuk meg a file-t majd modósítsuk a következőek szerint:
+
+```kotlin
+@Composable
+fun HighScoresScreen(
+    snakeViewModel: SnakeViewModel
+) {
+    val highScores = snakeViewModel.topScores.collectAsStateWithLifecycle(listOf())
+
+    Column (
+        //...
+    ) {
+        Row (
+            //...
+        ) {
+            //...
+        }
+        LazyColumn (
+            //...
+        ) {
+            items(highScores.value.size) { index ->
+                Row (
+                    //...
+                ){
+                    TableText(highScores.value[index].name, Modifier.weight(2f))
+                    TableText(highScores.value[index].score.toString(), Modifier.weight(1f))
+                    TableText(highScores.value[index].difficulty, Modifier.weight(2f))
+                }
+            }
+        }
+    }
+}
+```
+
+A korábban használt highScores statikus változót lecseréljük egy újabb változóra, ami már a viewModel topScore paraméterét használja, majd végül módosítjuk a további paramétereket a használatukhoz megfelelően. Ezzel el is készült a Screen, már csak a snakeViewModel paramétert kell átadnunk a NavGraph-on belüli hívásnál:
+
+```kotlin
+@Composable
+fun NavGraph(
+    //...
+) {
+    NavHost(
+        //...
+    ){
+        //...
+        composable("highscores"){
+            mainViewModel.updateTitle("High Scores", true)
+            mainViewModel.setNavigationLambda { navController.navigate("mainscreen") }
+            HighScoresScreen(
+                snakeViewModel = snakeViewModel
+            )
+        }
+        //...
+    }
+}
+```
+
+!!!example "BEADANDÓ (x pont)"
+    Készíts **képernyő képet** a HighScoreScreenről, amelyen látszik az **elkészült oldal, valahány mentett rekord** (emulátoron, készüléket tükrözve vagy képernyőfelvétellel), egy **ahhoz tartozó kódrészlet**, valamint a **neptun kódod a kódban valahol kommentként**. A képeket a megoldásban a repository-ba fx.png néven töltsd föl.
