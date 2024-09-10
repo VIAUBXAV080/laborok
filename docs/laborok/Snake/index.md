@@ -2585,3 +2585,209 @@ fun NavGraph(
 
 !!!example "BEADANDÓ (x pont)"
     Készíts **képernyő képet** a HighScoreScreenről, amelyen látszik az **elkészült oldal, valahány mentett rekord** (emulátoron, készüléket tükrözve vagy képernyőfelvétellel), egy **ahhoz tartozó kódrészlet**, valamint a **neptun kódod a kódban valahol kommentként**. A képeket a megoldásban a repository-ba fx.png néven töltsd föl.
+
+
+
+## Sensor Control
+
+Ebben a feladatban meg fogjuk valósítani, azt a fajta működését a játékunknak, hogy a felhasználó a telefon döntögetésével tudja irányítani a kígyót a megfelelő irányba.
+
+
+Ehhez a következő lépéseket kell megvalósítani:
+
+1. SnakeViewModel módosítása
+2. SettingsViewModel létrehozása
+3. SettingsScreen módosítása
+4. NavGraph
+5. MainNavScreen
+6. MainActivity
+7. AppModule
+8. PreferenceStorage
+
+Első sorban hozzunk létre egy `PreferenceStorage` nevű Kotlin Filet, a `data` mappában, majd a következőt használjuk fel a megírására:
+
+```kotlin
+private val Context.dataStore by preferencesDataStore(name = "settings")
+
+class PreferenceStorage(private val context: Context) {
+    companion object {
+        private val SENSOR_CONTROL_KEY = booleanPreferencesKey("sensor_control")
+    }
+
+    val isSensorControlled: Flow<Boolean> = context.dataStore.data
+        .map { preferences ->
+            preferences[SENSOR_CONTROL_KEY] ?: false
+        }
+
+    suspend fun setSensorControlled(isSensorControlled: Boolean) {
+        context.dataStore.edit { preferences ->
+            preferences[SENSOR_CONTROL_KEY] = isSensorControlled
+        }
+    }
+}
+```
+
+Ez a kódrészlet egy Kotlin alkalmazásban lévő adatmegőrző rendszer működését mutatja be, amelyet az Android `DataStore` API-jával valósítanak meg. A `PreferenceStorage` osztály a `Context`-et használja a beállítások mentéséhez és lekéréséhez. Egy `Flow`-val tér vissza, amely figyeli a `sensor_control` nevű preferencia változásait, és alapértelmezésben `false`-t ad vissza, ha a beállítás még nem létezik. A `setSensorControlled` függvény lehetővé teszi, hogy egy új értéket állítsunk be ehhez a kulcshoz aszinkron módon.
+
+Ezután hozzuk létre az új ViewModellünket. A `model` mappán belül készítsünk egy `settings` mappát, és ezen belül hozzunk létre egy új Kotlin Filet. Majd írjuk meg a kódot az alábbiak alapján:
+
+```kotlin
+@HiltViewModel
+class SettingsViewModel @Inject constructor(
+    private val preferenceStorage: PreferenceStorage
+) : ViewModel() {
+
+    private val _isSensorControlled = MutableStateFlow(false)
+    val isSensorControlled = _isSensorControlled.asStateFlow()
+
+    init {
+        //Collect Pref Storage
+    }
+
+    //setSensorControlled
+}
+```
+
+A SettingsViewModellünk az alábbi módon fog kinézni. Itt is szükségünk van a Dependency Injection használatára, hogy a viewModel megkapja a PreferenceStorage példányt, amelyből ki fogja nyerni azt az információt, hogy a beállítás képernyőn be, vagy ki volt kapcsolva a szenzoros irányítás. Ehhez tartozik még egy `init` blokk, illetve egy függvény, amivel módosítani lehet ezt az állapotot. Az init blokk a következő képpen néz ki:
+
+```kotlin
+init {
+    viewModelScope.launch {
+        preferenceStorage.isSensorControlled.collect { value ->
+            _isSensorControlled.value = value
+        }
+    }
+}
+```
+Itt lényegében begyűjtjük a DataStore-ban tárolt adatot, jelen esetben a sensor be, vagy kikapcsolt állapotát, majd beállítja a lokális változó értékét.
+
+Azonban szükségünk van még egy függvényre, aminek a segítségével tudjuk állítani ezt az állapotot.:
+
+```kotlin
+fun setSensorControlled(isSensorControlled: Boolean) {
+    viewModelScope.launch {
+        preferenceStorage.setSensorControlled(isSensorControlled)
+    }
+}
+```
+
+Mivel egy suspend-ed függvényt szeretnénk meghívni, ezért ezt az egészet egy `viewModelScope.launch { .. }` blokkban kell ezt végrehajtani. Ezzel meg is van a SettingsViewModel, ezt már csak át kell adnunk a szükséges Composable függvények paramétereinek.
+
+
+Ahhoz, hogy a SettingsScreen-en tudjuk használni ezt a viewModelt, vissza kell mennünk a MainActivity-be, és itt el kell végeznünk pár módosítást. Első sorban létre kell hoznunk egy settingsViewModel változót, amely a viewModel-t fogja példányosítani, majd be kell állítani az értékét, és átadni a MainNavScreennek:
+
+```kotlin
+@AndroidEntryPoint
+class MainActivity : ComponentActivity() {
+
+    private lateinit var settingsViewModel: SettingsViewModel
+    //Other Vals
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        settingsViewModel = ViewModelProvider(this)[SettingsViewModel::class.java]
+        enableEdgeToEdge()
+        setContent {
+            SnakeDemoTestTheme {
+                MainNavScreen(
+                    mainViewModel = mainViewModel,
+                    snakeViewModel = snakeViewModel,
+                    settingsViewModel = settingsViewModel
+                )
+            }
+        }
+    }
+}
+```
+
+Itt még alá fogja húzni nekünk a meglévő kódot, ugyanis módosítanunk kell a MainNavScreen paraméterlistáját is, valamint a függvényhívást is.
+
+```kotlin
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun MainNavScreen(
+    mainViewModel: MainViewModel,
+    snakeViewModel: SnakeViewModel,
+    settingsViewModel: SettingsViewModel
+){
+
+    //...
+
+    Scaffold(
+        //...
+    ) { innerPadding ->
+
+        //...
+        NavGraph(
+            modifier = Modifier.padding(innerPadding),
+            navController = navController,
+            snakeViewModel = snakeViewModel,
+            state = state.value,
+            settingsVM = settingsViewModel
+        )
+    }
+}
+```
+
+Ezek után az error tovább került a NavGraph-ba, de továbbra sem vagyunk készen, és módosítjuk a NavGraph paraméter listáját is a következő képpen:
+
+```kotlin
+@Composable
+fun NavGraph(
+    modifier: Modifier = Modifier,
+    navController: NavHostController = rememberNavController(),
+    startDestination: String = "mainscreen",
+    mainViewModel: MainViewModel = viewModel(),
+    state: SnakeState,
+    snakeViewModel: SnakeViewModel,
+    settingsVM: SettingsViewModel
+) {
+    //...
+}
+```
+
+Majd végül átadjuk az új `settingsVM` paramétert a SettingsScreen paraméterének:
+
+```kotlin
+composable("settings"){
+    mainViewModel.updateTitle("Settings", true)
+    mainViewModel.setNavigationLambda { navController.navigate("mainscreen") }
+    SettingsScreen(settingsViewModel = settingsVM)
+}
+```
+
+Ezek után nekiállhatunk a `SettingsScreen` módosításának. Mivel új paramétert kapott, egyből ezt fel is tudjuk használni egy változó inicializálására a következő képpen:
+
+```kotlin
+@Composable
+fun SettingsScreen(
+    settingsViewModel: SettingsViewModel = viewModel()
+) {
+    val isSensorControlled by settingsViewModel.isSensorControlled.collectAsState()
+    //Column
+}
+```
+
+Majd ezt az új változót használjuk tovább a Column egyes Composable függvényeiben paraméterként.:
+
+```kotlin
+Switch(
+    checked = isSensorControlled,
+    onCheckedChange = {
+        settingsViewModel.setSensorControlled(it)
+    }
+)
+```
+Mivel az isSensorControlled egy val, ezért azt közvetlen nem tudjuk módosítani, hogy ha szükséges, így a settingsViewModel-ben lévő függvényt hívjuk, aminek a segítségével beállítjuk ezt a változót, és így a lokális val változónk is frissülni fog. Ha ezzel megvagyunk a kapcsolónak működnie kéne, és meg kéne tartania az állapotát, azonban még konkrét működés nincs hozzárendelve. Ezt a következő lépsekben tesszük meg.
+
+
+
+
+
+
+
+
+## Önálló feladat
+
+### High Score Delete All megvalósítása
