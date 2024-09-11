@@ -937,6 +937,9 @@ Ez egy szimpla gomb, ami azért felel, hogy elindítsa a játékot, hogy ha a fe
 
 Ahhoz hogy a GameScreen-t is meg tudjuk csinálni, ahhoz előtte magát a játék logikát kell megvalósítani. Folytatásként elkészítjük a játéknak az állapotait egy Data Class segítségével, majd a Snake-hez tartozó viewModel-t is.
 
+**BEADANDO**
+
+
 ## Snake State / Snake View Model (x pont)
 
 ### Snake State
@@ -1343,6 +1346,8 @@ private fun resumeGame(){
 ```
 
 Így még sajnos önmagában a projekt nem működik, ugyanis a Game Screen még nincs kész. A következő feladatban ezt is meg fogjuk valósítani, illetve a szükséges DrawScope függvényeket is létre fogjuk hozni.
+
+**BEADANÓ**
 
 ## Game Screen / DrawScope függvények (x pont)
 
@@ -2673,6 +2678,22 @@ fun setSensorControlled(isSensorControlled: Boolean) {
 
 Mivel egy suspend-ed függvényt szeretnénk meghívni, ezért ezt az egészet egy `viewModelScope.launch { .. }` blokkban kell ezt végrehajtani. Ezzel meg is van a SettingsViewModel, ezt már csak át kell adnunk a szükséges Composable függvények paramétereinek.
 
+Szükség van arra hogy az alkalmazás tudja, hogy ezt a PreferenceStorage paramétert, hogyan állítsa elő, ehhez az AppModule-ban definiálnunk kell egy függvényt a következő képpen:
+
+```kotlin
+@Module
+@InstallIn(SingletonComponent::class)
+object AppModule {
+
+    @Singleton
+    @Provides
+    fun providePreferenceStorage(@ApplicationContext context: Context): PreferenceStorage {
+        return PreferenceStorage(context)
+    }
+    //Other FUNS
+}
+```
+Ennek a segítségével elő fogja tudni állítani a szükséges paramétert az alkalmazásunk!
 
 Ahhoz, hogy a SettingsScreen-en tudjuk használni ezt a viewModelt, vissza kell mennünk a MainActivity-be, és itt el kell végeznünk pár módosítást. Első sorban létre kell hoznunk egy settingsViewModel változót, amely a viewModel-t fogja példányosítani, majd be kell állítani az értékét, és átadni a MainNavScreennek:
 
@@ -3119,3 +3140,5 @@ composable(
 ## Önálló feladat
 
 ### High Score Delete All megvalósítása
+
+### isTurned megvalósítása ?
