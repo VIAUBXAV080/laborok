@@ -24,11 +24,25 @@ A játéknak két fajta irányítási lehetősége lesz. Az egyik a nyilakkal le
 
 ## Előkészületek
 
-//TODO
+A feladatok megoldása során ne felejtsd el követni a [feladat beadása folyamatát](../../tudnivalok/github/GitHub).
 
 ### Git repository létrehozása és letöltése
 
-//TODO
+1. Moodle-ben keresd meg a laborhoz tartozó meghívó URL-jét és annak segítségével hozd létre a saját repository-dat.
+
+1. Várd meg, míg elkészül a repository, majd checkout-old ki.
+
+    !!! tip ""
+        Egyetemi laborokban, ha a checkout során nem kér a rendszer felhasználónevet és jelszót, és nem sikerül a checkout, akkor valószínűleg a gépen korábban megjegyzett felhasználónévvel próbálkozott a rendszer. Először töröld ki a mentett belépési adatokat (lásd [itt](../../tudnivalok/github/GitHub-credentials.md)), és próbáld újra.
+
+1. Hozz létre egy új ágat `megoldas` néven, és ezen az ágon dolgozz.
+
+1. A `neptun.txt` fájlba írd bele a Neptun kódodat. A fájlban semmi más ne szerepeljen, csak egyetlen sorban a Neptun kód 6 karaktere.
+
+!!! info "Android, Java, Kotlin"
+	Az Android hagyományosan Java nyelven volt fejleszthető, azonban az utóbbi években a Google átállt a [Kotlin](https://kotlinlang.org/) nyelvre. Ez egy sokkal modernebb nyelv, mint a Java, sok olyan nyelvi elemet ad, amit kényelmes használni, valamint új nyelvi szabályokat, amikkel például elkerülhetőek a Java nyelven gyakori `NullPointerException` jellegű hibák.
+
+	Másrészről viszont a nyelv sok mindenben tér el a hagyományosan C jellegű szintaktikát követő nyelvektől, amit majd látni is fogunk. A labor előtt érdemes megismerkedni a nyelvvel, egyrészt a fent látható linken, másrészt [ezt](https://developer.android.com/kotlin/learn) az összefoglaló cikket átolvasva.
 
 ## Projekt létrehozása
 
@@ -163,11 +177,12 @@ plugins {
 
 Hogy ha mindennel megvagyunk Sync-eljük le a projektet és várjuk meg míg legölt az összes szükséges könyvtár.
 
-## Navigáció a képernyők között (x pont)
+## Navigáció a képernyők között (2.5 pont)
 
 Elsőként hozzuk létre a szükséges képernyőket. Még csak demoként lesznek meg, egy teszt szöveggel, majd a további feladatok során kiegészítjük a tényleges képernyővel. Ahhoz hogy a képernyők között navigálni tudjuk szükségünk van a NavHost-ra amiben definiáljuk az egyes kijelzőkre mutató utat. Ehhez hozzunk létre egy új Packaget `model` néven majd ebben egy `navigation` néven egy újabb packaget. Ezen belül fogunk első sorban dolgozni. Itt hozzunk létre egy `NavGraph` nevü Kotlin Filet. 
 
 Az alkalmazásban 6 képernyőnk lesz, ezek:
+
 *   Főképernyő (MainScreen)
 *   Eredmények képernyő (HighScoresScreen)
 *   Beállítások képernyő (SettingsScreen)
@@ -178,6 +193,7 @@ Az alkalmazásban 6 képernyőnk lesz, ezek:
 Az utolsó Screen igény szerint változtatható, itt most csak a TopBar miatt fogjuk ezt használni. A képernyők felépítése ezen belül fog változni. A MainNavScreen-en belül lesz egy Scaffold aminek a segítségével beállítunk egy TopAppBar-t. A Content-je pedig egy NavHost-t Graphot fog tartalmazni, aminek a segítségével fogunk váltani az oldalak között.
 
 A TopBar megvalósítását az alábbiak alapján szeretnénk megvalósítani:
+
 *   A Főképernyőn legyen kiírva hogy "Snake" és semmi más.
 *   Beállítás képernyőn legyen egy kis ikon amivel vissza lehet lépni a főképernyőre, valamint legyen title-nek beállítva hogy "Settings"
 *   HighScores képernyőn hasonlóan a beállítás képernyőhöz, legyen egy ikon amivel vissza lehet lépni a főképernyőre, legyen a title "HighScores", illetve egy kuka ikon amivel lehet majd később törölni az adatbázist.
@@ -211,13 +227,13 @@ class MainViewModel : ViewModel() {
 Három változónk lesz, ezek közül az egyik egy Lambda. Ez a navigálásért fog felelni később, illetve van kettő függvényünk aminek a segítségével beállítjuk a privát változók értékét.
 
 
-Ezután hozzunk létre `screen` néven egy új Packaget a gyökérmappában (hu.bme.aut...), majd ebben több új Kotlin Filet az alábbi nevekkel: `GameScreen`, `HighScoresScreen`, `MainNavScreen`, `MainScreen`, `SettingsScreen`, `StartGameScreen`. Ezek lesznek az alkalmazás képernyői, kezdetben még csak Demo-ra lesz állítva, és a későbbiekben fogjuk megvalósítani a tényleges kinézetüket.
+Ezután hozzunk létre `screen` néven egy új Packaget a gyökérmappában (`hu.bme.aut...`), majd ebben több új Kotlin Filet az alábbi nevekkel: `GameScreen`, `HighScoresScreen`, `MainNavScreen`, `MainScreen`, `SettingsScreen`, `StartGameScreen`. Ezek lesznek az alkalmazás képernyői, kezdetben még csak Demo-ra lesz állítva, és a későbbiekben fogjuk megvalósítani a tényleges kinézetüket.
 
-Folytatásként kezdjük el a MainNavScreen megírását, ugyanis ez fog felelni azért, hogy a NavHost-graphot tartalmazza.
+Folytatásként kezdjük el a `MainNavScreen` megírását, ugyanis ez fog felelni azért, hogy a `NavHost` *Graphot* tartalmazza.
 
 Ennek egy Scaffoldból kell állnia ami dinamikusan fogja kezelni a TopBar-t a képernyőtől függően. Ehhez korábban már létrehoztuk a viewModellünket, ennek a segítségével fogjuk megvalósítani ezt a működést.
 
-Mielőtt elkezdenénk a Scaffold-ot, valósítsuk meg a NavGraph-ot.
+Mielőtt elkezdenénk a Scaffold-ot, valósítsuk meg a NavGraph-ot a `NavGraph.kt` file-ban.
 
 ```kotlin
 @Composable
@@ -297,7 +313,7 @@ fun MainNavScreen(
 }
 ```
 
-Az alábbi kód a MainNavScreen skeletonját mutatja. Ezt a következőekben felépítjük a szükséges elemekkel. Jól látható a TopAppBar, valamint azok az elemek amiket fogunk használni. Egy *if* elágazással szűrjük a TopAppBar megjelenését, amit korábban kikötöttünk, hogy üres string esetén nem jelenítjük meg. (Ez akkor következik be hogy ha már a játék folyamatban van.)
+Az alábbi kód a MainNavScreen skeletonját mutatja. Ezt a következőekben felépítjük a szükséges elemekkel. Jól látható a TopAppBar, valamint azok az elemek amiket fogunk használni. Egy *if* elágazással szűrjük a TopAppBar megjelenését, amit korábban kikötöttünk, hogy üres *String* esetén nem jelenítjük meg. (Ez akkor következik be hogy ha már a játék folyamatban van.)
 
 `NavigationIcon`
 ```kotlin
@@ -313,7 +329,7 @@ IconButton(
     )
 }
 ```
-A vissza nyíl megjelenése egy boolean változótól függ, ugyanis a főképernyőn erre nincs szükség. Ilyenkor ezt a Boolean változó False értékbe való billentésével megakadályozzuk, hogy látható legyen. Az onClick esemény megkapja a viewModel értékét, amit az ?.invoke() függvénnyel tudunk elsütni.
+A vissza nyíl megjelenése egy boolean változótól függ, ugyanis a főképernyőn erre nincs szükség. Ilyenkor ezt a Boolean változó False értékbe való billentésével megakadályozzuk, hogy látható legyen. Az `onClick` esemény megkapja a viewModel értékét, amit az `?.invoke()` függvénnyel tudunk elsütni.
 
 `Actions`
 ```kotlin
@@ -397,6 +413,8 @@ Text(
 )
 ```
 
+Ez a Title felirat csak egy `Text` Composable függvényt fog magába foglalni, amin megjelenítjük a játék címét, vagy bármilyen feliratot. Mi most a *Snake Game* feliratot fogjuk megjeleníteni ezzel. Látható, hogy adunk egy fontFamily értéket is neki, így fogjuk elérni az egyedi betűtípusunkat.
+
 `Button 1`
 
 ```kotlin
@@ -416,6 +434,8 @@ Button(
     )
 }
 ```
+
+Az első gomb fog felelni a játék indításáért, azonban ez a gomb még nem fogja elindítani a játékot, hanem egy új képernyőre fog navigálni, ahol ki lehet választani a játék nehézségét, valamint megadni a játékos nevét. Itt az `onClick` eseménynek átadjuk a `navController.navigate(..)` függvényt, amelynek a paraméterébe beírjuk az adott képernyőt ahova navigálni szeretnénk.
 
 `Button 2`
 
@@ -437,6 +457,8 @@ Button(
 }
 ```
 
+A második gombunk ugyanolyan elven működik mint az első, és mint a harmadik fog, itt meg kell változtatnunk a `.navigate(..)` paraméterét, hogy a HighScores képernyőre navigáljon minket.
+
 `Button 3`
 
 ```kotlin
@@ -456,6 +478,8 @@ Button(
     )
 }
 ```
+
+A harmadik gomb sem különb az első kettőtől, azt leszámítva, hogy ez a beállítás képernyőre fog navigálni minket.
 
 Majd végül regisztráljuk az útvonalat a NavGraph-ban is
 
@@ -524,6 +548,8 @@ composable("highscores"){
 }
 ```
 
+Hasonlóan az előzőhöz, itt is módosítjuk a mainViewModel paramétereit úgy, hogy *High Scores* felirat legyen a TopAppBar-on, illetve a vissza nyíl a főképernyőre mutasson.
+
 ### Game Settings Screen
 
 Ehhez egyelőre csak beégetett adatot fogunk használni a játékosnév, illetve a nehézséghez, de ez később módosítva lesz.
@@ -553,9 +579,9 @@ fun StartGameScreen(
 }
 ```
 
-A navController segítségével átadhatunk navigációs argumentumokat, amit később ki fogunk tudni szedni a NavGraph-on belül. Ezeket a Stringeket tudjuk majd felhasználni a játék további paramétereihez.
+A navController segítségével átadhatunk navigációs argumentumokat, amit később ki fogunk tudni szedni a `NavGraph`-on belül. Ezeket a *Stringeket* tudjuk majd felhasználni a játék további paramétereihez.
 
-Modosítsuk a NavGraph-ot úgy, hogy megadjuk az elérési utat az imént létrehozott képernyőhöz.
+Modosítsuk a `NavGraph`-ot úgy, hogy megadjuk az elérési utat az imént létrehozott képernyőhöz.
 
 ```kotlin
 composable("preGameScreen") {
@@ -593,7 +619,7 @@ fun GameScreen(
 ```
 Jól látható, hogy itt paraméterként kapja meg a szükséges adatokat, de ez később viewModel-re lesz lecserélve, ez csak a kezdeti játék állapotát fogja modellezni.
 
-Már csak egy a NavGraph-ban meg kell adni az elérési utat, illetve a MainActivity-ben meg kell hívni a főképernyő Composable függvényét.
+Már csak egy a `NavGraph`-ban meg kell adni az elérési utat, illetve a MainActivity-ben meg kell hívni a főképernyő Composable függvényét.
 
 `NavGraph`
 
@@ -612,7 +638,9 @@ composable(
     )
 }
 ```
-Láthatjuk, hogy navigációs argumentumot az alábbi sorokkal lehet kiszedni, majd felhasználni adatként.
+Láthatjuk, hogy navigációs argumentumokat az `arguments` segítségével lehet kiszedni, majd a `navArgument` segítségével lehet egyesével eltárolni és felhasználni adatként.
+
+Módosítsuk a `MainActivity`-t úgy, hogy a mainViewModel példányosítva legyen, és adjuk át paraméterként a `MainNavScreen`nek.
 
 `MainActivity`
 
@@ -637,14 +665,14 @@ class MainActivity : ComponentActivity() {
 
 Ha mindent jól csináltunk akkor az alkalmazás elindítása után a főképernyő fogad minket ahonnan a gombok segítségével el tudunk navigálni az egyes képernyőkre.
 
-!!!example "BEADANDÓ (x pont)"
+!!!example "BEADANDÓ (2.5 pont)"
     Készíts **5 képernyő képet** az elkészült képernyőkről, amelyen látszik az **elkészült oldal** (emulátoron, készüléket tükrözve vagy képernyőfelvétellel), egy **ahhoz tartozó kódrészlet**, valamint a **neptun kódod a kódban valahol kommentként**. A képeket a megoldásban a repository-ba f1a.png, f1b.png, f1c.png, f1d.png, f1e.png néven töltsd föl.
 
-## Képernyők kiegészítése (x pont)
+## Képernyők kiegészítése (2.5 pont)
 
-A második feladat a már meglévő képernyők megtervezése és kiegészítése lesz. A dokumentáció elején látható képernyőket szeretnénk megvalósítani. Ehhez kedjük először a legegyszerűbb képernyővel. Ez a Settings Screen lesz, itt csak egyetlen kapcsolót fogunk megjeleníteni, amivel majd a későbbiek során foglalkozunk, amikor a Sensor részét is beleépítettük az alkalmazásba. Ehhez nyissuk meg a SettingsScreen fájlt, és módosítsuk az alábbiak szerint.
+A második feladat a már meglévő képernyők megtervezése és kiegészítése lesz. A dokumentáció elején látható képernyőket szeretnénk megvalósítani. Ehhez kezdjük először a legegyszerűbb képernyővel. Ez a Settings Screen lesz, itt csak egyetlen kapcsolót fogunk megjeleníteni, amivel majd a későbbiek során foglalkozunk, amikor a Sensor részét is beleépítettük az alkalmazásba. Ehhez nyissuk meg a SettingsScreen fájlt, és módosítsuk az alábbiak szerint.
 
-### Settings Screen
+### Settings Screen 
 
 <p align="center">
 <img src="./assets/settingsscreen.png" width="320">
@@ -688,6 +716,8 @@ fun SettingsScreen() {
 ```
 
 Kezdetben a kapcsoló állapotát így fogjuk tárolni, viszont ez később viewModel formájában lesz megvalósítva, hogy majd a játék képernyő is megkapja az állapotot. Egy egyszerű Column van elhelyezve a képernyőn, amiben egyetlen Row van. Ez tartalmaz egy Label feliratot `Text` Composable függvénnyel, illetve egy kapcsolót a `Switch` Composable-vel.
+
+Mivel az `isSensorControlled` egy állapot, ezért minden egyes állapotváltozásnál az a Composable ami függ ettől a változótól újra rajzolódik, ezáltal a kapcsoló ki-be kapcsolható lesz.
 
 Folytatásként egészítsük ki a High Scores Screent.
 
@@ -769,7 +799,7 @@ fun HighScoresScreen() {
 }
 
 ```
-Kezdetben csak beégetett adatokkal fogunk dolgozni, ezt később lecseréljük adatbázisos adatokra. A High Score lista 3 adatból fog állni, név, pontok, és nehézség. Ezt az adatot egy LazyColum segítségével fogjuk megjeleníteni a képernyőn. Ehhez meg kell adni a lista méretét, illetve azt hogy mit jelenítsen meg. Ehhez szintén a TableText Composable függvényt használjuk. 
+Kezdetben csak beégetett adatokkal fogunk dolgozni, ezt később lecseréljük adatbázisos adatokra. A High Score lista 3 adatból fog állni, név, pontok, és nehézség. Ezt az adatot egy LazyColum segítségével fogjuk megjeleníteni a képernyőn. Ehhez meg kell adni a lista méretét, illetve azt hogy mit jelenítsen meg. Ehhez szintén a TableText Composable függvényt használjuk. A LazyColumn fölött egy Row-t helyeztünk el, amely hasonlóan kapta a Content-et, mint a LazyColumn, a különbség az, hogy ez nem része a LazyColumn-nak, ez egy *fejlécként* szolgál nekünk, amelynek a pozíciója fix.
 
 ### Game Settings Screen
 <p align="center">
@@ -908,10 +938,11 @@ OutlinedTextField(
 )
 ```
 Ez a TextField egy összetettebb Composable lesz, de a leírás alapján könnyne meg lehet érteni.
+
 *   `value` - Ennek a paraméternek átadjuk magát a playerName változó értékét.
 *   `onValueChange` - Ennek az attribútum segítségével adjuk meg egy lambdába, hogy mi történjen, hogy ha a felhasználó írt a TextField-be. Jelen esetben felülírjuk a változónk értékét, és mivel egy remember - mutableStateOf-os változóról van szó, ezért Recomposition valósul meg, így a friss értékét fogjuk látni a változónak.
 *   `isError` - Itt egy Boolean változót tudunk átadni értékként, amire azért van szükség, hogy ha a felhasználó üressen hagyná ezt a mezőt, ne tudjun tovább lépni a következő képernyőre.
-*   `supportingText` - Itt meg tudunk adni egyéb segítséget a felhasználónak, hogy ha üressen hagyná a mező értékét, és tovább szeretne lépni, akkor jelenítse meg a "Please enter a name" feliratot.
+*   `supportingText` - Itt meg tudunk adni egyéb segítséget a felhasználónak, hogy ha üressen hagyná a mező értékét, és tovább szeretne lépni, akkor jelenítse meg a *Please enter a name* feliratot.
 *   `label` - Ez egy kiegészítés az OutlinedTextField Composable függvényben. Ennek a segítségével tudunk megadni informáló feliratot, hogy az adott TextField miért felel.
 *   `textStyle` - Ennek a segítségével tudunk beállítani új stílust a kiírásra.
 
@@ -933,14 +964,15 @@ Button(
     )
 }
 ```
-Ez egy szimpla gomb, ami azért felel, hogy elindítsa a játékot, hogy ha a felhasználó mindent helyesen csinált. Az onClick eseménynek egy if-else elágazást adunk át, ami ellenőrzi, hogy a felhasználó írt-e be adatot a TextField-be. Hogy ha üresen hagyta, akkor erre figyelmezteti, és nem engedi tovább lépni.
+Ez egy szimpla gomb, ami azért felel, hogy elindítsa a játékot, hogy ha a felhasználó mindent helyesen csinált. Az onClick eseménynek egy if-else elágazást adunk át, ami ellenőrzi, hogy a felhasználó írt-e be adatot a TextField-be. Hogy ha üresen hagyta, akkor a Boolean változót bebillenti true értékbe, aminek köszönhetően megjelenik az SupportingText üzenet. Ilyenkor a felhasználó nem tud tovább menni a következő ablakra mindaddig amíg a TextField üres.
 
 Ahhoz hogy a GameScreen-t is meg tudjuk csinálni, ahhoz előtte magát a játék logikát kell megvalósítani. Folytatásként elkészítjük a játéknak az állapotait egy Data Class segítségével, majd a Snake-hez tartozó viewModel-t is.
 
-**BEADANDO**
+!!!example "BEADANDÓ (2.5 pont)"
+    Készíts **4 képernyő képet** az elkészült képernyőkről, amelyen látszik az **elkészült oldal** (emulátoron, készüléket tükrözve vagy képernyőfelvétellel), egy **ahhoz tartozó kódrészlet**, valamint a **neptun kódod a kódban valahol kommentként, és/vagy játékosnévként megadva**. A képeket a megoldásban a repository-ba f2a.png, f2b.png, f2c.png, f2d.png néven töltsd föl.
 
 
-## Snake State / Snake View Model (x pont)
+## Snake State / Snake View Model (4 pont)
 
 ### Snake State
 
@@ -951,7 +983,7 @@ data class SnakeState(
     val xSize: Int = 20,
     val ySize: Int = 30,
     val direction: Direction = Direction.RIGHT,
-    val prevDirection: Direction = Direction.RIGHT,
+    //val prevDirection: Direction = Direction.RIGHT,
     val snake: List<Coordinate> = listOf(Coordinate(x = 5, y = 5)),
     val food: Coordinate = generateFood(xSize, ySize),
     val isGameOver: Boolean = false,
@@ -1011,6 +1043,7 @@ A megadott kód segítségével egészítsük ki a fájlt.
 #### Game State / Direction Enum Class
 
 Ahhoz hogy minden hibát eltűntessünk a kódból létre kell hoznunk a hiányzó Enum Class-okat is. 
+
 *   A GameState Enum Class a játék állapotáért felel
     *   IDLE - Kezdeti állapot
     *   STARTED - Fut
@@ -1051,7 +1084,7 @@ Ezen kívűl meg kell valósítanunk egy egyszerű Sealed Class-t ami magáért 
 *   Reset Game
 *   Change Dir
 
-Ehhez hozzunk létre egy új Kotlin File-t a snake Packageba `SnakeEvent` néven, majd egészítsük ki az alábbi kód alapján:
+Ehhez hozzunk létre egy új Kotlin File-t a `snake` Packageba `SnakeEvent` néven, majd egészítsük ki az alábbi kód alapján:
 
 ```kotlin
 sealed class SnakeEvent {
@@ -1221,7 +1254,7 @@ is SnakeEvent.ChangeDir -> {
     )
 }
 ```
-Végül magát az irányváltoztatásért felelős eseményt is megvalósítjuk az alábbiak szerint.
+Végül magát az irányváltoztatásért felelős eseményt is megvalósítjuk az alábbiak szerint. Itt fontos, hogy az egyes irányváltoztatások csak akkor lehetségesek, hogy ha a választott irány az adott iránynak nem a 180 fokos elforgatása, ugyanis ilyenkor a kígyó saját magába forogna át, amely a játék végét eredményezné.
 
 Ezután a Update Game függvényt kell megvalósítanunk, amelynek a segítségével a játék állapotát frissítjük, minden egyes mozgás után. Ez szintén egy hosszabb kód lesz, de igyekeztünk a lehető legjobban szétszedni.
 
@@ -1262,6 +1295,7 @@ private fun updateGame(state: SnakeState) : SnakeState {
 ```
 
 `GameOver Check`
+
 Ez egy szimpla if elágazás ahol leellenőrizzük, hogy a játék Game Over állapotban van-e, vagy sem.
 ```kotlin
 if (state.isGameOver){
@@ -1269,6 +1303,7 @@ if (state.isGameOver){
 }
 ```
 `New Head Coordinates`
+
 Ez egy kicsit összetettebb értékadás, ugyanis itt figyelembe kell venni a jelenlegi irányt is, és az alapján kell kiszámítani az új koordinátát.
 
 ```kotlin
@@ -1280,6 +1315,7 @@ val newHead = when (state.direction){
 }
 ```
 `New Snake and Food`
+
 ```kotlin
 var newSnake = mutableListOf(newHead) + state.snake
 val newFood = if (newHead == state.food){
@@ -1308,7 +1344,7 @@ Végül már csak két függvényünk van hátra a viewModellből amit az alább
 
 **Start Game**
 
-Ez a függvény magáért a kígyó léptetéséért felel, illetve ez a függvény hívja meg az imént létrehozott *updateGame* függvényt megadott időközönként. 
+Ez a függvény magáért a kígyó léptetéséért felel, illetve ez a függvény hívja meg az imént létrehozott *updateGame* függvényt megadott időközönként. (Ez a játék nehézségétől fog függeni.)
 
 ```kotlin
 private fun startGame(){
@@ -1347,12 +1383,13 @@ private fun resumeGame(){
 
 Így még sajnos önmagában a projekt nem működik, ugyanis a Game Screen még nincs kész. A következő feladatban ezt is meg fogjuk valósítani, illetve a szükséges DrawScope függvényeket is létre fogjuk hozni.
 
-**BEADANÓ**
+!!!example "BEADANDÓ (4 pont)"
+    Készíts **2 képernyőképet** az elkészült kódról, amelyen látszik a **SnakeState kódja, valamint a ViewModel-ben az Event kódja** (emulátoron, készüléket tükrözve vagy képernyőfelvétellel), egy **ahhoz tartozó kódrészlet**, valamint a **neptun kódod a kódban valahol kommentként**. A képeket a megoldásban a repository-ba f3a.png, f3b.png néven töltsd föl.
 
-## Game Screen / DrawScope függvények (x pont)
+## Game Screen / DrawScope függvények (4 pont)
 
 
-Ahhoz hogy a Game Screen-t el tudjuk készíteni először szükségünk van 3 DrawScope-ra. DrawBoard, DrawFood, DrawSnake. Ezek egy-egy DrawScope függvények, amellyeket meg tudunk hívni a Canvas Composable belsejében. Magát a pályát a játékot a Canvas Composable-val fogjuk megvalósítani.
+Ahhoz hogy a Game Screen-t el tudjuk készíteni először szükségünk van 3 DrawScope-ra. *DrawBoard*, *DrawFood*, *DrawSnake*. Ezek egy-egy DrawScope függvények, amellyeket meg tudunk hívni a Canvas Composable belsejében. Magát a pályát a játékot a Canvas Composable-val fogjuk megvalósítani.
 
 A 3 DrawScopen kívül szükségünk van még egy pár segédfüggvényre, ezek a (BodyImage, IsTurn, TurnImage) függvények csak a játék szépítéséért felelnek, hogy ha a kígyónak nem csak egy kör alakú testet szeretnénk adni, hanem valami képet, vagy Icon-t, amin látszódik a kígyó fordulása is.
 
@@ -1363,7 +1400,7 @@ A 3 DrawScopen kívül szükségünk van még egy pár segédfüggvényre, ezek 
 
 Itt az alábbi példa megmutat egy olyan opciót amit meg kellene akadályoznunk ezekkel a függvényekkel.
 
-Első sorban valósítsuk meg a DrawScope függvényeket. Ehhez hozzunk létre 1 új Packaget a gyökér mappában `draw` néven, majd ezekben 3 újabb Packaget - board, food, snake néven.
+Első sorban valósítsuk meg a DrawScope függvényeket. Ehhez hozzunk létre 1 új Packaget a gyökér mappában `draw` néven, majd ezekben 3 újabb Packaget -- **board**, **food**, **snake** néven.
 
 **DrawBoard**
 
@@ -1391,6 +1428,7 @@ fun DrawScope.drawBoard(
 ```
 
 A függvény lényege, hogy paraméterként átadjuk a következőeket:
+
 *   cellSize - Egyetlen cellának a mérete a Board-on.
 *   cellColor - A cella színe, nekünk ez most alapból Fekete lesz.
 *   borderCellColor - A Board szélének a színe. Szeretnénk megkülönböztetni a pálya színétől.
@@ -1750,7 +1788,7 @@ A lenti vezérlőgombok elrendezését az alábbi minta szemlélteti:
 
 *   A külső bordó keretes téglalap egy Row. Az összes vezérlő gomb ezen belül van elhelyezve. 
 *   Ezen belül van 3 Column 1-2-1-es súlyozással. Így tudjuk elérni, hogy a középső szekció nagyobb mint a két szélső. 
-*   Az első és az utolsó oszlopban egy szimpla Text Composable van elhelyezve.
+*   Az első és az utolsó oszlopban egy szimpla TextButton Composable van elhelyezve.
 *   A középső oszlopon belül 3 Row van elhelyezve, ezeken belül a felépítés az alábbi módon történik:
     *   Az első sorban egy IconButton van elhelyezve
     *   A második sorban kettő IconButton van elhelyezve, és ezek a sor két széléhez vannak rendezve.
@@ -1865,6 +1903,7 @@ onClick = {
 Szükségünk van arra, hogy a játék állapotát alaphelyzetbe állítsuk, ezt az onClick első sorával tehetjük meg, valamint a `navController.navigate(..){..}` lambda segítségével beállítjuk, hogy ha a felhasználó vissza gombot nyomna a főképernyőn ezután, ne tudjon visszanavigálni a játék képernyőjére. Ezt a `popUpTo(..){inclusive..}` segítségével tehetjük meg.
 
 A Text felirata az alábbiaktól függ:
+
 *   Ha gameState == IDLE && countBack > 0 -> A visszaszámlálót írja ki. (Ezzel később foglalkozunk, ezt még nem kell beleimplementálni)
 *   Ha gameState == PAUSED -> *Paused* felirat legyen
 *   Ha gameState == GameOver -> *Game Over* felirat legyen
@@ -1901,7 +1940,9 @@ Canvas(modifier = Modifier
 ```
 A Canvas-hez tartozó kódrészlet meglehetőssen kicsi, viszont emlékezzünk vissza, emögött egy nagyon sok függvényt, DrawScopet definiáltunk :)!
 
-A korábban megírt DrawScope-k használatával először kirajzoljuk a játék pályát, majd erre rárajzoljuk az almát, és utána a kígyót. **Nagyon fontos a sorrend, ugyanis ezek az elemek egymást fedik, és ha a pálya rajzolást raknánk legutoljára, nem látnánk a többi elemet ami fölötte van!**
+A korábban megírt DrawScope-k használatával először kirajzoljuk a játék pályát, majd erre rárajzoljuk az almát, és utána a kígyót. 
+!!!danger "SORREND!"
+    **Nagyon fontos a sorrend, ugyanis ezek az elemek egymást fedik, és ha a pálya rajzolást raknánk legutoljára, nem látnánk a többi elemet ami fölötte van!**
 
 Hogy ha ezzel megvagyunk következőnek megvalósítjuk a Controller részét. Ez egy hosszabb kód lesz, ezért előre is elnézést kérünk!
 
@@ -2331,13 +2372,10 @@ Ha mindent jól csináltunk, a játéknak működnie kellene az elindítás utá
 
 Próbálj meg összeszedni 5 pontot, majd lescreenshotolni és azt beadni feladatmegoldásként!
 
-**FELADAT BEADÁS**
+!!!example "BEADANDÓ (4 pont)"
+    Készíts **képernyő képet** a játékról, amelyen látszik az **elkészült oldal, valahány pont a játék során vagy a gameOver felirat** (emulátoron, készüléket tükrözve vagy képernyőfelvétellel), egy **ahhoz tartozó kódrészlet**, valamint a **neptun kódod a kódban valahol kommentként**. A képeket a megoldásban a repository-ba f4.png néven töltsd föl.
 
-
-!!!example "BEADANDÓ (x pont)"
-    Készíts **képernyő képet** a játékról, amelyen látszik az **elkészült oldal, valahány pont a játék során vagy a gameOver felirat** (emulátoron, készüléket tükrözve vagy képernyőfelvétellel), egy **ahhoz tartozó kódrészlet**, valamint a **neptun kódod a kódban valahol kommentként**. A képeket a megoldásban a repository-ba fx.png néven töltsd föl.
-
-## High Scores / Database
+## High Scores / Database (2 pont)
 
 A következő feladatban az adabázis részét fogjuk megvalósítani az alkalmazásnak, ennek a segítségével tudjuk elérni, hogy a játék végén, egy adatbázisba elmentsük a játék adatait (Név, pont, nehézség formában). Ehhez szükségünk lesz egy **Dao**-ra, egy **DataBase**-re, illetve egy **Entity**-re is. Ezeknek a segítségével fogjuk elvégezni az adatok tárolását, valamint az adatbázis adatainak a módosítását.
 
@@ -2346,7 +2384,7 @@ Először hozzunk létre egy új Packaget a gyökérmappában `data` néven. Kor
 ### Dao
 A következő lépés, hogy az entitáshoz kapcsolódó alapműveleteket is támogassuk a Room könyvtár segítségével. Ezt egy DAO (Data Access Object) komponenssel fogjuk megvalósítani. A DAO egy - szintén nem csak Android alatt alkalmazott - tervezési minta, amelynek a lényege, hogy az egy entitáshoz kapcsolódó összes adatbázisműveleteket egy komponensbe gyűjtjük össze. Ez egyrészt jól áttekinthető, illetve ha az adatbázist le szeretnénk cserélni más technológiára, akkor elvileg elegendő lenne a DAO komponens módosítása, bár ilyen jellegű módosításra manapság általában nincs szükség.
 
-Hozzunk létre egy data.dao package-et, és ebben hozzunk létre egy `TopScoresDao` interfacet, majd vegyük fel az alábbit:
+Hozzunk létre egy `data.dao` package-et, és ebben hozzunk létre egy `TopScoresDao` interfacet, majd vegyük fel az alábbit:
 
 ```kotlin
 @Dao
@@ -2359,12 +2397,6 @@ interface TopScoreDao {
 
     @Update
     suspend fun update(topScore: TopScore)
-
-    @Delete
-    suspend fun delete(topScore: TopScore)
-
-    @Query("DELETE FROM topscore")
-    suspend fun deleteAll()
 }
 ```
 
@@ -2418,7 +2450,7 @@ Ez az osztály egy Abstract osztály lesz, és szintén megkapja a Room egy anno
 4.  AndroidManifest.xml
 5.  **AppModule.kt**
 
-Ezek közül kettő még nem lett létrehozva. Ezekre azért van szükség, hogy használhassuk a Dependency Injectiont. Első sorban módosítsuk a SnakeViewModel.kt fájlt, úgy, hogy használja a HiltViewModel annotációt. Ehhez nyissuk meg a ViewModel osztályunkat, és módosítsuk a következők szerint:
+Ezek közül kettő még nem lett létrehozva. Ezekre azért van szükség, hogy használhassuk a Dependency Injectiont. Első sorban módosítsuk a `SnakeViewModel.kt` fájlt, úgy, hogy használja a HiltViewModel annotációt. Ehhez nyissuk meg a ViewModel osztályunkat, és módosítsuk a következők szerint:
 
 ```kotlin
 @HiltViewModel
@@ -2471,7 +2503,7 @@ class SnakeViewModel @Inject constructor(
 }
 ```
 
-A fenti kódban, módosítottuk a viewModelt olyan szinten, hogy már megkapta a Hilt annotációját, valamint egy paramétert is kapott. Ez a Dao lesz, amit jelenleg a programunk nem fog tudni értelmezni, ugyanis ehhez létre kell hozunk egy AppModule fájlt, amiben leírjuk, hogy milyen módon kell átadnia ezt a paramétert.
+A fenti kódban, módosítottuk a viewModelt olyan szinten, hogy már megkapta a Hilt annotációját, valamint egy paramétert is kapott. Ez a Dao lesz, amit jelenleg a programunk nem fog tudni értelmezni, ugyanis ehhez létre kell hozunk egy `AppModule` fájlt, amiben leírjuk, hogy milyen módon kell előállítania ezt a paramétert.
 
 Ehhez hozzunk létre egy új Packaget `di` néven, majd ebben egy új Kotlin Filet, `AppModule` néven, és töltsük ki a következővel:
 
@@ -2487,7 +2519,7 @@ object AppModule {
 }
 ```
 
-Az AppModule objektumon belül rakunk két annotációt a provideTopScoreDao függvény-re, amely majd egy TopScoreDao objektumot ad vissza a meghívás után. Mivel ApplicationContext-et tud biztosítani, így ennek a segítségével meghívjuk a getDatabase függvény-t ezzel a paraméterrel, majd legkérdezzük a Dao-t, így megkapva a szükséges paraméterünket.
+Az AppModule objektumon belül rakunk két annotációt a `provideTopScoreDao` függvény-re, amely majd egy TopScoreDao objektumot ad vissza a meghívás után. Mivel `ApplicationContext`-et tud biztosítani, így ennek a segítségével meghívjuk a `getDatabase` függvényt ezzel a paraméterrel, majd legkérdezzük a Dao-t, így megkapva a szükséges paraméterünket.
 
 Ahhoz, hogy a Dependency Injectionunk működjön globálisan az alkalmazás szintjén inicializálnunk kell a Daggert, hogy létrejöjjön egy kontextus, amelyben a függőségeket menedzseli. Ehhez hozzunk létre a gyökérmappában egy új Kotlin File-t `Application` néven, majd írjuk bele a következő egyszerű kódot:
 
@@ -2522,7 +2554,7 @@ Azonban ahhoz, hogy ez működjön a Manifest állományt módosítanunk kell ú
 
 Most már csak egy annotációt kell rárakni a MainActivity-re, hogy az adatbázis mentés sikeres legyen. Azonban ahhoz, hogy az eremdények láthatóak legyenek a HighScore Screen-en még pár lépés hátra van.
 
-Első sorban módosítsuk a MainActivity-nket.:
+Első sorban módosítsuk a MainActivity-nket úgy, hogy megkapja az `AndroidEntryPoint` Hilt annotációt:
 
 ```kotlin
 @AndroidEntryPoint
@@ -2588,12 +2620,12 @@ fun NavGraph(
 }
 ```
 
-!!!example "BEADANDÓ (x pont)"
-    Készíts **képernyő képet** a HighScoreScreenről, amelyen látszik az **elkészült oldal, valahány mentett rekord** (emulátoron, készüléket tükrözve vagy képernyőfelvétellel), egy **ahhoz tartozó kódrészlet**, valamint a **neptun kódod a kódban valahol kommentként**. A képeket a megoldásban a repository-ba fx.png néven töltsd föl.
+!!!example "BEADANDÓ (2 pont)"
+    Készíts **képernyő képet** a HighScoreScreenről, amelyen látszik az **elkészült oldal, valahány mentett rekord, köztük a NEPTUN kódod egy játékosnévként** (emulátoron, készüléket tükrözve vagy képernyőfelvétellel), egy **ahhoz tartozó kódrészlet**, valamint a **neptun kódod a kódban valahol kommentként**. A képeket a megoldásban a repository-ba f5.png néven töltsd föl.
 
 
 
-## Sensor Control
+## Sensor Control (2 pont)
 
 Ebben a feladatban meg fogjuk valósítani, azt a fajta működését a játékunknak, hogy a felhasználó a telefon döntögetésével tudja irányítani a kígyót a megfelelő irányba.
 
@@ -2802,7 +2834,7 @@ Switch(
 ```
 Mivel az isSensorControlled egy val, ezért azt közvetlen nem tudjuk módosítani, hogy ha szükséges, így a settingsViewModel-ben lévő függvényt hívjuk, aminek a segítségével beállítjuk ezt a változót, és így a lokális val változónk is frissülni fog. Ha ezzel megvagyunk a kapcsolónak működnie kéne, és meg kéne tartania az állapotát, azonban még konkrét működés nincs hozzárendelve. Ezt a következő lépsekben tesszük meg.
 
-Ahhoz, hogy magát a Sensor-t tudjuk használni, módosítanunk kell a SnakeViewModel-t úgy, hogy implementáljuk benne a SensorEventListener interface függvényeit. Ennek a segítségével adhatjuk meg, hogy milyen működést szeretnénk hozzárendelni az egyes Sensor műveletekhez. Ehhez nyissuk meg a már meglévő `SnakeViewModel` fájlunkat és módosítsuk a következőek szerint:
+Ahhoz, hogy magát a Sensor-t tudjuk használni, módosítanunk kell a SnakeViewModel-t úgy, hogy implementáljuk benne a `SensorEventListener` interface függvényeit. Ennek a segítségével adhatjuk meg, hogy milyen működést szeretnénk hozzárendelni az egyes Sensor műveletekhez. Ehhez nyissuk meg a már meglévő `SnakeViewModel` fájlunkat és módosítsuk a következőek szerint:
 
 ```kotlin
 class SnakeViewModel @Inject constructor(
@@ -2823,7 +2855,7 @@ class SnakeViewModel @Inject constructor(
     
 }
 ```
-Látható, hogy módosítottuk magát a paraméterét is, kapott egy SensorManager paramétert, amit később majd a Dependency Injectionnal fogunk átadni neki, amihez szükségünk van az `AppModule` módosítására, azonban ez még jelenleg Errort fog nekünk mutatni, ugyanis nem definiáltuk az interface függvényeit. Ehhez kattintsunk az aláhúzott piros részre, majd az ALT+ENTER segítségével hozzuk be a menüt, és kattintsunk az *Implement Members* opcióra, vagy írjuk bele a ViewModel-be az alábbi kódot:
+Látható, hogy módosítottuk magát a paraméterét is, kapott egy SensorManager paramétert, amit később majd a Dependency Injectionnal fogunk átadni neki, amihez szükségünk van az `AppModule` módosítására, azonban ez még jelenleg Errort fog nekünk mutatni, ugyanis nem definiáltuk az interface függvényeit. Ehhez kattintsunk az aláhúzott piros részre, majd az <kbd>ALT</kbd>+<kbd>ENTER</kbd> segítségével hozzuk be a menüt, és kattintsunk az *Implement Members* opcióra, vagy írjuk bele a ViewModel-be az alábbi kódot:
 
 ```kotlin
 //...
@@ -2839,7 +2871,8 @@ override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
 
 Nekünk az `onSensorChanged` függvényre lesz szükségünk, a másik függvény törzsét ki is törölhetjük! 
 
-**Fontos, hogy töröljük ki a TODO commentet, mert nem fog működni az alkalmazás**
+!!!danger "TODO Comment"
+    **Fontos, hogy töröljük ki a TODO commentet, mert nem fog működni az alkalmazás**
 
 
 Mielőtt megcsinálnánk a függvényt, hozzunk létre pár új változót, erre azért lesz szükség, ugyanis akkor szeretnénk használni a Sensor-os érzékelőket, hogy ha az be van kapcsolva. Ehhez kell egy változó ami nyilván tartja ennek az állapotát, továbbá szükségünk van egy olyan változóra ami azt tartja nyilván, hogy a kígyóval lehet-e fordulni. Ezt azért kell beletennünk a kódban, ugyanis, ha gyorsan forgatjuk a telefont, és nem korlátozzuk a kígyó fordulását, akkor könnyen lehet, hogy GameOver-hez vezet a játék. (Kígyó előre megy, és 2x gyorsan fordulunk jobbra. Ilyenkor ha a kígyónak van már teste, saját magába fog ütközni, ezért korlátozzuk egy Boolean változóval a forgását.) Ezekhez a módosításokhoz, használjuk fel az alábbi kódot:
@@ -2893,68 +2926,7 @@ override fun onSensorChanged(event: SensorEvent?) {
 A függvény törzsében, hogy ha a sensorControll változónk hamis, akkor nem foglalkozunk a sensor állapotának módosulásával, ugyanis ilyenkor ki van kapcsolva és kézi irányítással irányítjuk a játékot. Azonban, hogy ha nem hamis, akkor tovább megyünk, és létrehozunk egy threshold változót, ami arra fog szolgállni, hogy ne legyen annyira érzékeny a sensoros irányítás, és kicsit jobban meg kelljen dönteni a képernyőt, hogy a kígyó forduljon. Ezután egy változót hozunk létre, amely a döntéstől függően egy irányt fog tartalmazni, amelyet utána felhasználunk egy onEvent paraméterként. Így fog megvalósulni a fordulása a kígyónak.
 
 
-Valósítsuk meg az isTurned logikát, amely blokkolni fogja a fordulást, mindaddig amíg a kígyó nem ment egyet előre. Ehhez használjuk fel a korábban létrehozott _isTurned változót:
-
-1.   Ha a változó HAMIS, akkor az onEvent - ChangeDir-ben visszatér érték módosítás nélkül.
-2.   Miután fordultunk egyet, a változó értékét IGAZ-ra állítjuk.
-3.   Miután lépett egyet előre a kígyó a változó értékét HAMIS-ra állítjuk.
-
-**1.**
-
-```kotlin
-fun onEvent(event: SnakeEvent) {
-    when (event) {
-        //PauseGame
-
-        //ResetGame
-        
-        //StartGame
-        
-
-        is SnakeEvent.ChangeDir -> {
-            //...
-            if (_isTurned.value){
-                return
-            }
-            //UpdateDir
-            updateDir(
-                //...
-            )
-        }
-    }
-}
-```
-
-**2.**
-
-```kotlin
-private fun updateDir(dir: Direction) {
-    //...
-    _isTurned.value = true
-}
-```
-
-**3.**
-
-```kotlin
-private fun startGame() {
-    if (...) {
-        //...
-        viewModelScope.launch {
-            gameDifficulty.collect { difficulty ->
-                while (...) {
-                    //...
-                    _state.value = updateGame(state.value)
-                    _isTurned.value = false
-                    delay(delayMillis)
-                }
-            }
-        }
-    }
-}
-```
-
-Továbbá szükségünk van egy olyan függvényre, amelynek a segítségével ki-be tudjuk kapcsolni az *_isSensorControlled* változónkat, illetve ki-be tudjuk regisztrálni a sensorManager változót. Ehhez használjuk fel az alábbi kódot, és értelmezzük!
+Továbbá szükségünk van egy olyan függvényre, amelynek a segítségével ki-be tudjuk kapcsolni az `_isSensorControlled` változónkat, illetve ki-be tudjuk regisztrálni a sensorManager változót. Ehhez használjuk fel az alábbi kódot, és értelmezzük!
 
 ```kotlin
 fun setSensorControlled(enabled: Boolean) {
@@ -3118,6 +3090,8 @@ object AppModule {
 }
 ```
 
+Az alábbi függvénnyel megmondjuk az app-nak, hogy miként kell elkészítenie a SensorManager változót, és átadni a függvény paraméterének.
+
 `NavGraph.kt`
 
 ```kotlin
@@ -3134,11 +3108,48 @@ composable(
 }
 ```
 
+!!!example "BEADANDÓ (2 pont)"
+    Készíts **képernyőképet** az elkészült képernyőkről, amelyen látszik a **Sensoros irányítás, és pár szerzett pont** (emulátoron, készüléket tükrözve vagy képernyőfelvétellel), egy **ahhoz tartozó kódrészlet**, valamint a **neptun kódod a kódban valahol kommentként**. A képeket a megoldásban a repository-ba f6.png néven töltsd föl.
 
 
 
-## Önálló feladat
 
-### High Score Delete All megvalósítása
+## Önálló feladat (3 pont)
 
-### isTurned megvalósítása ?
+### High Score Delete All megvalósítása (1 pont)
+Készítsd el a High Score képernyőn elhelyezkedő Delete All gomb működésének a logikáját!
+
+???info "Segítség"
+    *   Dao függvény megvalósítása. [HELP](https://developer.android.com/training/data-storage/room/accessing-data)
+        *   ???info "More Help"
+                `DELETE FROM ...`
+    *   SnakeViewModel függvény
+    *   OnClick esemény átadása
+
+!!!example "BEADANDÓ (1 pont)"
+    Készíts **egy képernyő képet** az elkészült logikáról, amelyen látszik a **kód, illetve egy olyan képernyő ahol van az adatbázisnak eleme, valamint egy olyan ahol a törölve vannak az elemek**, valamint a **neptun kódod a kódban valahol kommentként**. A képeket a megoldásban a repository-ba f7a.png, f7b.png néven töltsd föl.
+
+### isTurned megvalósítása (1 pont)
+Készítsd el az isTurned logikát, amely blokkolni fogja a fordulást, mindaddig amíg a kígyó nem ment egyet előre. Ehhez használjuk fel a létrehozott `_isTurned` változót. Működés:
+
+*   Fordulás után blokkoljuk az ismételt fordulást
+*   Előre lépés után feloldjuk a blokkolást
+
+???info "Segítség"
+    1.   Ha a változó HAMIS, akkor az onEvent - ChangeDir-ben visszatér érték módosítás nélkül.
+    2.   Miután fordultunk egyet, a változó értékét IGAZ-ra állítjuk.
+    3.   Miután lépett egyet előre a kígyó a változó értékét HAMIS-ra állítjuk.
+
+!!!example "BEADANDÓ (1 pont)"
+    Készíts **egy képernyő képet** az elkészült logikáról, amelyen látszik a **kód**, valamint a **neptun kódod a kódban valahol kommentként**. A képeket a megoldásban a repository-ba f8.png néven töltsd föl.
+
+
+### Egyetlen elem törlése (1 pont)
+Készítsd el azt a logikát, amellyel egyetlen elemet tudsz törölni az adatbázisból, hogy ha hosszan rányomsz az adott sorra a High Score Screenen!
+
+???info "Segítség"
+    *   Hosszan nyomás kezelése - combinedClickable :)
+    *   Hasonlóan mint az első önálló feladat
+
+!!!example "BEADANDÓ (1 pont)"
+    Készíts **két képernyő képet** az elkészült logikáról, amelyen látszik az **eredmény képernyő 3 adattal, majd utána kettő adattal**, valamint a **neptun kódod a kódban valahol kommentként**. A képeket a megoldásban a repository-ba f9a.png, f9b.png néven töltsd föl.
