@@ -2781,9 +2781,337 @@ Switch(
 ```
 Mivel az isSensorControlled egy val, ezért azt közvetlen nem tudjuk módosítani, hogy ha szükséges, így a settingsViewModel-ben lévő függvényt hívjuk, aminek a segítségével beállítjuk ezt a változót, és így a lokális val változónk is frissülni fog. Ha ezzel megvagyunk a kapcsolónak működnie kéne, és meg kéne tartania az állapotát, azonban még konkrét működés nincs hozzárendelve. Ezt a következő lépsekben tesszük meg.
 
+Ahhoz, hogy magát a Sensor-t tudjuk használni, módosítanunk kell a SnakeViewModel-t úgy, hogy implementáljuk benne a SensorEventListener interface függvényeit. Ennek a segítségével adhatjuk meg, hogy milyen működést szeretnénk hozzárendelni az egyes Sensor műveletekhez. Ehhez nyissuk meg a már meglévő `SnakeViewModel` fájlunkat és módosítsuk a következőek szerint:
+
+```kotlin
+class SnakeViewModel @Inject constructor(
+    private val topScoreDao: TopScoreDao,
+    private val sensorManager: SensorManager,
+) : ViewModel(), SensorEventListener {
+    //isTurned
+    
+    //Accelerometer
+    
+    //Is Sensor Controlled
+    
+    //Init
+
+    //onSensorChanged
+    
+    //onAccuracyChanged
+    
+}
+```
+Látható, hogy módosítottuk magát a paraméterét is, kapott egy SensorManager paramétert, amit később majd a Dependency Injectionnal fogunk átadni neki, amihez szükségünk van az `AppModule` módosítására, azonban ez még jelenleg Errort fog nekünk mutatni, ugyanis nem definiáltuk az interface függvényeit. Ehhez kattintsunk az aláhúzott piros részre, majd az ALT+ENTER segítségével hozzuk be a menüt, és kattintsunk az *Implement Members* opcióra, vagy írjuk bele a ViewModel-be az alábbi kódot:
+
+```kotlin
+//...
+override fun onSensorChanged(event: SensorEvent?) {
+    TODO("Not yet implemented")
+}
+
+override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+    TODO("Not yet implemented")
+}
+//...
+```
+
+Nekünk az `onSensorChanged` függvényre lesz szükségünk, a másik függvény törzsét ki is törölhetjük! 
+
+**Fontos, hogy töröljük ki a TODO commentet, mert nem fog működni az alkalmazás**
 
 
+Mielőtt megcsinálnánk a függvényt, hozzunk létre pár új változót, erre azért lesz szükség, ugyanis akkor szeretnénk használni a Sensor-os érzékelőket, hogy ha az be van kapcsolva. Ehhez kell egy változó ami nyilván tartja ennek az állapotát, továbbá szükségünk van egy olyan változóra ami azt tartja nyilván, hogy a kígyóval lehet-e fordulni. Ezt azért kell beletennünk a kódban, ugyanis, ha gyorsan forgatjuk a telefont, és nem korlátozzuk a kígyó fordulását, akkor könnyen lehet, hogy GameOver-hez vezet a játék. (Kígyó előre megy, és 2x gyorsan fordulunk jobbra. Ilyenkor ha a kígyónak van már teste, saját magába fog ütközni, ezért korlátozzuk egy Boolean változóval a forgását.) Ezekhez a módosításokhoz, használjuk fel az alábbi kódot:
 
+```kotlin
+//isTurned
+private val _isTurned = MutableStateFlow(false)
+
+//Accelerometer
+private var accelerometer: Sensor? = null
+
+//Is Sensor Controlled
+private val _isSensorControlled = MutableStateFlow(false)
+var isSensorControlled: StateFlow<Boolean> = _isSensorControlled.asStateFlow()
+
+//Init
+
+init {
+    accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+}
+```
+Jól látható, hogy a szükséges paramétereket megvalósítottuk, azonban egy init blokkra is szükségünk van, ugyanis a Sensor változót be kell regisztrálnunk minden egyes alkalommal. A következő lépésben az interface függvényét fogjuk megvalósítani.
+
+Ebben a függvényben kell leírnunk, hogy melyik döntésre, milyen funkciót szeretnénk megvalósítani. Ehhez használjuk fel az alábbi kódot:
+
+```kotlin
+override fun onSensorChanged(event: SensorEvent?) { 
+    if (!isSensorControlled.value) return
+    
+    event?.let {
+        val x = it.values[0]
+        val y = it.values[1]
+
+        val threshold = 2.0f
+
+        val direction = when {
+            x > threshold -> Direction.LEFT
+            x < -threshold -> Direction.RIGHT
+            y > threshold -> Direction.DOWN
+            y < -threshold -> Direction.UP
+            else -> null
+        }
+
+        direction?.let {
+            onEvent(SnakeEvent.ChangeDir(it))
+        } 
+    } 
+}
+```
+
+A függvény törzsében, hogy ha a sensorControll változónk hamis, akkor nem foglalkozunk a sensor állapotának módosulásával, ugyanis ilyenkor ki van kapcsolva és kézi irányítással irányítjuk a játékot. Azonban, hogy ha nem hamis, akkor tovább megyünk, és létrehozunk egy threshold változót, ami arra fog szolgállni, hogy ne legyen annyira érzékeny a sensoros irányítás, és kicsit jobban meg kelljen dönteni a képernyőt, hogy a kígyó forduljon. Ezután egy változót hozunk létre, amely a döntéstől függően egy irányt fog tartalmazni, amelyet utána felhasználunk egy onEvent paraméterként. Így fog megvalósulni a fordulása a kígyónak.
+
+
+Valósítsuk meg az isTurned logikát, amely blokkolni fogja a fordulást, mindaddig amíg a kígyó nem ment egyet előre. Ehhez használjuk fel a korábban létrehozott _isTurned változót:
+
+1.   Ha a változó HAMIS, akkor az onEvent - ChangeDir-ben visszatér érték módosítás nélkül.
+2.   Miután fordultunk egyet, a változó értékét IGAZ-ra állítjuk.
+3.   Miután lépett egyet előre a kígyó a változó értékét HAMIS-ra állítjuk.
+
+**1.**
+
+```kotlin
+fun onEvent(event: SnakeEvent) {
+    when (event) {
+        //PauseGame
+
+        //ResetGame
+        
+        //StartGame
+        
+
+        is SnakeEvent.ChangeDir -> {
+            //...
+            if (_isTurned.value){
+                return
+            }
+            //UpdateDir
+            updateDir(
+                //...
+            )
+        }
+    }
+}
+```
+
+**2.**
+
+```kotlin
+private fun updateDir(dir: Direction) {
+    //...
+    _isTurned.value = true
+}
+```
+
+**3.**
+
+```kotlin
+private fun startGame() {
+    if (...) {
+        //...
+        viewModelScope.launch {
+            gameDifficulty.collect { difficulty ->
+                while (...) {
+                    //...
+                    _state.value = updateGame(state.value)
+                    _isTurned.value = false
+                    delay(delayMillis)
+                }
+            }
+        }
+    }
+}
+```
+
+Továbbá szükségünk van egy olyan függvényre, amelynek a segítségével ki-be tudjuk kapcsolni az *_isSensorControlled* változónkat, illetve ki-be tudjuk regisztrálni a sensorManager változót. Ehhez használjuk fel az alábbi kódot, és értelmezzük!
+
+```kotlin
+fun setSensorControlled(enabled: Boolean) {
+    _isSensorControlled.value = enabled
+    if (enabled) {
+        sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL)
+    } else {
+        sensorManager.unregisterListener(this)
+    }
+}
+```
+
+A függvény első sorában módosítjuk a változót, utána pedig egy if-else elágazás segítségével ki-be regisztráljuk a sensorManager-t, az állapottól függően.
+
+Magát a függvényt a MainNavScreen-en szeretnénk meghívni úgy, hogy a settingsViewModel-ben eltárolt adatot adjuk át paraméterként a függvénynek. Ehhez használjuk fel a következő kódrészletet:
+
+```kotlin
+fun MainNavScreen(
+    settingsViewModel: SettingsViewModel,
+    snakeViewModel: SnakeViewModel,
+    mainViewModel: MainViewModel
+) {
+    //...
+    val isSensorControlled by settingsViewModel.isSensorControlled.collectAsStateWithLifecycle()
+    snakeViewModel.setSensorControlled(isSensorControlled)
+    //...
+}
+```
+
+Miután itt beállítottuk az alkalmazás be fogja regisztrálni a sensorManager-t, és ennek hatására tudjuk használni a Sensor-os irányítást. Azonban szükségünk van a UI módosítására a GameScreen-en, ugyanis azt szeretnénk elérni, hogy ha Sensoros irányításon vagyunk, akkor a UI ne tartalmazza a Controller gombokat, csak a játék állapot vezérlő gombokat. Ehhez módosítsuk a GameScreen-t a következő képpen:
+
+```kotlin
+@Composable
+fun GameScreen(
+    state: SnakeState,
+    onEvent: (SnakeEvent) -> Unit,
+    navController: NavHostController,
+    settingsVM: SettingsViewModel,
+) {
+
+    val isSensorControlled by settingsVM.isSensorControlled.collectAsStateWithLifecycle()
+
+    //...
+    //Controllers
+}
+```
+
+Ebben a Composable függvényben is szükségünk van a settingsViewModel paraméterre, ugyanis ennek a segítségével szedjük ki a Boolean változót, amely megmutatja, hogy Sensoros vagy Manuális irányítás UI-t kell használnunk. Ehhez módosítsuk a Controller UI részt, egy if-else elágazásra az alábbiak szerint:
+
+```kotlin
+if (!isSensorControlled) {
+    //Current Controllers under the Controllers Comment
+} else{
+    //Column ...
+}
+```
+Az else elágazás kitöltéséhez használjuk fel az alábbiakat:
+
+**Column**
+
+*   Horizontal, Vertical - Center
+*   Modifier
+    *   1-es súlyozás (weight)
+    *   Töltse ki a teljes teret (fillMaxSize)
+    *   Háttér szürke legyen (background)
+    *   Legyen egy vékony kerete (border)
+    ```kotlin
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+        modifier = Modifier
+            .weight(1f)
+            .background(Color.Gray)
+            .fillMaxSize()
+            .border(1.dp, Color.Black)
+    ) {
+        //TextButton 1
+        
+        //TextButton 2
+        
+    }
+    ```
+
+**TextButton 1**
+
+*   OnClick
+    *   GameState.IDLE -> StartGame
+    *   GameState.STARTED -> PauseGame
+    *   GameState.PAUSED -> StartGame
+*   Modifier:
+    *   Töltse ki a teljes szélességet (fillMaxWidth)
+    ```kotlin
+    TextButton(
+        onClick = {
+            when (state.gameState) {
+                GameState.IDLE -> onEvent(SnakeEvent.StartGame)
+                GameState.STARTED -> onEvent(SnakeEvent.PauseGame)
+                GameState.PAUSED -> onEvent(SnakeEvent.StartGame)
+            }
+        },
+        Modifier.fillMaxWidth()
+    ) {
+        Text(
+            text = when (state.gameState) {
+                GameState.IDLE -> "Start"
+                GameState.STARTED -> "Pause"
+                GameState.PAUSED -> "Resume"
+            },
+            fontSize = 30.sp,
+            color = Color.Black,
+            fontFamily = FontFamily(
+                Font(
+                    R.font.pixelfont,
+                    style = FontStyle.Normal
+                )
+            ),
+        )
+    }
+    ```
+
+**TextButton 2**
+
+*   OnClick:
+    *   ResetGame
+*   Modifier:
+    *   Töltse ki a tlejes szélességet (fillMaxWidth)
+    ```kotlin
+    TextButton(
+        onClick = {
+            onEvent(SnakeEvent.ResetGame)
+        },
+        Modifier.fillMaxWidth()
+    ) {
+        Text(
+            text = if (state.isGameOver) "Restart" else "New Game",
+            fontSize = 30.sp,
+            color = Color.Black,
+            fontFamily = FontFamily(
+                Font(
+                    R.font.pixelfont,
+                    style = FontStyle.Normal
+                )
+            ),
+        )
+    }
+    ```
+
+Miután megvagyunk minden UI elemmel, már csak az `AppModule` bővítése, illetve a paraméterátadást kell megoldanunk. Ehhez használjuk fel a következő kódokat:
+
+`AppModule.kt`
+
+```kotlin
+@Module
+@InstallIn(SingletonComponent::class)
+object AppModule {
+    //Other FUNS
+    @Provides
+    fun provideSensorManager(@ApplicationContext context: Context): SensorManager {
+        return context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
+    }
+}
+```
+
+`NavGraph.kt`
+
+```kotlin
+composable(
+    //...
+){
+    //...
+    GameScreen(
+        navController = navController,
+        state = state,
+        onEvent = snakeViewModel::onEvent,
+        settingsVM = settingsVM
+    )
+}
+```
 
 
 
