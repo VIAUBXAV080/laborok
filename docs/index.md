@@ -10,7 +10,7 @@ A laborok sorrendjét és a beadások határidejét Moodle-ben találod.
     A javítás menetéről és formájáról bővebben a ["Hozzájárulás az anyaghoz"](tudnivalok/github/contributing.md) dokumentumban olvashatsz bővebben.
 
 !!! quote "Felhasználási feltételek"
-    Az itt található oktatási segédanyagok a BMEVIAUAV21 tárgy hallgatóinak készültek. Az anyagok oly módú felhasználása, amely a tárgy oktatásához nem szorosan kapcsolódik, csak a szerző(k) és a forrás megjelölésével történhet.
+    Az itt található oktatási segédanyagok a BMEVIAUBXAV080 - Haladó Android fejlesztés tárgy hallgatóinak készültek. Az anyagok oly módú felhasználása, amely a tárgy oktatásához nem szorosan kapcsolódik, csak a szerző(k) és a forrás megjelölésével történhet.
 
     Az anyagok a tárgy keretében oktatott kontextusban értelmezhetőek. Az anyagokért egyéb felhasználás esetén a szerző(k) felelősséget nem vállalnak.
 
@@ -49,8 +49,6 @@ A laborok kérik, hogy készíts képernyőképet a megoldás egy-egy részérő
 **Egyéni munka? Otthoni munka?** Mivel a laborokra jegyet kapsz, elvárás, hogy mindenki saját megoldást készítsen el és adjon be. Ez nem zárja ki az egymásnak nyújtott segítséget. Kizárja viszont más megoldásának lemásolását. Ezért kérjük a képernyőképeket, mert így a munka folyamatával bizonyítod a megoldás saját elkészítését.
 
 **Más munkájának lemásolása:** A BME etikai kódexe és a TVSZ szabályozza. Komolyan vesszük.
-
-**Egy labor csak 2 óra, nem?** Nem. A tárgy 4 kredit, amely a félév során megközelítőleg 120 munkaóra befektetését igényli. A labor tehát nem csak a teremben eltöltött 2 óra, hanem az előzetes felkészülés és a feladat befejezése / otthoni elvégzése is.
 
 **Egy apró elírás miatt nem működött a kódom, és nem értékeltétek.** A laborok során működő programot, kódot, kódrészletet kell készíteni. Azért számítógép laborban vagy otthon készítjük a feladatot, mert így tudod magad ellenőrizni. Minimum elvárás, hogy a beadott kód leforduljon, lefusson. Ha a viselkedés nem teljesen helyes, azt értékeljük. De ha egyáltalán nem működik, nem értékeljük a megoldást.
 

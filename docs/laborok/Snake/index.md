@@ -1,4 +1,4 @@
-# Labor 01 - Snake Game
+# Labor 1 - Snake Game
 
 Az első labor folyamán egy összetettebb alkalmazást, játékot fogunk megcsinálni. Ez a játék a Snake játék egy változata lesz. A játék lényege, hogy egy fix méretű pályán egy kígyót kell irányítani, és minél több pontot összeszedni. Ezt az almák felvételével tudjuk elérni. Minden egyes alma felvétele egy egységgel fogja növelni a kígyó hosszát. A szokásos működéstől kicsit eltérő lesz a mi alkalmazásunk, itt 3 nehézség közül lehet majd választani (Easy, Normal, Hard), amelynek köszönhetően fix sebességű lesz a kígyó gyorsasága.
 
