@@ -3136,7 +3136,7 @@ Készítsd el az isTurned logikát, amely blokkolni fogja a fordulást, mindaddi
 *   Előre lépés után feloldjuk a blokkolást
 
 ???info "Segítség"
-    1.   Ha a változó HAMIS, akkor az onEvent - ChangeDir-ben visszatér érték módosítás nélkül.
+    1.   Ha a változó IGAZ, akkor az onEvent - ChangeDir-ben visszatér érték módosítás nélkül.
     2.   Miután fordultunk egyet, a változó értékét IGAZ-ra állítjuk.
     3.   Miután lépett egyet előre a kígyó a változó értékét HAMIS-ra állítjuk.
 
