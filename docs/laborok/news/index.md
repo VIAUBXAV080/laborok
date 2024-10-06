@@ -84,7 +84,7 @@ A Swagger UI-ban ki is próbálatod a végpontokat.
 Vigyél fel egy hírt, amelynek Te vagy a szerzője, majd listázd a híreket!
 
 !!!example "BEADANDÓ (1 pont)"
-    Készíts képernyőképet róla, hogy fut a backend, és visszaadta a hírek listáját, benne az általad felvett hírrel!
+    Készíts képernyőképet (f1.png) róla, hogy fut a backend, és visszaadta a hírek listáját, benne az általad felvett hírrel!
 
 Fontos: a backend csak a futásának ideje alatt őrzi meg a felvitt híreket, ha újraindítod, akkor a korábban elmentett
 hírek elvesznek.
@@ -318,7 +318,7 @@ elemen elhelyezve az alábbi attribútumot, kikapcsoljuk ezt a védelmet:
 Így már működnie kell a hírek letöltésének. Most a fentiek alapján valósítsd meg önállóan a hírek beküldését!
 
 !!!example "BEADANDÓ (1 pont)"
-    Készíts képernyőképet a kapcsolódó kódrészletről, benne kommentként a Neptun-kódoddal, mellette a futó
+    Készíts képernyőképet (f2.png) a kapcsolódó kódrészletről, benne kommentként a Neptun-kódoddal, mellette a futó
     alkalmazással, ahol látszik egy általad felvitt hír.
 
 ### Harmadik feladat: Kódminőség javítása
@@ -361,7 +361,7 @@ ezt a szabályt. Konfiguráld át a `ktlint` plugint úgy, hogy ne alkalmazza ez
 módját a `ktlint` dokumentációjában: https://pinterest.github.io/ktlint/latest/
 
 !!!example "BEADANDÓ (1 pont)"
-    Készíts képernyőképet a linter által kiadott hibalistából, mellette a kapcsolódó gradle konfiguráció kódjával,
+    Készíts képernyőképet (f3.png) a linter által kiadott hibalistából, mellette a kapcsolódó gradle konfiguráció kódjával,
     benne kommentként a Neptun-kódoddal!
 
 ### Negyedik feladat: Offline működés
@@ -380,8 +380,8 @@ legyen. Gondold át, hogyan lehetne ezt megoldani tiszta architektúrával, majd
         nem a legfrissebb állapotot látjuk!
 
 !!!example "BEADANDÓ (1 pont)"
-    Készíts képernyőképet a kapcsolódó kódrészletről, benne kommentként a Neptun-kódoddal, mellette a futó alkalmazással,
-    ahol látszik a tájékoztató szöveg, hogy hálózat híján a tárolt híreket látjuk.
+    Készíts képernyőképet (f4.png) a kapcsolódó kódrészletről, benne kommentként a Neptun-kódoddal,
+    mellette a futó alkalmazással, ahol látszik a tájékoztató szöveg, hogy hálózat híján a tárolt híreket látjuk.
 
 ### Ötödik feladat: Sávszélesség optimalizáció
 
@@ -391,5 +391,5 @@ Módosítsd úgy az alkalmazást - ha nem eleve így készítetted - hogy amikor
 a lokálisan legutóbb elmentett hír utániakat töltse le! A backend támogatja ezt a működést.
 
 !!!example "BEADANDÓ (1 pont)"
-    Készíts képernyőképet a kapcsolódó kódrészletről, ahol látszik a logika, ami meghatározza a backendnek küldendő
-    `after` paramétert, benne kommentként a Neptun-kódoddal.
+    Készíts képernyőképet (f5.png) a kapcsolódó kódrészletről, ahol látszik a logika, ami meghatározza a backendnek
+    küldendő `after` paramétert, benne kommentként a Neptun-kódoddal.
