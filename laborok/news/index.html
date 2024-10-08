@@ -743,12 +743,12 @@ alkalmazás képes legyen offline működésre is. Az alkalmazás kódminősége
 fontos, ezért ktlint plugint is engedélyezni fogunk, illetve konfigurálunk tesztlefedettségi riportokat is.</p>
 <p>A feladat során az alábbi technológiákkal fogunk találkozni:</p>
 <ul>
+<li>Modern App Architecture</li>
 <li>ViewModel</li>
 <li>Dependency Injection</li>
-<li>Room</li>
 <li>OpenAPI</li>
 <li>Ktlint</li>
-<li>JaCoCo</li>
+<li>Room</li>
 </ul>
 <p>Az alkalmazásban mindössze két lényeges felület lesz. A főképernyőn a legutóbbi hírek láthatóak beküldésük
 szerint csökkenő sorrendben. Minden hírhez megjelenik a címe, szövege, a beküldő neve és a beküldés ideje.
@@ -820,22 +820,22 @@ most készítsünk neki egy <code>src/main/openapi</code> könyvtárat! Viszont 
 az Android Studióban át kell váltanunk <code>Android</code> nézetről <code>Project files</code> nézetre, hogy lássuk a valós könyvtárakat.
 Hozzunk létre itt egy fájlt <code>api.json</code> néven, és tegyük be ebbe az API-leírást! Fontos, hogy a hosztgépünket az Android
 emulátorból a <code>10.0.2.2</code> IP-címen érhetjük el, ezért módosítsuk az API-leírás <code>servers</code> szekcióját:</p>
-<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="nt">&quot;servers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://10.0.2.2:8080&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Generated server url&quot;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">  </span><span class="p">],</span>
+<div class="highlight"><pre><span></span><code><span class="nt">&quot;servers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://10.0.2.2:8080&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Generated server url&quot;</span>
+<span class="p">}</span>
+<span class="p">],</span>
 </code></pre></div>
 <p>Mivel az alkalmazásunk Internetet is fog használni, vegyük fel a Manifest-fájlba a megfelelő engedélyt:</p>
-<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="nt">&lt;uses-permission</span><span class="w"> </span><span class="na">android:name=</span><span class="s">&quot;android.permission.INTERNET&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;uses-permission</span><span class="w"> </span><span class="na">android:name=</span><span class="s">&quot;android.permission.INTERNET&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
 </code></pre></div>
 <p>A következő lépés, hogy az OpenAPI plugint fel kell vennünk a projektbe. A projektszintű <code>build.gradle.kts</code> fájlba
 vegyük fel először, de itt még ne alkalmazzuk:</p>
-<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="n">id</span><span class="p">(</span><span class="s">&quot;org.openapi.generator&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="s">&quot;7.8.0&quot;</span><span class="w"> </span><span class="n">apply</span><span class="w"> </span><span class="kc">false</span>
+<div class="highlight"><pre><span></span><code><span class="n">id</span><span class="p">(</span><span class="s">&quot;org.openapi.generator&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="s">&quot;7.8.0&quot;</span><span class="w"> </span><span class="n">apply</span><span class="w"> </span><span class="kc">false</span>
 </code></pre></div>
 <p>Majd a modulszintű <code>build.gradle.kts</code> fájlban alkalmazzuk is:</p>
-<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="n">id</span><span class="p">(</span><span class="s">&quot;org.openapi.generator&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">id</span><span class="p">(</span><span class="s">&quot;org.openapi.generator&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>Majd szintén ebbe a fájlba vegyük fel a generátor konfigurációját is:</p>
 <div class="highlight"><pre><span></span><code><span class="n">openApiGenerate</span><span class="w"> </span><span class="p">{</span>
@@ -881,19 +881,19 @@ nézetben a projekt struktúrában meg is jelennek a <code>kotlin</code> mappa a
 konfigurációt megnézve láthatjuk, hogy a <em>Retrofit 2</em> és a <em>Kotlin serialization</em> könyvtárakat konfiguráltuk be, hogy a
 generált kód ezekre épüljön. Ezért vegyük fel a modulszintű <code>build.gradle.kts</code> fájlunkba ezeket a függőségeket és
 néhány ezekhez kapcsolódót, amelyeket a generált kód szintén használ:</p>
-<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="c1">// Networking</span>
-<span class="w">    </span><span class="n">implementation</span><span class="p">(</span><span class="s">&quot;com.squareup.okhttp3:logging-interceptor:4.12.0&quot;</span><span class="p">)</span>
-<span class="w">    </span><span class="n">implementation</span><span class="p">(</span><span class="s">&quot;com.squareup.retrofit2:retrofit:2.11.0&quot;</span><span class="p">)</span>
-<span class="w">    </span><span class="n">implementation</span><span class="p">(</span><span class="s">&quot;com.squareup.retrofit2:converter-scalars:2.11.0&quot;</span><span class="p">)</span>
-<span class="w">    </span><span class="n">implementation</span><span class="p">(</span><span class="s">&quot;com.squareup.retrofit2:converter-kotlinx-serialization:2.11.0&quot;</span><span class="p">)</span>
-<span class="w">    </span><span class="n">implementation</span><span class="p">(</span><span class="s">&quot;org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="c1">// Networking</span>
+<span class="n">implementation</span><span class="p">(</span><span class="s">&quot;com.squareup.okhttp3:logging-interceptor:4.12.0&quot;</span><span class="p">)</span>
+<span class="n">implementation</span><span class="p">(</span><span class="s">&quot;com.squareup.retrofit2:retrofit:2.11.0&quot;</span><span class="p">)</span>
+<span class="n">implementation</span><span class="p">(</span><span class="s">&quot;com.squareup.retrofit2:converter-scalars:2.11.0&quot;</span><span class="p">)</span>
+<span class="n">implementation</span><span class="p">(</span><span class="s">&quot;com.squareup.retrofit2:converter-kotlinx-serialization:2.11.0&quot;</span><span class="p">)</span>
+<span class="n">implementation</span><span class="p">(</span><span class="s">&quot;org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>Viszont a Kotlin serialization használatához egy gradle pluginra is szükségünk van, ezt előbb a projektszintű
 <code>build.gradle.kts</code> fájlba vesszük fel:</p>
-<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="n">id</span><span class="p">(</span><span class="s">&quot;org.jetbrains.kotlin.plugin.serialization&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="s">&quot;2.0.20&quot;</span><span class="w"> </span><span class="n">apply</span><span class="w"> </span><span class="kc">false</span>
+<div class="highlight"><pre><span></span><code><span class="n">id</span><span class="p">(</span><span class="s">&quot;org.jetbrains.kotlin.plugin.serialization&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="s">&quot;2.0.20&quot;</span><span class="w"> </span><span class="n">apply</span><span class="w"> </span><span class="kc">false</span>
 </code></pre></div>
 <p>Majd a modulszintűbe:</p>
-<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="n">id</span><span class="p">(</span><span class="s">&quot;org.jetbrains.kotlin.plugin.serialization&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">id</span><span class="p">(</span><span class="s">&quot;org.jetbrains.kotlin.plugin.serialization&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>Így a buildnek már sikeresnek kell lennie. Most pedig integrálnunk kell ezt a kódot az alkalmazásunkba. Ehhez két fő
 lépést fogunk elvégezni:</p>
@@ -988,9 +988,9 @@ a hír beküldése működésképtelen marad:</p>
 akarunk kommunikálni. Alapból ez - biztonsági indokokból - tilos, viszont egyszerű módon nem tudunk hiteles SSL
 tanúsítványt szerezni, ráadásul a hosztgépünknek nincs is feltétlen doménneve. Ezért a Manifestben az <code>application</code>
 elemen elhelyezve az alábbi attribútumot, kikapcsoljuk ezt a védelmet:</p>
-<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="nt">&lt;application</span>
-<span class="w">        </span><span class="na">android:usesCleartextTraffic=</span><span class="s">&quot;true&quot;</span>
-<span class="w">        </span><span class="err">...</span>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;application</span>
+<span class="w">    </span><span class="na">android:usesCleartextTraffic=</span><span class="s">&quot;true&quot;</span>
+<span class="w">    </span><span class="err">...</span>
 </code></pre></div>
 <p>Így már működnie kell a hírek letöltésének. Most a fentiek alapján valósítsd meg önállóan a hírek beküldését!</p>
 <div class="admonition example">
@@ -1002,10 +1002,10 @@ alkalmazással, ahol látszik egy általad felvitt hír.</p>
 <p>Ebben a feladatban most felvesszük a projektbe a <code>ktlint</code> plugint, hogy a kódolási konvenciók betartásával egységes
 stílust, jobb kódminőséget érjünk el.</p>
 <p>Ehhez először vegyük fel a projektszintű <code>build.gradle.kts</code> fájlunkba a plugint, de itt még ne alkalmazzuk:</p>
-<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="n">id</span><span class="p">(</span><span class="s">&quot;org.jlleitschuh.gradle.ktlint&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">apply</span><span class="w"> </span><span class="kc">false</span>
+<div class="highlight"><pre><span></span><code><span class="n">id</span><span class="p">(</span><span class="s">&quot;org.jlleitschuh.gradle.ktlint&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="s">&quot;12.1.1&quot;</span><span class="w"> </span><span class="n">apply</span><span class="w"> </span><span class="kc">false</span>
 </code></pre></div>
 <p>Majd alkalmazzuk a modulszintű <code>build.gradle.kts</code> fájlban:</p>
-<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="n">id</span><span class="p">(</span><span class="s">&quot;org.jlleitschuh.gradle.ktlint&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">id</span><span class="p">(</span><span class="s">&quot;org.jlleitschuh.gradle.ktlint&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>Szintén ebbe a fájlba vegyük fel a <code>ktlint</code> alapvető konfigurációs beállításait:</p>
 <div class="highlight"><pre><span></span><code><span class="n">ktlint</span><span class="w"> </span><span class="p">{</span>
@@ -1069,8 +1069,8 @@ küldendő <code>after</code> paramétert, benne kommentként a Neptun-kódoddal
           </path>
         </svg>
       </span>
-      <span title="2024. október 6. 14:04:29">
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-10-06T14:04:29+02:00" locale="hu"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-10-06</span>
+      <span title="2024. október 8. 10:59:37">
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-10-08T10:59:37+02:00" locale="hu"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-10-08</span>
       </span>
     </span>
 
