@@ -8,12 +8,12 @@ fontos, ezért ktlint plugint is engedélyezni fogunk, illetve konfigurálunk te
 
 A feladat során az alábbi technológiákkal fogunk találkozni:
 
+*   Modern App Architecture
 *   ViewModel
 *   Dependency Injection
-*   Room
 *   OpenAPI
 *   Ktlint
-*   JaCoCo
+*   Room
 
 Az alkalmazásban mindössze két lényeges felület lesz. A főképernyőn a legutóbbi hírek láthatóak beküldésük
 szerint csökkenő sorrendben. Minden hírhez megjelenik a címe, szövege, a beküldő neve és a beküldés ideje.
@@ -102,31 +102,31 @@ Hozzunk létre itt egy fájlt `api.json` néven, és tegyük be ebbe az API-leí
 emulátorból a `10.0.2.2` IP-címen érhetjük el, ezért módosítsuk az API-leírás `servers` szekcióját:
 
 ```json
-  "servers": [
-    {
-      "url": "http://10.0.2.2:8080",
-      "description": "Generated server url"
-    }
-  ],
+"servers": [
+{
+  "url": "http://10.0.2.2:8080",
+  "description": "Generated server url"
+}
+],
 ```
 
 Mivel az alkalmazásunk Internetet is fog használni, vegyük fel a Manifest-fájlba a megfelelő engedélyt:
 
 ```xml
-    <uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.INTERNET" />
 ```
 
 A következő lépés, hogy az OpenAPI plugint fel kell vennünk a projektbe. A projektszintű `build.gradle.kts` fájlba
 vegyük fel először, de itt még ne alkalmazzuk:
 
 ```kotlin
-    id("org.openapi.generator") version "7.8.0" apply false
+id("org.openapi.generator") version "7.8.0" apply false
 ```
 
 Majd a modulszintű `build.gradle.kts` fájlban alkalmazzuk is:
 
 ```kotlin
-    id("org.openapi.generator")
+id("org.openapi.generator")
 ```
 
 Majd szintén ebbe a fájlba vegyük fel a generátor konfigurációját is:
@@ -185,25 +185,25 @@ generált kód ezekre épüljön. Ezért vegyük fel a modulszintű `build.gradl
 néhány ezekhez kapcsolódót, amelyeket a generált kód szintén használ:
 
 ```kotlin
-    // Networking
-    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
-    implementation("com.squareup.retrofit2:retrofit:2.11.0")
-    implementation("com.squareup.retrofit2:converter-scalars:2.11.0")
-    implementation("com.squareup.retrofit2:converter-kotlinx-serialization:2.11.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
+// Networking
+implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+implementation("com.squareup.retrofit2:retrofit:2.11.0")
+implementation("com.squareup.retrofit2:converter-scalars:2.11.0")
+implementation("com.squareup.retrofit2:converter-kotlinx-serialization:2.11.0")
+implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
 ```
 
 Viszont a Kotlin serialization használatához egy gradle pluginra is szükségünk van, ezt előbb a projektszintű
 `build.gradle.kts` fájlba vesszük fel:
 
 ```kotlin
-    id("org.jetbrains.kotlin.plugin.serialization") version "2.0.20" apply false
+id("org.jetbrains.kotlin.plugin.serialization") version "2.0.20" apply false
 ```
 
 Majd a modulszintűbe:
 
 ```kotlin
-    id("org.jetbrains.kotlin.plugin.serialization")
+id("org.jetbrains.kotlin.plugin.serialization")
 ```
 
 Így a buildnek már sikeresnek kell lennie. Most pedig integrálnunk kell ezt a kódot az alkalmazásunkba. Ehhez két fő
@@ -310,9 +310,9 @@ tanúsítványt szerezni, ráadásul a hosztgépünknek nincs is feltétlen dom�
 elemen elhelyezve az alábbi attribútumot, kikapcsoljuk ezt a védelmet:
 
 ```xml
-    <application
-        android:usesCleartextTraffic="true"
-        ...
+<application
+    android:usesCleartextTraffic="true"
+    ...
 ```
 
 Így már működnie kell a hírek letöltésének. Most a fentiek alapján valósítsd meg önállóan a hírek beküldését!
@@ -329,13 +329,13 @@ stílust, jobb kódminőséget érjünk el.
 Ehhez először vegyük fel a projektszintű `build.gradle.kts` fájlunkba a plugint, de itt még ne alkalmazzuk:
 
 ```kotlin
-    id("org.jlleitschuh.gradle.ktlint") apply false
+id("org.jlleitschuh.gradle.ktlint") version "12.1.1" apply false
 ```
 
 Majd alkalmazzuk a modulszintű `build.gradle.kts` fájlban:
 
 ```kotlin
-    id("org.jlleitschuh.gradle.ktlint")
+id("org.jlleitschuh.gradle.ktlint")
 ```
 
 Szintén ebbe a fájlba vegyük fel a `ktlint` alapvető konfigurációs beállításait:
