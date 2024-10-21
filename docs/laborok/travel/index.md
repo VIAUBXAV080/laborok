@@ -33,9 +33,8 @@ a képernyők már elő vannak készítve a projektvázban:
 </p>
 
 !!!info "Pontozás"
-Ebben a laborban két "vezetett" (= teljesen dokumentált) és négy önálló feladat is van. A négy önálló feladatból csak az
-utolsó épül az előtte levőre, a többiből tetszőleges összeállításban megszerezheted a maximális 3 pontot.
-
+    Ebben a laborban két "vezetett" (= teljesen dokumentált) és négy önálló feladat is van. A négy önálló feladatból csak az
+    utolsó épül az előtte levőre, a többiből tetszőleges összeállításban megszerezheted a maximális 3 pontot.
 
 ## Előkészületek
 
@@ -88,7 +87,7 @@ Az új ajánlatok érkezését (és ezáltal a WebSocketen új üzenet küldés�
 A `http://localhost:8080/api/offers` végpontra szükséges egy POST üzenetet küldenünk JSON formátumban, pl. az alábbi
 tartalommal:
 
-`json
+```json
 {
     "flightNumber": "WIZZ987",
     "from": "BUD",
@@ -96,7 +95,7 @@ tartalommal:
     "departure": "2024-11-10T08:30",
     "durationMinutes": 170,
     "priceEur": 95
-}`
+}```
 
 Ez a felküldés nem része az Androidos alkalmazás funkcióinak, de ezt elvégezheted az előző laboron megismert `Swagger UI`
 felülettel, amely az OpenAPI leírással együtt most is generálódik. Vagy ha ismered, használhatod a Postman alkalmazást is.
@@ -431,8 +430,8 @@ művelet sikeres, akkor is ha valójában nem az.
 * Az üzenet tetszőleges tartalmú lehet, most CSV-ben küldjük szövegesen az adatot.
 
 !!!info "Modern App Architecture"
-Ahogyan az előző feladatrészben, most is valójában egy DataSource komponensbe kellene szerveznünk a logikát, ha
-pontosan követni akarjuk a legújabb architekturális ajánlásokat.
+    Ahogyan az előző feladatrészben, most is valójában egy DataSource komponensbe kellene szerveznünk a logikát, ha
+    pontosan követni akarjuk a legújabb architekturális ajánlásokat.
 
 Már csak az maradt hátra, hogy a korábbi dummy repository osztályt lecseréljük, ehhez a dependency injection beállításait
 kell módosítanunk:
@@ -552,7 +551,7 @@ Az alkalmazás login képernyője ezidáig bármit elfogadott, viszont a backend
 
 Nem feladat az alkalmazásban a regisztráció megvalósítása, de a bejelentkezéshez először egy felhasználót kell
 létrehoznod. A backendben ehhez is készült egy végpont, ezt meghívhatod a már megismert Swagger UI-jal vagy a
-Postmannel is.
+Postmannel is. Nézd meg a hívás pontos módját a generált API-leírásban!
 
 Ha regisztráltál felhasználót, akkor már használhatod a bejelentkezéshez is. A bejelentkezéshez is egy REST végpontot
 kell hívnod. Ez a sikeres bejelentkezést 200 OK státuszkóddal és egy törzsben visszaadott tokennel jelzi. Ha sikertelen
