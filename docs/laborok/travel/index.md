@@ -95,7 +95,8 @@ tartalommal:
     "departure": "2024-11-10T08:30",
     "durationMinutes": 170,
     "priceEur": 95
-}```
+}
+```
 
 Ez a felküldés nem része az Androidos alkalmazás funkcióinak, de ezt elvégezheted az előző laboron megismert `Swagger UI`
 felülettel, amely az OpenAPI leírással együtt most is generálódik. Vagy ha ismered, használhatod a Postman alkalmazást is.
