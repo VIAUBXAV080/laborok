@@ -1078,8 +1078,8 @@ alapú implementációt.</p>
 <span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">mqttClient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MqttAndroidClient</span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">URI</span><span class="p">,</span><span class="w"> </span><span class="n">CLIENT_ID</span><span class="p">)</span>
 <span class="w">        </span><span class="n">mqttClient</span><span class="p">.</span><span class="na">setCallback</span><span class="p">(</span><span class="k">object</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nc">MqttCallback</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">connectionLost</span><span class="p">(</span><span class="n">cause</span><span class="p">:</span><span class="w"> </span><span class="n">Throwable</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="n">Log</span><span class="p">.</span><span class="na">d</span><span class="p">(</span><span class="n">TAG</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Error: </span><span class="si">${</span><span class="n">cause</span><span class="p">.</span><span class="na">message</span><span class="si">}</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">connectionLost</span><span class="p">(</span><span class="n">cause</span><span class="p">:</span><span class="w"> </span><span class="n">Throwable?)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">Log</span><span class="p">.</span><span class="na">d</span><span class="p">(</span><span class="n">TAG</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Error: </span><span class="si">${</span><span class="n">cause</span><span class="o">?.</span><span class="na">message</span><span class="si">}</span><span class="s">&quot;</span><span class="p">)</span>
 <span class="w">            </span><span class="p">}</span>
 
 <span class="w">            </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">messageArrived</span><span class="p">(</span>
@@ -1275,8 +1275,8 @@ futó alkalmazás az ujjlenyomat-azonosítást kérő dialógussal.</p>
           </path>
         </svg>
       </span>
-      <span title="2024. október 26. 15:09:07">
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-10-26T15:09:07+02:00" locale="hu"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-10-26</span>
+      <span title="2024. november 1. 13:46:30">
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-11-01T13:46:30+01:00" locale="hu"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-11-01</span>
       </span>
     </span>
 
