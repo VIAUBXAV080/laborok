@@ -376,8 +376,8 @@ class BookingRepositoryMqttImpl(val context: Context) : BookingRepository {
     ) {
         val mqttClient = MqttAndroidClient(context, URI, CLIENT_ID)
         mqttClient.setCallback(object : MqttCallback {
-            override fun connectionLost(cause: Throwable) {
-                Log.d(TAG, "Error: ${cause.message}")
+            override fun connectionLost(cause: Throwable?) {
+                Log.d(TAG, "Error: ${cause?.message}")
             }
 
             override fun messageArrived(
