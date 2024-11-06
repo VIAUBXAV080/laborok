@@ -9,7 +9,7 @@ Házi feladat készítésével a vizsgát kiváltva megajánlott 4-es vagy 5-ös
 -	Technoloógiák:
 	-	Kötelezően:
 		-	Compose UI
-		-	MVVM vagy ezzel egyenértékű egyéb architektúra
+		-	MVI / MVVM architektúra
 		-	Dependency Injection
 	-	Legalább **3 komplexebb** technológia használata, melyet a tárgyban érintettünk, pl.:
 		-	tesztelés, legalább 60% lefedettség,
