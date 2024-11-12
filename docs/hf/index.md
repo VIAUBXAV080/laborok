@@ -63,7 +63,7 @@ A házi feladat beadásának platformja a laborokhoz hasonlóan a Github Classro
 
 ### Specifikáció
 
-A specifikáció beadás határideje a **9. hét vége (2024. november 10. 23:59)**.
+A specifikáció beadás határideje a **10. hét vége (2024. november 17. 23:59)**.
 A specifikáció elkészítése közben a "**spec**" branchen dolgozz. Erre az ágra akárhány kommitot tehetsz.
 Sablont a README.md fájl tartalmaz, azt kell kiegészíteni, és feltölteni a repóba a megadott határidőig.
 A beadás akkor teljes, ha a "spec" branch-en megtalálható a README.md fájlban a specifikáció. A beadást egy pull request jelzi, amely pull requestet valamelyik oktatóhoz kell rendelned.
