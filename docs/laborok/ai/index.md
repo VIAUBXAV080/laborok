@@ -15,7 +15,7 @@ A feladatok megoldása során ne felejtsd el követni a feladatbeadás folyamat�
 3. Hozz létre egy új ágat `megoldas` néven, és ezen az ágon dolgozz.
 4. A neptun.txt fájlba írd bele a Neptun kódodat. A fájlban semmi más ne szerepeljen, csak egyetlen sorban a Neptun kód 6 karaktere.
 
-## 1. feladat: Sudoku alkalmazás elkészítése Gemini segítségével
+## 1. feladat: Aknakereső alkalmazás elkészítése Gemini segítségével
 
 
 ### Projekt létrehozása
