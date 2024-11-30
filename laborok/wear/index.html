@@ -595,18 +595,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#terkep-megvalositasa" class="md-nav__link">
-    Térkép megvalósítása
+  <a href="#terkep-megvalositasa-2-pont" class="md-nav__link">
+    Térkép megvalósítása (2 pont)
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#wear-os" class="md-nav__link">
-    Wear OS
+  <a href="#wear-os-2-pont" class="md-nav__link">
+    Wear OS (2 pont)
   </a>
   
-    <nav class="md-nav" aria-label="Wear OS">
+    <nav class="md-nav" aria-label="Wear OS (2 pont)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -659,6 +659,26 @@
   <a href="#google-maps" class="md-nav__link">
     Google Maps
   </a>
+  
+    <nav class="md-nav" aria-label="Google Maps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#api-kulcs" class="md-nav__link">
+    API kulcs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#felulet" class="md-nav__link">
+    Felület
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -842,18 +862,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#terkep-megvalositasa" class="md-nav__link">
-    Térkép megvalósítása
+  <a href="#terkep-megvalositasa-2-pont" class="md-nav__link">
+    Térkép megvalósítása (2 pont)
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#wear-os" class="md-nav__link">
-    Wear OS
+  <a href="#wear-os-2-pont" class="md-nav__link">
+    Wear OS (2 pont)
   </a>
   
-    <nav class="md-nav" aria-label="Wear OS">
+    <nav class="md-nav" aria-label="Wear OS (2 pont)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -907,6 +927,26 @@
     Google Maps
   </a>
   
+    <nav class="md-nav" aria-label="Google Maps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#api-kulcs" class="md-nav__link">
+    API kulcs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#felulet" class="md-nav__link">
+    Felület
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -939,14 +979,15 @@
 <ul>
 <li><a href="https://firebase.google.com/docs/auth"><code>Firebase Authentication</code></a></li>
 <li><a href="https://firebase.google.com/docs/firestore"><code>Firebase CloudFirestore</code></a></li>
+<li><a href="https://developer.android.com/training/dependency-injection/hilt-android"><code>Hilt</code></a></li>
 <li><a href="https://github.com/osmdroid/osmdroid"><code>OpenStreetMap - OSMDroid</code></a></li>
-<li><a href="https://developers.google.com/maps/documentation/android-sdk/utility"><code>Maps SDK for Android Utility Library</code></a></li>
-<li><a href="https://developer.android.com/develop/sensors-and-location/location/retrieve-current"><code>Fused Location Provider</code></a></li>
 <li><a href="https://github.com/google/accompanist"><code>Accompanist</code></a></li>
+<li><a href="https://developer.android.com/develop/sensors-and-location/location/retrieve-current"><code>Fused Location Provider</code></a></li>
 <li><a href="https://developer.android.com/wear"><code>WearOS</code></a></li>
 <li><a href="https://developer.android.com/training/wearables/user-input/wear-ime"><code>Wear IME</code></a></li>
 <li><a href="https://developer.android.com/training/wearables/data/overview"><code>Data Layer API</code></a></li>
-<li><a href="https://developer.android.com/training/dependency-injection/hilt-android"><code>Hilt</code></a></li>
+<li><a href="https://developers.google.com/maps/documentation/android-sdk/utility"><code>Maps SDK for Android Utility Library</code></a></li>
+<li><a href="https://developers.google.com/maps/documentation/places/android-sdk/secrets-gradle-plugin">Secrets Gradle Plugin</a></li>
 </ul>
 <p align="center">
 <a class="glightbox" href="./assets/login.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="./assets/login.png" width="240"></a>
@@ -1014,7 +1055,7 @@
 <p>Az újonnan felvett madaraink egyelőre 0,0 koordinátával kerülnek be az adatbázisba. Ahhoz, hogy a saját helyzetünket adjuk hozzá a megfigyeléshez, használnunk kell a telefon pozíciómeghatározását.</p>
 <h3 id="engedelykezeles">Engedélykezelés<a class="headerlink" href="#engedelykezeles" title="Permanent link">&para;</a></h3>
 <p>Ehhez először is vegyük fel a szükséges (<code>ACCESS_FINE_LOCATION</code>, <code>ACCESS_COARSE_LOCATION</code>) engedélyeket a <code>Manifest</code>be.</p>
-<p>Mivel ezek veszélyes engedélyek, futásidőben is kezelnünk kell őket. Ehhez az <a href="https://github.com/google/accompanist"><code>Accompanist</code></a> könyvtárat fogjuk használni. A referenciák már szerepelnek a <code>libs.versions.toml</code> fájlban, így csak a <code>build.gradle</code>-be kell felvennünk a függőséget:</p>
+<p>Mivel ezek veszélyes engedélyek, futásidőben is kezelnünk kell őket. Ehhez az <a href="https://github.com/google/accompanist"><code>Accompanist</code></a> könyvtárat fogjuk használni. A referenciák már szerepelnek a <code>libs.versions.toml</code> fájlban, így csak a <code>build.gradle.kts</code>-be kell felvennünk a függőséget:</p>
 <div class="highlight"><pre><span></span><code>    //Accompanist
     implementation (libs.accompanist.permissions)
 </code></pre></div>
@@ -1124,7 +1165,7 @@
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="fused-location-provider">Fused Location Provider<a class="headerlink" href="#fused-location-provider" title="Permanent link">&para;</a></h3>
-<p>Először vegyük föl a pozíciómeghatározást tartalmazó függőséget.A referenciák már szerepelnek a <code>libs.versions.toml</code> fájlban, így csak a <code>build.gradle</code>-be kell felvennünk a függőséget:</p>
+<p>Először vegyük föl a pozíciómeghatározást tartalmazó függőséget.A referenciák már szerepelnek a <code>libs.versions.toml</code> fájlban, így csak a <code>build.gradle.kts</code>-be kell felvennünk a függőséget:</p>
 <div class="highlight"><pre><span></span><code>    //Location
     implementation(libs.play.services.location)
 </code></pre></div>
@@ -1270,12 +1311,12 @@ class LocationService @Inject constructor(
 <p>Készíts egy <strong>képernyőképet</strong>, amelyen látszik a <strong>Firestore-ba bevitt adat, amelynek a neve a NEPTUN kódod</strong>, valamint egy <strong>pozíciómeghatározáshoz használt kódrészlet</strong>! A képet a megoldásban a repository-ba f1.png néven töltsd föl!</p>
 <p>A képernyőkép szükséges feltétele a pontszám megszerzésének.</p>
 </div>
-<h2 id="terkep-megvalositasa">Térkép megvalósítása<a class="headerlink" href="#terkep-megvalositasa" title="Permanent link">&para;</a></h2>
+<h2 id="terkep-megvalositasa-2-pont">Térkép megvalósítása (2 pont)<a class="headerlink" href="#terkep-megvalositasa-2-pont" title="Permanent link">&para;</a></h2>
 <p>Most, hogy már el tudjuk menteni a pozíciót is a megfigyeléseinkhez, célszerű lenne a megjelenítésüket is megoldani. Hozzunk létre ehhez egy térkép nézetet <code>OSMapScreen</code> néven, majd a hozzá tartozó <em>viewModelt</em> is <code>OSMapViewModel</code> néven a <code>feature.osm</code> <em>package</em>-ben.</p>
 <p>Illesszük be az új felületet a navigációba! (Screen osztály kiegészítése, NavGraph kiegészítése, BottomNavigationItems kiegészítése)</p>
 <p>A térképes nézetet <a href="https://developers.google.com/maps/documentation/android-sdk/overview">Google Maps</a> helyett, <a href="https://www.openstreetmap.org/">OpenStreetMap</a>pel fogjuk megvalósítani. A Google megoldása az API kulcshoz bankkártya adatok megadását igényli, ami miatt csak extra feladatként nézzük meg.</p>
 <p>Az OSM-nek nincs hivatalos Androidos könyvtára, de számos <em>3<sup>rd</sup> party</em> megoldás található. A legelterjedtebb talán az <a href="https://github.com/osmdroid/osmdroid"><code>OSMDroid</code></a>, azonban ennek is sajnos már abba hagyták a fejlesztését, így a <em>Jetpack Compose</em> technológiára nem készítették föl. Ennek ellenére megbízhatósága és könnyű kezelhetősége miatt ezt a könyvtárat fogjuk használni, és beilleszteni a <em>Compose</em> kódba.</p>
-<p>Először is vegyük fel a szükséges függőséget. A referenciák már szerepelnek a <code>libs.versions.toml</code> fájlban, így csak a <code>build.gradle</code>-be kell felvennünk a függőséget:</p>
+<p>Először is vegyük fel a szükséges függőséget. A referenciák már szerepelnek a <code>libs.versions.toml</code> fájlban, így csak a <code>build.gradle.kts</code>-be kell felvennünk a függőséget:</p>
 <div class="highlight"><pre><span></span><code>    //OpenStreetMap
    implementation(libs.osmdroid.android)
 </code></pre></div>
@@ -1413,7 +1454,7 @@ class LocationService @Inject constructor(
 <p>Készíts egy <strong>képernyőképet</strong>, amelyen látszik a <strong>térkép a megváltoztatott markerekkel</strong> (emulátoron, készüléket tükrözve vagy képernyőfelvétellel), az <strong>OSMapScreen</strong> kódja, valamint a <strong>neptun kódod a kódban valahol kommentként</strong>! A képet a megoldásban a repository-ba f2.png néven töltsd föl! </p>
 <p>A képernyőkép szükséges feltétele a pontszám megszerzésének.</p>
 </div>
-<h2 id="wear-os">Wear OS<a class="headerlink" href="#wear-os" title="Permanent link">&para;</a></h2>
+<h2 id="wear-os-2-pont">Wear OS (2 pont)<a class="headerlink" href="#wear-os-2-pont" title="Permanent link">&para;</a></h2>
 <p>Most már akár teljesnek is mondhatnánk az alkalmazásunk funkcionalitását. Tudunk madármegfigyeléseket felvenni a saját pozíciónkra, illetve azokat térképen vissza is nézhetjük. Azonban néha akár kellemetlen is lehet elővenni a telefonunkat egy-egy bejegyzés miatt, mennyivel könnyebb lenne, ha a hozzáadást akár óráról is elvégezhetnénk. Adjunk hozzá a projektünkhöz egy új <code>Wear OS</code> modult <code>BirdWearApp</code> néven. (Ezt az alkalmazást ez esetben akár külön projektben is megvalósíthatnánk, de az összetartozó alkalmazásokat gyakran szerencsésebb egy projektben fejleszteni, hiszen ha van közös kódbázisuk, az egy <em>common</em> modulba kiemelve mindkét helyen használható lenne.)</p>
 <div class="admonition danger">
 <p class="admonition-title">package név</p>
@@ -1437,7 +1478,7 @@ class LocationService @Inject constructor(
 <span class="w">    </span><span class="nt">&lt;string</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;label_save&quot;</span><span class="nt">&gt;</span>Save<span class="nt">&lt;/string&gt;</span>
 <span class="nt">&lt;/resources&gt;</span>
 </code></pre></div>
-<p>A <em>Wear</em> alkalmazásban egy gombot szeretnénk megjeleníteni, amit megnyomva a felhasználó be tudja vinni az új megfigyelését akár billentyűzetről akár hangban. Aztán ezt egy megerősítő gombbal átküldheti a telefonnak, ami továbbítja az adatbázisba. Ezt az alkalmazást is a <em>Clean Architecture</em> szerint szeretnénk megvalósítani így vegyük fel a megfelelő <em>Hilt</em> <em>pluginokat</em> és függőségeket. A referenciák már szerepelnek a <code>libs.versions.toml</code> fájlban, így csak a <code>build.gradle</code>-be kell felvennünk a függőséget:</p>
+<p>A <em>Wear</em> alkalmazásban egy gombot szeretnénk megjeleníteni, amit megnyomva a felhasználó be tudja vinni az új megfigyelését akár billentyűzetről akár hangban. Aztán ezt egy megerősítő gombbal átküldheti a telefonnak, ami továbbítja az adatbázisba. Ezt az alkalmazást is a <em>Clean Architecture</em> szerint szeretnénk megvalósítani így vegyük fel a megfelelő <em>Hilt</em> <em>pluginokat</em> és függőségeket. A referenciák már szerepelnek a <code>libs.versions.toml</code> fájlban, így csak a <code>build.gradle.kts</code>-be kell felvennünk a függőséget:</p>
 <div class="highlight"><pre><span></span><code>plugins {
     alias(libs.plugins.google.devtools.ksp)
     alias(libs.plugins.google.dagger.hilt.android)
@@ -1618,7 +1659,7 @@ dependencies {
 </code></pre></div>
 <h3 id="a-bevitel-megvalositasa">A bevitel megvalósítása<a class="headerlink" href="#a-bevitel-megvalositasa" title="Permanent link">&para;</a></h3>
 <p>A bevitelt <em>Wear</em> eszközön csak a billentyűzetre bízni nem szerencsés. Ilyen kis felületen a gépelés nehézkes, ezért a platform támogatja az egyszerű szöveg bevitelt is. Valósítsuk meg ennek a kezelését a <code>NewBirdScreen</code>ben.</p>
-<p>Vegyük föl a szükséges függőséget a modulba. A referenciák már szerepelnek a <code>libs.versions.toml</code> fájlban, így csak a <code>build.gradle</code>-be kell felvennünk a függőséget:</p>
+<p>Vegyük föl a szükséges függőséget a modulba. A referenciák már szerepelnek a <code>libs.versions.toml</code> fájlban, így csak a <code>build.gradle.kts</code>-be kell felvennünk a függőséget:</p>
 <div class="highlight"><pre><span></span><code>    //Wear Input
     implementation(libs.androidx.wear.input)
 </code></pre></div>
@@ -1833,7 +1874,252 @@ interface ISendDataRepository {
 <p>A képernyőkép szükséges feltétele a pontszám megszerzésének.</p>
 </div>
 <h2 id="google-maps">Google Maps<a class="headerlink" href="#google-maps" title="Permanent link">&para;</a></h2>
-<p>hamarosan...</p>
+<p>Először is vegyük föl a szükséges függőséget a <code>BirdPhoneApp</code> modul <code>build.gradle.kts</code> fájljában. A referenciák már szerepelnek a <code>libs.versions.toml</code> fájlban, így csak a <code>build.gradle.kts</code>-be kell felvennünk a függőséget:</p>
+<div class="highlight"><pre><span></span><code>    implementation(libs.maps.compose.utils)
+</code></pre></div>
+<h3 id="api-kulcs">API kulcs<a class="headerlink" href="#api-kulcs" title="Permanent link">&para;</a></h3>
+<p>A <a href="https://developers.google.com/maps/documentation/android-sdk/utility"><code>Maps SDK for Android Utility Library</code></a> használatához szükségünk van egy API kulcsra, amelynek megszerzéséhez itt találunk információkat: <a href="https://developers.google.com/maps/documentation/android-sdk/get-api-key">API kulcsok</a>.</p>
+<p>Amint megvan az API kulcs, ne felejtsük el korlátozni a használatát, és elrejteni a projektben. Erre egy remek megoldás, ha titokként kezeljük, és használjuk a <a href="https://developers.google.com/maps/documentation/places/android-sdk/secrets-gradle-plugin">Secrets Gradle Plugin</a>-t.</p>
+<p>Helyezzük el a projektünk <code>build.gradle.kts</code> fájljában a következő plugint. A referenciák már szerepelnek a <code>libs.versions.toml</code> fájlban, így csak a <code>build.gradle.kts</code>-be kell felvennünk a függőséget:</p>
+<div class="highlight"><pre><span></span><code>plugins {
+    alias(libs.plugins.gradle.secrets.plugin) apply false
+    ...
+}
+</code></pre></div>
+<p>Majd a <code>BirdPhoneApp</code> modul <code>build.gradle.kts</code> fájljában a következőt:</p>
+<div class="highlight"><pre><span></span><code>plugins {
+    alias(libs.plugins.gradle.secrets.plugin)
+    ...
+}
+</code></pre></div>
+<p>Ez után hozzunk létre egy <code>secrets.properties</code> fájlt a <code>local.properties</code> fájl mellé, és írjuk bele az API kulcsunkat:</p>
+<div class="highlight"><pre><span></span><code>MAPS_API_KEY=AIz..........................
+</code></pre></div>
+<p>Ha ez megvan, a <code>BirdPhoneApp</code> modul <code>build.gradle.kts</code> fájljában vegyük fel a <code>secrets</code> <em>property</em>-t</p>
+<div class="highlight"><pre><span></span><code>secrets {
+    propertiesFileName = &quot;secrets.properties&quot;
+}
+</code></pre></div>
+<p>Végezetül, az így már biztonságosan tárolt <em>API kulcsot</em> illesszük be a <code>Mainfest</code> fájlba az <em>application tagen</em> belülre:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;meta-data</span>
+<span class="w">    </span><span class="na">android:name=</span><span class="s">&quot;com.google.android.geo.API_KEY&quot;</span>
+<span class="w">    </span><span class="na">android:value=</span><span class="s">&quot;${MAPS_API_KEY}&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+</code></pre></div>
+<p>Ezek után már használhatjuk a <code>Google Maps</code>-et a projektünkben.</p>
+<h3 id="felulet">Felület<a class="headerlink" href="#felulet" title="Permanent link">&para;</a></h3>
+<p>Vegyük fel a <code>hu.bme.aut.android.birdwatchingapp.feature.googlemap</code> <em>package</em>-ben a <code>GoogleMapScreen</code>-t valamint a <code>GoogleMapViewModel</code>-t és illesszük be őket a navigációba.</p>
+<p>A felületen több funkciót is szeretnénk megvelósítani:</p>
+<ol>
+<li>Az egyszerű megjelenítés helyett, amit már láttunk, hogy minden <em>marker</em> külön jelenik meg, ezen a térképen ezeket csoportosítva szeretnénk megjeleníteni. </li>
+<li>Szeretnénk egy bekapcsolható hőtérképet is megvalósítani.</li>
+<li>Egy keresőmezőt is szeretnénk implementálni.</li>
+</ol>
+<p>A csoportosításhoz <code>ClusterItem</code>-ekre van szükségünk. Valósítsuk meg ezt a <code>hu.bme.aut.android.birdwatchingapp.ui.model</code> <em>package</em>-ben.</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">hu.bme.aut.android.birdwatchingapp.ui.model</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">com.google.android.gms.maps.model.LatLng</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.google.maps.android.clustering.ClusterItem</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">MyClusterItem</span><span class="p">(</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">position</span><span class="p">:</span><span class="w"> </span><span class="n">LatLng</span><span class="p">,</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">title</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">snippet</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span>
+<span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ClusterItem</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">getPosition</span><span class="p">():</span><span class="w"> </span><span class="n">LatLng</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">position</span>
+
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">getTitle</span><span class="p">():</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">title</span>
+
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">getSnippet</span><span class="p">():</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">snippet</span>
+
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">getZIndex</span><span class="p">():</span><span class="w"> </span><span class="kt">Float</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.0F</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>A <code>GoogleMapScreen</code>-en helyezzük el a térképet, egy beviteli mezőt, és egy kapcsolót. Ha a hőtérkép be van kapcsolva akkor azt, ha nem, akkor a csoportosítást jelenítjük meg:</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">hu.bme.aut.android.birdwatchingapp.feature.googlemap</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.compose.foundation.clickable</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.compose.foundation.layout.Box</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.compose.foundation.layout.fillMaxSize</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.compose.foundation.layout.padding</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.compose.material.icons.Icons</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.compose.material.icons.filled.Clear</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.compose.material3.Icon</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.compose.material3.MaterialTheme</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.compose.material3.OutlinedTextField</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.compose.material3.Switch</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.compose.material3.TextFieldDefaults</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.compose.runtime.Composable</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.compose.runtime.getValue</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.compose.ui.Alignment</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.compose.ui.Modifier</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.compose.ui.unit.dp</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.hilt.navigation.compose.hiltViewModel</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.lifecycle.compose.collectAsStateWithLifecycle</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.google.maps.android.compose.GoogleMap</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.google.maps.android.compose.MapProperties</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.google.maps.android.compose.MapType</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.google.maps.android.compose.MapUiSettings</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.google.maps.android.compose.MapsComposeExperimentalApi</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.google.maps.android.compose.TileOverlay</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.google.maps.android.compose.clustering.Clustering</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.google.maps.android.compose.rememberCameraPositionState</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.google.maps.android.heatmaps.HeatmapTileProvider</span>
+
+<span class="nd">@OptIn</span><span class="p">(</span><span class="n">MapsComposeExperimentalApi</span><span class="o">::</span><span class="n">class</span><span class="p">)</span>
+<span class="nd">@Composable</span>
+<span class="kd">fun</span><span class="w"> </span><span class="nf">GoogleMapScreen</span><span class="p">(</span>
+<span class="w">    </span><span class="n">viewModel</span><span class="p">:</span><span class="w"> </span><span class="n">GoogleMapViewModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hiltViewModel</span><span class="p">()</span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">state</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">viewModel</span><span class="p">.</span><span class="na">state</span><span class="p">.</span><span class="na">collectAsStateWithLifecycle</span><span class="p">()</span>
+
+<span class="w">    </span><span class="n">Box</span><span class="p">(</span><span class="n">modifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Modifier</span><span class="p">.</span><span class="na">fillMaxSize</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">GoogleMap</span><span class="p">(</span>
+<span class="w">            </span><span class="n">modifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Modifier</span><span class="p">.</span><span class="na">fillMaxSize</span><span class="p">(),</span>
+
+<span class="w">            </span><span class="n">cameraPositionState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rememberCameraPositionState</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">state</span><span class="p">.</span><span class="na">cameraPosition</span><span class="w"> </span><span class="p">},</span>
+<span class="w">            </span><span class="n">properties</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MapProperties</span><span class="p">(</span>
+<span class="w">                </span><span class="n">mapType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MapType</span><span class="p">.</span><span class="na">HYBRID</span><span class="p">,</span>
+<span class="w">                </span><span class="n">isMyLocationEnabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">            </span><span class="p">),</span>
+<span class="w">            </span><span class="n">uiSettings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MapUiSettings</span><span class="p">(</span>
+<span class="w">                </span><span class="n">zoomControlsEnabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">                </span><span class="n">zoomGesturesEnabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">                </span><span class="n">scrollGesturesEnabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">                </span><span class="n">compassEnabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">                </span><span class="n">mapToolbarEnabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">                </span><span class="n">myLocationButtonEnabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">            </span><span class="p">)</span>
+<span class="w">        </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">state</span><span class="p">.</span><span class="na">isHeatMapOn</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="kd">val</span><span class="w"> </span><span class="nv">latLngs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">viewModel</span><span class="p">.</span><span class="na">collectLatLngs</span><span class="p">()</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">latLngs</span><span class="p">.</span><span class="na">isNotEmpty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="kd">val</span><span class="w"> </span><span class="nv">provider</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">HeatmapTileProvider</span><span class="p">.</span><span class="na">Builder</span><span class="p">()</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">data</span><span class="p">(</span><span class="n">latLngs</span><span class="p">)</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">build</span><span class="p">()</span>
+<span class="w">                    </span><span class="n">TileOverlay</span><span class="p">(</span>
+<span class="w">                        </span><span class="n">tileProvider</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">provider</span>
+<span class="w">                    </span><span class="p">)</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">Clustering</span><span class="p">(</span><span class="n">items</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">state</span><span class="p">.</span><span class="na">birds</span><span class="p">)</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">OutlinedTextField</span><span class="p">(</span>
+<span class="w">            </span><span class="n">trailingIcon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">Icon</span><span class="p">(</span>
+<span class="w">                    </span><span class="n">imageVector</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Icons</span><span class="p">.</span><span class="na">Default</span><span class="p">.</span><span class="na">Clear</span><span class="p">,</span>
+<span class="w">                    </span><span class="n">contentDescription</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">                    </span><span class="n">modifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Modifier</span><span class="p">.</span><span class="na">clickable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">viewModel</span><span class="p">.</span><span class="na">onEvent</span><span class="p">(</span><span class="n">GoogleMapEvent</span><span class="p">.</span><span class="na">SearchTermChanged</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">))</span>
+<span class="w">                    </span><span class="p">})</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">state</span><span class="p">.</span><span class="na">searchTerm</span><span class="p">,</span>
+<span class="w">            </span><span class="n">onValueChange</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">viewModel</span><span class="p">.</span><span class="na">onEvent</span><span class="p">(</span><span class="n">GoogleMapEvent</span><span class="p">.</span><span class="na">SearchTermChanged</span><span class="p">(</span><span class="nb">it</span><span class="p">))</span><span class="w"> </span><span class="p">},</span>
+<span class="w">            </span><span class="n">modifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Modifier</span>
+<span class="w">                </span><span class="p">.</span><span class="na">align</span><span class="p">(</span><span class="n">Alignment</span><span class="p">.</span><span class="na">TopCenter</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">padding</span><span class="p">(</span><span class="n">top</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">16.</span><span class="n">dp</span><span class="p">),</span>
+<span class="w">            </span><span class="n">colors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TextFieldDefaults</span><span class="p">.</span><span class="na">colors</span><span class="p">().</span><span class="na">copy</span><span class="p">(</span>
+<span class="w">                </span><span class="n">unfocusedContainerColor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MaterialTheme</span><span class="p">.</span><span class="na">colorScheme</span><span class="p">.</span><span class="na">primaryContainer</span><span class="p">,</span>
+<span class="w">                </span><span class="n">focusedContainerColor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MaterialTheme</span><span class="p">.</span><span class="na">colorScheme</span><span class="p">.</span><span class="na">primaryContainer</span>
+<span class="w">            </span><span class="p">)</span>
+<span class="w">        </span><span class="p">)</span>
+
+<span class="w">        </span><span class="n">Switch</span><span class="p">(</span>
+<span class="w">            </span><span class="n">checked</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">state</span><span class="p">.</span><span class="na">isHeatMapOn</span><span class="p">,</span>
+<span class="w">            </span><span class="n">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">            </span><span class="n">onCheckedChange</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">viewModel</span><span class="p">.</span><span class="na">onEvent</span><span class="p">(</span><span class="n">GoogleMapEvent</span><span class="p">.</span><span class="na">GoogleMapModeChanged</span><span class="p">(</span><span class="nb">it</span><span class="p">))</span><span class="w"> </span><span class="p">},</span>
+<span class="w">            </span><span class="n">modifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Modifier</span>
+<span class="w">                </span><span class="p">.</span><span class="na">align</span><span class="p">(</span><span class="n">Alignment</span><span class="p">.</span><span class="na">BottomStart</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">padding</span><span class="p">(</span><span class="n">bottom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">16.</span><span class="n">dp</span><span class="p">,</span><span class="w"> </span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">16.</span><span class="n">dp</span><span class="p">),</span>
+<span class="w">        </span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>A <code>GoogleMapViewModel</code>-ben ennek megfelleően vegyük fön az alábbi függvényeket, majd egészítsük ki őket:</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">hu.bme.aut.android.birdwatchingapp.feature.googlemap</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.lifecycle.ViewModel</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.lifecycle.viewModelScope</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.google.android.gms.maps.model.CameraPosition</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.google.android.gms.maps.model.LatLng</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">dagger.hilt.android.lifecycle.HiltViewModel</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">hu.bme.aut.android.birdwatchingapp.domain.usecases.bird.AllBirdsUseCases</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">hu.bme.aut.android.birdwatchingapp.ui.model.MyClusterItem</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">kotlinx.coroutines.flow.MutableStateFlow</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">kotlinx.coroutines.flow.asStateFlow</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">kotlinx.coroutines.flow.update</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">kotlinx.coroutines.launch</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">javax.inject.Inject</span>
+
+<span class="nd">@HiltViewModel</span>
+<span class="kd">class</span><span class="w"> </span><span class="nc">GoogleMapViewModel</span><span class="w"> </span><span class="nd">@Inject</span><span class="w"> </span><span class="k">constructor</span><span class="p">(</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">sightingsUseCases</span><span class="p">:</span><span class="w"> </span><span class="n">AllBirdsUseCases</span>
+<span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ViewModel</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">_state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MutableStateFlow</span><span class="p">(</span><span class="n">GoogleMapState</span><span class="p">())</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_state</span><span class="p">.</span><span class="na">asStateFlow</span><span class="p">()</span>
+
+<span class="w">    </span><span class="k">init</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">onSearchThermChanged</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">onEvent</span><span class="p">(</span><span class="n">event</span><span class="p">:</span><span class="w"> </span><span class="n">GoogleMapEvent</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">when</span><span class="w"> </span><span class="p">(</span><span class="n">event</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">is</span><span class="w"> </span><span class="n">GoogleMapEvent</span><span class="p">.</span><span class="na">SearchTermChanged</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="kd">val</span><span class="w"> </span><span class="nv">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">event</span><span class="p">.</span><span class="na">name</span><span class="p">.</span><span class="na">trim</span><span class="p">()</span>
+<span class="w">                </span><span class="n">_state</span><span class="p">.</span><span class="na">update</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nb">it</span><span class="p">.</span><span class="na">copy</span><span class="p">(</span><span class="n">searchTerm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">                </span><span class="n">onSearchThermChanged</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<span class="w">            </span><span class="p">}</span>
+
+<span class="w">            </span><span class="k">is</span><span class="w"> </span><span class="n">GoogleMapEvent</span><span class="p">.</span><span class="na">GoogleMapModeChanged</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">_state</span><span class="p">.</span><span class="na">update</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nb">it</span><span class="p">.</span><span class="na">copy</span><span class="p">(</span><span class="n">isHeatMapOn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">event</span><span class="p">.</span><span class="na">switchState</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">onSearchThermChanged</span><span class="p">(</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">viewModelScope</span><span class="p">.</span><span class="na">launch</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">_state</span><span class="p">.</span><span class="na">update</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nb">it</span><span class="p">.</span><span class="na">copy</span><span class="p">(</span><span class="n">isLoading</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">            </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">///TODO elemek betöltése</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">e</span><span class="p">:</span><span class="w"> </span><span class="n">Exception</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">_state</span><span class="p">.</span><span class="na">update</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nb">it</span><span class="p">.</span><span class="na">copy</span><span class="p">(</span><span class="n">isLoading</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">collectLatLngs</span><span class="p">():</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">LatLng</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">list</span><span class="p">:</span><span class="w"> </span><span class="n">MutableList</span><span class="o">&lt;</span><span class="n">LatLng</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mutableListOf</span><span class="p">()</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">bird</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">state</span><span class="p">.</span><span class="na">value</span><span class="p">.</span><span class="na">birds</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">LatLng</span><span class="p">(</span><span class="n">bird</span><span class="p">.</span><span class="na">position</span><span class="p">.</span><span class="na">latitude</span><span class="p">,</span><span class="w"> </span><span class="n">bird</span><span class="p">.</span><span class="na">position</span><span class="p">.</span><span class="na">longitude</span><span class="p">))</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">list</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">GoogleMapState</span><span class="p">(</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">cameraPosition</span><span class="p">:</span><span class="w"> </span><span class="n">CameraPosition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CameraPosition</span><span class="p">.</span><span class="na">fromLatLngZoom</span><span class="p">(</span><span class="n">LatLng</span><span class="p">(</span><span class="m">47.0</span><span class="p">,</span><span class="w"> </span><span class="m">19.0</span><span class="p">),</span><span class="w"> </span><span class="m">10f</span><span class="p">),</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">searchTerm</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">isHeatMapOn</span><span class="p">:</span><span class="w"> </span><span class="kt">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">isLoading</span><span class="p">:</span><span class="w"> </span><span class="kt">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">error</span><span class="p">:</span><span class="w"> </span><span class="n">Throwable? </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">isError</span><span class="p">:</span><span class="w"> </span><span class="kt">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">birds</span><span class="p">:</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">MyClusterItem</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">emptyList</span><span class="p">()</span>
+<span class="p">)</span>
+
+<span class="kd">sealed</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">GoogleMapEvent</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">SearchTermChanged</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">name</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">GoogleMapEvent</span><span class="p">()</span>
+<span class="w">    </span><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">GoogleMapModeChanged</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">switchState</span><span class="p">:</span><span class="w"> </span><span class="kt">Boolean</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">GoogleMapEvent</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Ha kiegészítettük a függvényeket, próbáljuk ki az alkalmazást!</p>
+<div class="admonition example">
+<p class="admonition-title">BEADANDÓ</p>
+<p>Készíts egy <strong>képernyőképet</strong>, amelyen látszik a <strong>térkép a clusterezett pontokkal</strong> (emulátoron, készüléket tükrözve vagy képernyőfelvétellel), az <strong>onSearchThermChanged függvény</strong> kódja, valamint a <strong>neptun kódod a kódban valahol kommentként</strong>! A képet a megoldásban a repository-ba f4.png néven töltsd föl! </p>
+<p>Készíts egy <strong>képernyőképet</strong>, amelyen látszik a <strong>hőtérkép egy kereséssel</strong> (emulátoron, készüléket tükrözve vagy képernyőfelvétellel)! A képet a megoldásban a repository-ba f5.png néven töltsd föl! </p>
+</div>
 
     <hr>
   <div class="md-source-file">
@@ -1844,8 +2130,8 @@ interface ISendDataRepository {
           </path>
         </svg>
       </span>
-      <span title="2024. november 30. 18:21:43">
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-11-30T18:21:43+01:00" locale="hu"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-11-30</span>
+      <span title="2024. november 30. 19:36:34">
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-11-30T19:36:34+01:00" locale="hu"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-11-30</span>
       </span>
     </span>
 
