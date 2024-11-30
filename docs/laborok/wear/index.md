@@ -13,14 +13,15 @@ Felhasznált technológiák:
 
 - [`Firebase Authentication`](https://firebase.google.com/docs/auth)
 - [`Firebase CloudFirestore`](https://firebase.google.com/docs/firestore)
+- [`Hilt`](https://developer.android.com/training/dependency-injection/hilt-android)
 - [`OpenStreetMap - OSMDroid`](https://github.com/osmdroid/osmdroid)
-- [`Maps SDK for Android Utility Library`](https://developers.google.com/maps/documentation/android-sdk/utility)
-- [`Fused Location Provider`](https://developer.android.com/develop/sensors-and-location/location/retrieve-current)
 - [`Accompanist`](https://github.com/google/accompanist)
+- [`Fused Location Provider`](https://developer.android.com/develop/sensors-and-location/location/retrieve-current)
 - [`WearOS`](https://developer.android.com/wear)
 - [`Wear IME`](https://developer.android.com/training/wearables/user-input/wear-ime)
 - [`Data Layer API`](https://developer.android.com/training/wearables/data/overview)
-- [`Hilt`](https://developer.android.com/training/dependency-injection/hilt-android)
+- [`Maps SDK for Android Utility Library`](https://developers.google.com/maps/documentation/android-sdk/utility)
+- [Secrets Gradle Plugin](https://developers.google.com/maps/documentation/places/android-sdk/secrets-gradle-plugin)
 
 
 <p align="center">
@@ -101,7 +102,7 @@ Az újonnan felvett madaraink egyelőre 0,0 koordinátával kerülnek be az adat
 
 Ehhez először is vegyük fel a szükséges (`ACCESS_FINE_LOCATION`, `ACCESS_COARSE_LOCATION`) engedélyeket a `Manifest`be.
 
-Mivel ezek veszélyes engedélyek, futásidőben is kezelnünk kell őket. Ehhez az [`Accompanist`](https://github.com/google/accompanist) könyvtárat fogjuk használni. A referenciák már szerepelnek a `libs.versions.toml` fájlban, így csak a `build.gradle`-be kell felvennünk a függőséget:
+Mivel ezek veszélyes engedélyek, futásidőben is kezelnünk kell őket. Ehhez az [`Accompanist`](https://github.com/google/accompanist) könyvtárat fogjuk használni. A referenciák már szerepelnek a `libs.versions.toml` fájlban, így csak a `build.gradle.kts`-be kell felvennünk a függőséget:
 
 ```gradle
     //Accompanist
@@ -224,7 +225,7 @@ is SightingsEvent.StartLocationMonitoring -> {
 
 ### Fused Location Provider
 
-Először vegyük föl a pozíciómeghatározást tartalmazó függőséget.A referenciák már szerepelnek a `libs.versions.toml` fájlban, így csak a `build.gradle`-be kell felvennünk a függőséget:
+Először vegyük föl a pozíciómeghatározást tartalmazó függőséget.A referenciák már szerepelnek a `libs.versions.toml` fájlban, így csak a `build.gradle.kts`-be kell felvennünk a függőséget:
 
 ```gradle
     //Location
@@ -391,7 +392,7 @@ Most már a *Floating Action Button* megnyomására megkapjuk az engedélykéré
 
 	A képernyőkép szükséges feltétele a pontszám megszerzésének.
 
-## Térkép megvalósítása
+## Térkép megvalósítása (2 pont)
 
 Most, hogy már el tudjuk menteni a pozíciót is a megfigyeléseinkhez, célszerű lenne a megjelenítésüket is megoldani. Hozzunk létre ehhez egy térkép nézetet `OSMapScreen` néven, majd a hozzá tartozó *viewModelt* is `OSMapViewModel` néven a `feature.osm` *package*-ben.
 
@@ -401,7 +402,7 @@ A térképes nézetet [Google Maps](https://developers.google.com/maps/documenta
 
 Az OSM-nek nincs hivatalos Androidos könyvtára, de számos *3rd party* megoldás található. A legelterjedtebb talán az [`OSMDroid`](https://github.com/osmdroid/osmdroid), azonban ennek is sajnos már abba hagyták a fejlesztését, így a *Jetpack Compose* technológiára nem készítették föl. Ennek ellenére megbízhatósága és könnyű kezelhetősége miatt ezt a könyvtárat fogjuk használni, és beilleszteni a *Compose* kódba.
 
-Először is vegyük fel a szükséges függőséget. A referenciák már szerepelnek a `libs.versions.toml` fájlban, így csak a `build.gradle`-be kell felvennünk a függőséget:
+Először is vegyük fel a szükséges függőséget. A referenciák már szerepelnek a `libs.versions.toml` fájlban, így csak a `build.gradle.kts`-be kell felvennünk a függőséget:
 
 ```gradle
     //OpenStreetMap
@@ -552,7 +553,7 @@ Változtassuk meg a markerek kinézetét!
 
 	A képernyőkép szükséges feltétele a pontszám megszerzésének.
 
-## Wear OS
+## Wear OS (2 pont)
 
 Most már akár teljesnek is mondhatnánk az alkalmazásunk funkcionalitását. Tudunk madármegfigyeléseket felvenni a saját pozíciónkra, illetve azokat térképen vissza is nézhetjük. Azonban néha akár kellemetlen is lehet elővenni a telefonunkat egy-egy bejegyzés miatt, mennyivel könnyebb lenne, ha a hozzáadást akár óráról is elvégezhetnénk. Adjunk hozzá a projektünkhöz egy új `Wear OS` modult `BirdWearApp` néven. (Ezt az alkalmazást ez esetben akár külön projektben is megvalósíthatnánk, de az összetartozó alkalmazásokat gyakran szerencsésebb egy projektben fejleszteni, hiszen ha van közös kódbázisuk, az egy *common* modulba kiemelve mindkét helyen használható lenne.)
 
@@ -584,7 +585,7 @@ Ezek után adjuk hozzá a *stringeket* is:
 </resources>
 ```
 
-A *Wear* alkalmazásban egy gombot szeretnénk megjeleníteni, amit megnyomva a felhasználó be tudja vinni az új megfigyelését akár billentyűzetről akár hangban. Aztán ezt egy megerősítő gombbal átküldheti a telefonnak, ami továbbítja az adatbázisba. Ezt az alkalmazást is a *Clean Architecture* szerint szeretnénk megvalósítani így vegyük fel a megfelelő *Hilt* *pluginokat* és függőségeket. A referenciák már szerepelnek a `libs.versions.toml` fájlban, így csak a `build.gradle`-be kell felvennünk a függőséget:
+A *Wear* alkalmazásban egy gombot szeretnénk megjeleníteni, amit megnyomva a felhasználó be tudja vinni az új megfigyelését akár billentyűzetről akár hangban. Aztán ezt egy megerősítő gombbal átküldheti a telefonnak, ami továbbítja az adatbázisba. Ezt az alkalmazást is a *Clean Architecture* szerint szeretnénk megvalósítani így vegyük fel a megfelelő *Hilt* *pluginokat* és függőségeket. A referenciák már szerepelnek a `libs.versions.toml` fájlban, így csak a `build.gradle.kts`-be kell felvennünk a függőséget:
 
 ```gradle
 plugins {
@@ -780,7 +781,7 @@ class NewBirdViewModel @Inject constructor(
 
 A bevitelt *Wear* eszközön csak a billentyűzetre bízni nem szerencsés. Ilyen kis felületen a gépelés nehézkes, ezért a platform támogatja az egyszerű szöveg bevitelt is. Valósítsuk meg ennek a kezelését a `NewBirdScreen`ben.
 
-Vegyük föl a szükséges függőséget a modulba. A referenciák már szerepelnek a `libs.versions.toml` fájlban, így csak a `build.gradle`-be kell felvennünk a függőséget:
+Vegyük föl a szükséges függőséget a modulba. A referenciák már szerepelnek a `libs.versions.toml` fájlban, így csak a `build.gradle.kts`-be kell felvennünk a függőséget:
 
 ```gradle
     //Wear Input
@@ -1032,4 +1033,286 @@ class MainActivity : ComponentActivity() {
 
 ## Google Maps
 
-hamarosan...
+Először is vegyük föl a szükséges függőséget a `BirdPhoneApp` modul `build.gradle.kts` fájljában. A referenciák már szerepelnek a `libs.versions.toml` fájlban, így csak a `build.gradle.kts`-be kell felvennünk a függőséget:
+
+```gradle
+    implementation(libs.maps.compose.utils)
+```
+
+### API kulcs
+
+
+
+A [`Maps SDK for Android Utility Library`](https://developers.google.com/maps/documentation/android-sdk/utility) használatához szükségünk van egy API kulcsra, amelynek megszerzéséhez itt találunk információkat: [API kulcsok](https://developers.google.com/maps/documentation/android-sdk/get-api-key).
+
+Amint megvan az API kulcs, ne felejtsük el korlátozni a használatát, és elrejteni a projektben. Erre egy remek megoldás, ha titokként kezeljük, és használjuk a [Secrets Gradle Plugin](https://developers.google.com/maps/documentation/places/android-sdk/secrets-gradle-plugin)-t.
+
+Helyezzük el a projektünk `build.gradle.kts` fájljában a következő plugint. A referenciák már szerepelnek a `libs.versions.toml` fájlban, így csak a `build.gradle.kts`-be kell felvennünk a függőséget:
+
+
+```gradle
+plugins {
+    alias(libs.plugins.gradle.secrets.plugin) apply false
+	...
+}
+```
+
+Majd a `BirdPhoneApp` modul `build.gradle.kts` fájljában a következőt:
+
+```gradle
+plugins {
+    alias(libs.plugins.gradle.secrets.plugin)
+	...
+}
+```
+
+Ez után hozzunk létre egy `secrets.properties` fájlt a `local.properties` fájl mellé, és írjuk bele az API kulcsunkat:
+
+```
+MAPS_API_KEY=AIz..........................
+```
+
+Ha ez megvan, a `BirdPhoneApp` modul `build.gradle.kts` fájljában vegyük fel a `secrets` *property*-t
+
+```gradle
+secrets {
+    propertiesFileName = "secrets.properties"
+}
+```
+
+Végezetül, az így már biztonságosan tárolt *API kulcsot* illesszük be a `Mainfest` fájlba az *application tagen* belülre:
+
+```xml
+<meta-data
+    android:name="com.google.android.geo.API_KEY"
+    android:value="${MAPS_API_KEY}" />
+```
+
+Ezek után már használhatjuk a `Google Maps`-et a projektünkben.
+
+### Felület
+
+Vegyük fel a `hu.bme.aut.android.birdwatchingapp.feature.googlemap` *package*-ben a `GoogleMapScreen`-t valamint a `GoogleMapViewModel`-t és illesszük be őket a navigációba.
+
+A felületen több funkciót is szeretnénk megvelósítani:
+
+1. Az egyszerű megjelenítés helyett, amit már láttunk, hogy minden *marker* külön jelenik meg, ezen a térképen ezeket csoportosítva szeretnénk megjeleníteni. 
+1. Szeretnénk egy bekapcsolható hőtérképet is megvalósítani.
+1. Egy keresőmezőt is szeretnénk implementálni.
+
+A csoportosításhoz `ClusterItem`-ekre van szükségünk. Valósítsuk meg ezt a `hu.bme.aut.android.birdwatchingapp.ui.model` *package*-ben.
+
+```kotlin
+package hu.bme.aut.android.birdwatchingapp.ui.model
+
+import com.google.android.gms.maps.model.LatLng
+import com.google.maps.android.clustering.ClusterItem
+
+class MyClusterItem(
+    private val position: LatLng,
+    private val title: String,
+    private val snippet: String
+) : ClusterItem {
+    override fun getPosition(): LatLng = position
+
+    override fun getTitle(): String = title
+
+    override fun getSnippet(): String = snippet
+
+    override fun getZIndex(): Float = 0.0F
+}
+``` 
+
+A `GoogleMapScreen`-en helyezzük el a térképet, egy beviteli mezőt, és egy kapcsolót. Ha a hőtérkép be van kapcsolva akkor azt, ha nem, akkor a csoportosítást jelenítjük meg:
+
+```kotlin
+package hu.bme.aut.android.birdwatchingapp.feature.googlemap
+
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Switch
+import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.google.maps.android.compose.GoogleMap
+import com.google.maps.android.compose.MapProperties
+import com.google.maps.android.compose.MapType
+import com.google.maps.android.compose.MapUiSettings
+import com.google.maps.android.compose.MapsComposeExperimentalApi
+import com.google.maps.android.compose.TileOverlay
+import com.google.maps.android.compose.clustering.Clustering
+import com.google.maps.android.compose.rememberCameraPositionState
+import com.google.maps.android.heatmaps.HeatmapTileProvider
+
+@OptIn(MapsComposeExperimentalApi::class)
+@Composable
+fun GoogleMapScreen(
+    viewModel: GoogleMapViewModel = hiltViewModel()
+) {
+
+    val state by viewModel.state.collectAsStateWithLifecycle()
+
+    Box(modifier = Modifier.fillMaxSize()) {
+        GoogleMap(
+            modifier = Modifier.fillMaxSize(),
+
+            cameraPositionState = rememberCameraPositionState { position = state.cameraPosition },
+            properties = MapProperties(
+                mapType = MapType.HYBRID,
+                isMyLocationEnabled = true
+            ),
+            uiSettings = MapUiSettings(
+                zoomControlsEnabled = true,
+                zoomGesturesEnabled = true,
+                scrollGesturesEnabled = true,
+                compassEnabled = true,
+                mapToolbarEnabled = false,
+                myLocationButtonEnabled = true,
+            )
+        ) {
+            if (state.isHeatMapOn) {
+                val latLngs = viewModel.collectLatLngs()
+                if (latLngs.isNotEmpty()) {
+                    val provider = HeatmapTileProvider.Builder()
+                        .data(latLngs)
+                        .build()
+                    TileOverlay(
+                        tileProvider = provider
+                    )
+                }
+            } else {
+                Clustering(items = state.birds)
+            }
+        }
+
+        OutlinedTextField(
+            trailingIcon = {
+                Icon(
+                    imageVector = Icons.Default.Clear,
+                    contentDescription = null,
+                    modifier = Modifier.clickable {
+                        viewModel.onEvent(GoogleMapEvent.SearchTermChanged(""))
+                    })
+            },
+            value = state.searchTerm,
+            onValueChange = { viewModel.onEvent(GoogleMapEvent.SearchTermChanged(it)) },
+            modifier = Modifier
+                .align(Alignment.TopCenter)
+                .padding(top = 16.dp),
+            colors = TextFieldDefaults.colors().copy(
+                unfocusedContainerColor = MaterialTheme.colorScheme.primaryContainer,
+                focusedContainerColor = MaterialTheme.colorScheme.primaryContainer
+            )
+        )
+
+        Switch(
+            checked = state.isHeatMapOn,
+            enabled = true,
+            onCheckedChange = { viewModel.onEvent(GoogleMapEvent.GoogleMapModeChanged(it)) },
+            modifier = Modifier
+                .align(Alignment.BottomStart)
+                .padding(bottom = 16.dp, start = 16.dp),
+        )
+    }
+}
+```
+
+A `GoogleMapViewModel`-ben ennek megfelleően vegyük fön az alábbi függvényeket, majd egészítsük ki őket:
+
+```kotlin
+package hu.bme.aut.android.birdwatchingapp.feature.googlemap
+
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.google.android.gms.maps.model.CameraPosition
+import com.google.android.gms.maps.model.LatLng
+import dagger.hilt.android.lifecycle.HiltViewModel
+import hu.bme.aut.android.birdwatchingapp.domain.usecases.bird.AllBirdsUseCases
+import hu.bme.aut.android.birdwatchingapp.ui.model.MyClusterItem
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
+import javax.inject.Inject
+
+@HiltViewModel
+class GoogleMapViewModel @Inject constructor(
+    private val sightingsUseCases: AllBirdsUseCases
+) : ViewModel() {
+
+    private val _state = MutableStateFlow(GoogleMapState())
+    val state = _state.asStateFlow()
+
+    init {
+        onSearchThermChanged("")
+    }
+
+    fun onEvent(event: GoogleMapEvent) {
+        when (event) {
+            is GoogleMapEvent.SearchTermChanged -> {
+                val name = event.name.trim()
+                _state.update { it.copy(searchTerm = name) }
+                onSearchThermChanged(name)
+            }
+
+            is GoogleMapEvent.GoogleMapModeChanged -> {
+                _state.update { it.copy(isHeatMapOn = event.switchState) }
+            }
+        }
+    }
+
+    private fun onSearchThermChanged(name: String) {
+        viewModelScope.launch {
+            _state.update { it.copy(isLoading = true) }
+            try {
+                ///TODO elemek betöltése
+            } catch (e: Exception) {
+                _state.update { it.copy(isLoading = false, error = e) }
+            }
+        }
+    }
+
+    fun collectLatLngs(): List<LatLng> {
+        val list: MutableList<LatLng> = mutableListOf()
+        for (bird in state.value.birds) {
+            list.add(LatLng(bird.position.latitude, bird.position.longitude))
+        }
+        return list
+    }
+}
+
+data class GoogleMapState(
+    val cameraPosition: CameraPosition = CameraPosition.fromLatLngZoom(LatLng(47.0, 19.0), 10f),
+    val searchTerm: String = "",
+    val isHeatMapOn: Boolean = false,
+    val isLoading: Boolean = false,
+    val error: Throwable? = null,
+    val isError: Boolean = error != null,
+    val birds: List<MyClusterItem> = emptyList()
+)
+
+sealed class GoogleMapEvent {
+    data class SearchTermChanged(val name: String) : GoogleMapEvent()
+    data class GoogleMapModeChanged(val switchState: Boolean) : GoogleMapEvent()
+}
+```
+
+Ha kiegészítettük a függvényeket, próbáljuk ki az alkalmazást!
+
+
+!!!example "BEADANDÓ"
+	Készíts egy **képernyőképet**, amelyen látszik a **térkép a clusterezett pontokkal** (emulátoron, készüléket tükrözve vagy képernyőfelvétellel), az **onSearchThermChanged függvény** kódja, valamint a **neptun kódod a kódban valahol kommentként**! A képet a megoldásban a repository-ba f4.png néven töltsd föl! 
+
+	Készíts egy **képernyőképet**, amelyen látszik a **hőtérkép egy kereséssel** (emulátoron, készüléket tükrözve vagy képernyőfelvétellel)! A képet a megoldásban a repository-ba f5.png néven töltsd föl! 
