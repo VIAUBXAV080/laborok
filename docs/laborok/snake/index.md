@@ -200,7 +200,7 @@ plugins {
 
 Hogy ha mindennel megvagyunk Sync-eljük le a projektet és várjuk meg míg legölt az összes szükséges könyvtár.
 
-## Navigáció a képernyők között (2.5 pont)
+## Navigáció a képernyők között
 
 Elsőként hozzuk létre a szükséges képernyőket. Még csak demoként lesznek meg, egy teszt szöveggel, majd a további feladatok során kiegészítjük a tényleges képernyővel. Ahhoz hogy a képernyők között navigálni tudjunk, szükségünk van a NavHost-ra amiben definiáljuk az egyes kijelzőkre mutató utat. Ehhez hozzunk létre egy új Packaget `navigation` néven. Ezen belül fogunk első sorban dolgozni. Itt hozzunk létre egy `NavGraph` nevü Kotlin fájlt. 
 
@@ -688,10 +688,10 @@ class MainActivity : ComponentActivity() {
 
 Ha mindent jól csináltunk akkor az alkalmazás elindítása után a főképernyő fogad minket ahonnan a gombok segítségével el tudunk navigálni az egyes képernyőkre.
 
-!!!example "BEADANDÓ (2.5 pont)"
+!!!example "BEADANDÓ"
     Készíts **5 képernyő képet** az elkészült képernyőkről, amelyen látszik az **elkészült oldal** (emulátoron, készüléket tükrözve vagy képernyőfelvétellel), egy **ahhoz tartozó kódrészlet**, valamint a **neptun kódod a kódban valahol kommentként**. A képeket a megoldásban a repository-ba f1a.png, f1b.png, f1c.png, f1d.png, f1e.png néven töltsd föl.
 
-## Képernyők kiegészítése (2.5 pont)
+## Képernyők kiegészítése (1 pont)
 
 A második feladat a már meglévő képernyők megtervezése és kiegészítése lesz. A dokumentáció elején látható képernyőket szeretnénk megvalósítani. Ehhez kezdjük először a legegyszerűbb képernyővel. Ez a Settings Screen lesz, itt csak egyetlen kapcsolót fogunk megjeleníteni, amivel majd a későbbiek során foglalkozunk, amikor a Sensor részét is beleépítettük az alkalmazásba. Ehhez nyissuk meg a SettingsScreen fájlt, és módosítsuk az alábbiak szerint.
 
@@ -991,11 +991,11 @@ Ez egy szimpla gomb, ami azért felel, hogy elindítsa a játékot, hogy ha a fe
 
 Ahhoz hogy a GameScreen-t is meg tudjuk csinálni, ahhoz előtte magát a játék logikát kell megvalósítani. Folytatásként elkészítjük a játéknak az állapotait egy Data Class segítségével, majd a Snake-hez tartozó viewModel-t is.
 
-!!!example "BEADANDÓ (2.5 pont)"
+!!!example "BEADANDÓ (1 pont)"
     Készíts **4 képernyő képet** az elkészült képernyőkről, amelyen látszik az **elkészült oldal** (emulátoron, készüléket tükrözve vagy képernyőfelvétellel), egy **ahhoz tartozó kódrészlet**, valamint a **neptun kódod a kódban valahol kommentként, és/vagy játékosnévként megadva**. A képeket a megoldásban a repository-ba f2a.png, f2b.png, f2c.png, f2d.png néven töltsd föl.
 
 
-## Snake State / Snake View Model (4 pont)
+## Snake State / Snake View Model (1 pont)
 
 ### Snake State
 
@@ -1407,10 +1407,10 @@ private fun resumeGame(){
 
 Így még sajnos önmagában a projekt nem működik, ugyanis a Game Screen még nincs kész. A következő feladatban ezt is meg fogjuk valósítani, illetve a szükséges DrawScope függvényeket is létre fogjuk hozni.
 
-!!!example "BEADANDÓ (4 pont)"
+!!!example "BEADANDÓ (1 pont)"
     Készíts **2 képernyőképet** az elkészült kódról, amelyen látszik a **SnakeState kódja, valamint a ViewModel-ben az Event kódja** (emulátoron, készüléket tükrözve vagy képernyőfelvétellel), egy **ahhoz tartozó kódrészlet**, valamint a **neptun kódod a kódban valahol kommentként**. A képeket a megoldásban a repository-ba f3a.png, f3b.png néven töltsd föl.
 
-## Game Screen / DrawScope függvények (4 pont)
+## Game Screen / DrawScope függvények (1 pont)
 
 
 Ahhoz hogy a Game Screen-t el tudjuk készíteni először szükségünk van 3 DrawScope-ra. *DrawBoard*, *DrawFood*, *DrawSnake*. Ezek egy-egy DrawScope függvények, amellyeket meg tudunk hívni a Canvas Composable belsejében. Magát a pályát a játékot a Canvas Composable-val fogjuk megvalósítani.
@@ -2396,10 +2396,10 @@ Ha mindent jól csináltunk, a játéknak működnie kellene az elindítás utá
 
 Próbálj meg összeszedni 5 pontot, majd lescreenshotolni és azt beadni feladatmegoldásként!
 
-!!!example "BEADANDÓ (4 pont)"
+!!!example "BEADANDÓ (1 pont)"
     Készíts **képernyő képet** a játékról, amelyen látszik az **elkészült oldal, valahány pont a játék során vagy a gameOver felirat** (emulátoron, készüléket tükrözve vagy képernyőfelvétellel), egy **ahhoz tartozó kódrészlet**, valamint a **neptun kódod a kódban valahol kommentként**. A képeket a megoldásban a repository-ba f4.png néven töltsd föl.
 
-## High Scores / Database (2 pont)
+## High Scores / Database
 
 A következő feladatban az adabázis részét fogjuk megvalósítani az alkalmazásnak, ennek a segítségével tudjuk elérni, hogy a játék végén, egy adatbázisba elmentsük a játék adatait (Név, pont, nehézség formában). Ehhez szükségünk lesz egy **Dao**-ra, egy **DataBase**-re, illetve egy **Entity**-re is. Ezeknek a segítségével fogjuk elvégezni az adatok tárolását, valamint az adatbázis adatainak a módosítását.
 
@@ -2650,12 +2650,12 @@ fun NavGraph(
 }
 ```
 
-!!!example "BEADANDÓ (2 pont)"
+!!!example "BEADANDÓ"
     Készíts **képernyő képet** a HighScoreScreenről, amelyen látszik az **elkészült oldal, valahány mentett rekord, köztük a NEPTUN kódod egy játékosnévként** (emulátoron, készüléket tükrözve vagy képernyőfelvétellel), egy **ahhoz tartozó kódrészlet**, valamint a **neptun kódod a kódban valahol kommentként**. A képeket a megoldásban a repository-ba f5.png néven töltsd föl.
 
 
 
-## Sensor Control (2 pont)
+## Sensor Control (1 pont)
 
 Ebben a feladatban meg fogjuk valósítani, azt a fajta működését a játékunknak, hogy a felhasználó a telefon döntögetésével tudja irányítani a kígyót a megfelelő irányba.
 
@@ -3136,15 +3136,15 @@ composable(
 }
 ```
 
-!!!example "BEADANDÓ (2 pont)"
+!!!example "BEADANDÓ (1 pont)"
     Készíts **képernyőképet** az elkészült képernyőkről, amelyen látszik a **Sensoros irányítás, és pár szerzett pont** (emulátoron, készüléket tükrözve vagy képernyőfelvétellel), egy **ahhoz tartozó kódrészlet**, valamint a **neptun kódod a kódban valahol kommentként**. A képeket a megoldásban a repository-ba f6.png néven töltsd föl.
 
 
 
 
-## Önálló feladat (3 pont)
+## Önálló feladat (1 pont)
 
-### High Score Delete All megvalósítása (1 pont)
+### High Score Delete All megvalósítása
 Készítsd el a High Score képernyőn elhelyezkedő Delete All gomb működésének a logikáját!
 
 ???info "Segítség"
@@ -3157,7 +3157,7 @@ Készítsd el a High Score képernyőn elhelyezkedő Delete All gomb működés�
 !!!example "BEADANDÓ (1 pont)"
     Készíts **egy képernyő képet** az elkészült logikáról, amelyen látszik a **kód, illetve egy olyan képernyő ahol van az adatbázisnak eleme, valamint egy olyan ahol a törölve vannak az elemek**, valamint a **neptun kódod a kódban valahol kommentként**. A képeket a megoldásban a repository-ba f7a.png, f7b.png néven töltsd föl.
 
-### isTurned megvalósítása (1 pont)
+### isTurned megvalósítása
 Készítsd el az isTurned logikát, amely blokkolni fogja a fordulást, mindaddig amíg a kígyó nem ment egyet előre. Ehhez használjuk fel a létrehozott `_isTurned` változót. Működés:
 
 *   Fordulás után blokkoljuk az ismételt fordulást
@@ -3172,7 +3172,7 @@ Készítsd el az isTurned logikát, amely blokkolni fogja a fordulást, mindaddi
     Készíts **egy képernyő képet** az elkészült logikáról, amelyen látszik a **kód**, valamint a **neptun kódod a kódban valahol kommentként**. A képeket a megoldásban a repository-ba f8.png néven töltsd föl.
 
 
-### Egyetlen elem törlése (1 pont)
+### Egyetlen elem törlése
 Készítsd el azt a logikát, amellyel egyetlen elemet tudsz törölni az adatbázisból, hogy ha hosszan rányomsz az adott sorra a High Score Screenen!
 
 ???info "Segítség"
