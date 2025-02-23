@@ -1364,40 +1364,67 @@
 <p>Miután ezekkel megvagyunk vegyük fel a következő függőségeket a <code>libs.versions.toml</code> illetve a <code>build.gradle.kts</code> fileba.</p>
 <p><code>libs.versions.toml</code></p>
 <div class="highlight"><pre><span></span><code><span class="k">[versions]</span>
-<span class="n">navigationComposeVersion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;2.7.7&quot;</span>
+<span class="n">agp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;8.8.1&quot;</span>
+<span class="n">kotlin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;2.0.0&quot;</span>
+<span class="n">coreKtx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;1.15.0&quot;</span>
+<span class="n">navigationComposeVersion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;2.8.7&quot;</span>
 <span class="n">roomRuntime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;2.6.1&quot;</span>
-<span class="n">datastorePreferences</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;1.1.1&quot;</span>
-<span class="n">lifecycleRuntimeComposeAndroid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;2.8.3&quot;</span>
-<span class="n">lifecycleRuntimeKtxVersion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;2.4.0&quot;</span>
-<span class="n">androidxLifecycleRuntimeKtx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;2.8.4&quot;</span>
-<span class="n">lifecycleLivedataKtx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;2.8.4&quot;</span>
-<span class="n">runtimeLivedata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;1.6.8&quot;</span>
+<span class="n">datastorePreferences</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;1.1.2&quot;</span>
+<span class="n">lifecycleRuntimeKtx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;2.8.7&quot;</span>
+<span class="n">runtimeLivedata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;1.7.8&quot;</span>
 <span class="n">hiltNavigationCompose</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;1.2.0&quot;</span>
 <span class="n">hiltAndroid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;2.51.1&quot;</span>
-<span class="c1"># Other versions</span>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="k">[libraries]</span>
+<span class="n">activityCompose</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;1.10.0&quot;</span>
+<span class="n">composeBom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;2025.02.00&quot;</span>
+
+<span class="k">[libraries]</span>
+<span class="n">androidx-core-ktx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;androidx.core&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;core-ktx&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">version</span><span class="p">.</span><span class="n">ref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;coreKtx&quot;</span><span class="w"> </span><span class="p">}</span>
+<span class="n">androidx-activity-compose</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;androidx.activity&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;activity-compose&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">version</span><span class="p">.</span><span class="n">ref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;activityCompose&quot;</span><span class="w"> </span><span class="p">}</span>
+<span class="n">androidx-compose-bom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;androidx.compose&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;compose-bom&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">version</span><span class="p">.</span><span class="n">ref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;composeBom&quot;</span><span class="w"> </span><span class="p">}</span>
+<span class="n">androidx-ui</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;androidx.compose.ui&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;ui&quot;</span><span class="w"> </span><span class="p">}</span>
+<span class="n">androidx-ui-graphics</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;androidx.compose.ui&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;ui-graphics&quot;</span><span class="w"> </span><span class="p">}</span>
+<span class="n">androidx-ui-tooling</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;androidx.compose.ui&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;ui-tooling&quot;</span><span class="w"> </span><span class="p">}</span>
+<span class="n">androidx-ui-tooling-preview</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;androidx.compose.ui&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;ui-tooling-preview&quot;</span><span class="w"> </span><span class="p">}</span>
+<span class="n">androidx-ui-test-manifest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;androidx.compose.ui&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;ui-test-manifest&quot;</span><span class="w"> </span><span class="p">}</span>
+<span class="n">androidx-ui-test-junit4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;androidx.compose.ui&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;ui-test-junit4&quot;</span><span class="w"> </span><span class="p">}</span>
+<span class="n">androidx-material3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;androidx.compose.material3&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;material3&quot;</span><span class="w"> </span><span class="p">}</span>
+
 <span class="n">navigation-compose</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">module</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;androidx.navigation:navigation-compose&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">version</span><span class="p">.</span><span class="n">ref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;navigationComposeVersion&quot;</span><span class="w"> </span><span class="p">}</span>
 <span class="n">androidx-room-ktx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">module</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;androidx.room:room-ktx&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">version</span><span class="p">.</span><span class="n">ref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;roomRuntime&quot;</span><span class="w"> </span><span class="p">}</span>
 <span class="n">androidx-room-runtime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">module</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;androidx.room:room-runtime&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">version</span><span class="p">.</span><span class="n">ref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;roomRuntime&quot;</span><span class="w"> </span><span class="p">}</span>
 <span class="n">androidx-datastore-preferences</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">module</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;androidx.datastore:datastore-preferences&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">version</span><span class="p">.</span><span class="n">ref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;datastorePreferences&quot;</span><span class="w"> </span><span class="p">}</span>
-<span class="n">androidx-lifecycle-runtime-compose-android</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;androidx.lifecycle&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;lifecycle-runtime-compose-android&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">version</span><span class="p">.</span><span class="n">ref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;lifecycleRuntimeComposeAndroid&quot;</span><span class="w"> </span><span class="p">}</span>
-<span class="n">androidx-lifecycle-runtime-ktx-v240</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">module</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;androidx.lifecycle:lifecycle-runtime-ktx&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">version</span><span class="p">.</span><span class="n">ref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;lifecycleRuntimeKtxVersion&quot;</span><span class="w"> </span><span class="p">}</span>
+<span class="n">androidx-lifecycle-runtime-compose-android</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;androidx.lifecycle&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;lifecycle-runtime-compose-android&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">version</span><span class="p">.</span><span class="n">ref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;lifecycleRuntimeKtx&quot;</span><span class="w"> </span><span class="p">}</span>
+<span class="n">androidx-lifecycle-runtime-ktx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">module</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;androidx.lifecycle:lifecycle-runtime-ktx&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">version</span><span class="p">.</span><span class="n">ref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;lifecycleRuntimeKtx&quot;</span><span class="w"> </span><span class="p">}</span>
 <span class="n">androidx-lifecycle-viewmodel-compose</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">module</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;androidx.lifecycle:lifecycle-viewmodel-compose&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">version</span><span class="p">.</span><span class="n">ref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;lifecycleRuntimeKtx&quot;</span><span class="w"> </span><span class="p">}</span>
-<span class="n">androidx-lifecycle-runtime-ktx-v284</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">module</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;androidx.lifecycle:lifecycle-runtime-ktx&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">version</span><span class="p">.</span><span class="n">ref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;androidxLifecycleRuntimeKtx&quot;</span><span class="w"> </span><span class="p">}</span>
-<span class="n">androidx-lifecycle-livedata-ktx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">module</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;androidx.lifecycle:lifecycle-livedata-ktx&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">version</span><span class="p">.</span><span class="n">ref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;lifecycleLivedataKtx&quot;</span><span class="w"> </span><span class="p">}</span>
+<span class="n">androidx-lifecycle-livedata-ktx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">module</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;androidx.lifecycle:lifecycle-livedata-ktx&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">version</span><span class="p">.</span><span class="n">ref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;lifecycleRuntimeKtx&quot;</span><span class="w"> </span><span class="p">}</span>
 <span class="n">androidx-lifecycle-viewmodel-ktx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">module</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;androidx.lifecycle:lifecycle-viewmodel-ktx&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">version</span><span class="p">.</span><span class="n">ref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;lifecycleRuntimeKtx&quot;</span><span class="w"> </span><span class="p">}</span>
 <span class="n">androidx-runtime-livedata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;androidx.compose.runtime&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;runtime-livedata&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">version</span><span class="p">.</span><span class="n">ref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;runtimeLivedata&quot;</span><span class="w"> </span><span class="p">}</span>
 <span class="n">androidx-hilt-navigation-compose</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">module</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;androidx.hilt:hilt-navigation-compose&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">version</span><span class="p">.</span><span class="n">ref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;hiltNavigationCompose&quot;</span><span class="w"> </span><span class="p">}</span>
 <span class="n">hilt-android</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">module</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;com.google.dagger:hilt-android&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">version</span><span class="p">.</span><span class="n">ref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;hiltAndroid&quot;</span><span class="w"> </span><span class="p">}</span>
 <span class="n">hilt-compiler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">module</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;com.google.dagger:hilt-compiler&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">version</span><span class="p">.</span><span class="n">ref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;hiltAndroid&quot;</span><span class="w"> </span><span class="p">}</span>
 <span class="n">androidx-room-compiler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">module</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;androidx.room:room-compiler&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">version</span><span class="p">.</span><span class="n">ref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;roomRuntime&quot;</span><span class="w"> </span><span class="p">}</span>
-
-
-<span class="c1"># Other libs</span>
+<span class="k">[plugins]</span>
+<span class="n">android-application</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;com.android.application&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">version</span><span class="p">.</span><span class="n">ref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;agp&quot;</span><span class="w"> </span><span class="p">}</span>
+<span class="n">kotlin-android</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;org.jetbrains.kotlin.android&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">version</span><span class="p">.</span><span class="n">ref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;kotlin&quot;</span><span class="w"> </span><span class="p">}</span>
+<span class="n">kotlin-compose</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;org.jetbrains.kotlin.plugin.compose&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">version</span><span class="p">.</span><span class="n">ref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;kotlin&quot;</span><span class="w"> </span><span class="p">}</span>
+<span class="n">hilt-android</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;com.google.dagger.hilt.android&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">version</span><span class="p">.</span><span class="n">ref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;hiltAndroid&quot;</span><span class="w"> </span><span class="p">}</span>
+<span class="n">kotlin-kapt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;org.jetbrains.kotlin.kapt&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">version</span><span class="p">.</span><span class="n">ref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;kotlin&quot;</span><span class="w"> </span><span class="p">}</span>
 </code></pre></div>
-<p><code>build.gradles.kts</code>
+<p><code>build.gradles.kts</code> (Modul szintű)
 <div class="highlight"><pre><span></span><code>dependencies {
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.activity.compose)
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.ui.graphics)
+    implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.androidx.material3)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.ui.test.junit4)
+    debugImplementation(libs.androidx.ui.tooling)
+    debugImplementation(libs.androidx.ui.test.manifest)
+
     // Hilt for DI
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
@@ -1407,9 +1434,8 @@
     implementation(libs.androidx.runtime.livedata)
     implementation (libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.lifecycle.livedata.ktx)
-    implementation( libs.androidx.lifecycle.runtime.ktx.v284)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
-    implementation(libs.androidx.lifecycle.runtime.ktx.v240)
     implementation(libs.androidx.lifecycle.runtime.compose.android)
 
     // DataStore for preferences
@@ -1422,43 +1448,43 @@
 
     //Navigation, lifecycle
     implementation(libs.navigation.compose)
-
-    // ... Other dependencies
 }
 </code></pre></div>
-<code>build.gradle.kts</code>
+<code>build.gradle.kts</code> (Modul szintű)
 <div class="highlight"><pre><span></span><code><span class="n">plugins</span><span class="p">{</span>
-<span class="w">    </span><span class="c1">//...</span>
-<span class="w">    </span><span class="n">id</span><span class="p">(</span><span class="s">&quot;com.google.dagger.hilt.android&quot;</span><span class="p">)</span>
-<span class="w">    </span><span class="n">kotlin</span><span class="p">(</span><span class="s">&quot;kapt&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="s">&quot;1.9.0&quot;</span>
+<span class="w">    </span><span class="n">alias</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="na">plugins</span><span class="p">.</span><span class="na">android</span><span class="p">.</span><span class="na">application</span><span class="p">)</span>
+<span class="w">    </span><span class="n">alias</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="na">plugins</span><span class="p">.</span><span class="na">kotlin</span><span class="p">.</span><span class="na">android</span><span class="p">)</span>
+<span class="w">    </span><span class="n">alias</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="na">plugins</span><span class="p">.</span><span class="na">kotlin</span><span class="p">.</span><span class="na">compose</span><span class="p">)</span>
+<span class="w">    </span><span class="n">alias</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="na">plugins</span><span class="p">.</span><span class="na">hilt</span><span class="p">.</span><span class="na">android</span><span class="p">)</span>
+<span class="w">    </span><span class="n">alias</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="na">plugins</span><span class="p">.</span><span class="na">kotlin</span><span class="p">.</span><span class="na">kapt</span><span class="p">)</span>
 <span class="p">}</span>
 <span class="n">android</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">//...</span>
-<span class="w">    </span><span class="n">compileSdk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">34</span>
+<span class="w">    </span><span class="n">compileSdk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">35</span>
 <span class="w">    </span><span class="n">defaultConfig</span><span class="p">{</span>
 <span class="w">        </span><span class="c1">//...</span>
 <span class="w">        </span><span class="n">minSdk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">24</span>
-<span class="w">        </span><span class="n">targetSdk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">34</span>
+<span class="w">        </span><span class="n">targetSdk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">35</span>
 <span class="w">        </span><span class="c1">//...</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">    </span><span class="c1">//...</span>
 <span class="w">    </span><span class="n">composeOptions</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">kotlinCompilerExtensionVersion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;1.5.1&quot;</span>
+<span class="w">        </span><span class="n">kotlinCompilerExtensionVersion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;1.5.15&quot;</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">    </span><span class="c1">//...</span>
 <span class="p">}</span>
 </code></pre></div></p>
-<p>Majd a Top-Level <code>build.gradle.kts</code> filet nyissuk meg és adjuk hozzá a HILT-et illetve a KAPT-ot.</p>
+<p>Majd a Project szintű <code>build.gradle.kts</code> filet nyissuk meg és adjuk hozzá a HILT-et illetve a KAPT-ot.</p>
 <p><code>build.gradle.kts (Snake)</code>
 <div class="highlight"><pre><span></span><code>plugins {
     //...
-    kotlin(&quot;kapt&quot;) version &quot;1.9.0&quot; apply false
-    id(&quot;com.google.dagger.hilt.android&quot;) version &quot;2.51.1&quot; apply false
+    alias(libs.plugins.hilt.android) apply false
+    alias(libs.plugins.kotlin.kapt) apply false
 }
 </code></pre></div></p>
 <p>Hogy ha mindennel megvagyunk Sync-eljük le a projektet és várjuk meg míg legölt az összes szükséges könyvtár.</p>
 <h2 id="navigacio-a-kepernyok-kozott-25-pont">Navigáció a képernyők között (2.5 pont)<a class="headerlink" href="#navigacio-a-kepernyok-kozott-25-pont" title="Permanent link">&para;</a></h2>
-<p>Elsőként hozzuk létre a szükséges képernyőket. Még csak demoként lesznek meg, egy teszt szöveggel, majd a további feladatok során kiegészítjük a tényleges képernyővel. Ahhoz hogy a képernyők között navigálni tudjuk szükségünk van a NavHost-ra amiben definiáljuk az egyes kijelzőkre mutató utat. Ehhez hozzunk létre egy új Packaget <code>model</code> néven majd ebben egy <code>navigation</code> néven egy újabb packaget. Ezen belül fogunk első sorban dolgozni. Itt hozzunk létre egy <code>NavGraph</code> nevü Kotlin Filet. </p>
+<p>Elsőként hozzuk létre a szükséges képernyőket. Még csak demoként lesznek meg, egy teszt szöveggel, majd a további feladatok során kiegészítjük a tényleges képernyővel. Ahhoz hogy a képernyők között navigálni tudjunk, szükségünk van a NavHost-ra amiben definiáljuk az egyes kijelzőkre mutató utat. Ehhez hozzunk létre egy új Packaget <code>navigation</code> néven. Ezen belül fogunk első sorban dolgozni. Itt hozzunk létre egy <code>NavGraph</code> nevü Kotlin fájlt. </p>
 <p>Az alkalmazásban 6 képernyőnk lesz, ezek:</p>
 <ul>
 <li>Főképernyő (MainScreen)</li>
@@ -1477,7 +1503,7 @@
 <li>StartGameScreen-en hasonlóan legyen egy vissza gomb, illetve title-nek "Game Settings" legyen beállítva.</li>
 <li>A GameScreen-en a felirat legyen egy üres string, ilyenkor a TopAppBar kikapcsolt állapotba fog kerülni.</li>
 </ul>
-<p>Első sorban hozzunk létre egy új Package-t <code>main</code> néven a <code>model</code> packageba, majd ebben egy <code>MainViewModel</code> nevű Kotlin Filet. Erre azért lesz szükség, hogy a TopBar feliratát, dinamikussan tudjuk majd kezelni, illetve az ikon működését is. Ebben a fájlban helyezzük el az alábbi kódot:</p>
+<p>Első sorban hozzunk létre egy új Package-t <code>main</code> néven a <code>feature</code> packageba, majd ebben egy <code>MainViewModel</code> nevű Kotlin fájlt. Erre azért lesz szükség, hogy a TopBar feliratát dinamikussan tudjuk majd kezelni, illetve az ikon működését is. Ebben a fájlban helyezzük el az alábbi kódot:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nc">MainViewModel</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ViewModel</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">_title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MutableLiveData</span><span class="p">(</span><span class="s">&quot;Main Menu&quot;</span><span class="p">)</span>
 <span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">title</span><span class="p">:</span><span class="w"> </span><span class="n">LiveData</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_title</span>
@@ -1499,10 +1525,10 @@
 <span class="p">}</span>
 </code></pre></div>
 <p>Három változónk lesz, ezek közül az egyik egy Lambda. Ez a navigálásért fog felelni később, illetve van kettő függvényünk aminek a segítségével beállítjuk a privát változók értékét.</p>
-<p>Ezután hozzunk létre <code>screen</code> néven egy új Packaget a gyökérmappában (<code>hu.bme.aut...</code>), majd ebben több új Kotlin Filet az alábbi nevekkel: <code>GameScreen</code>, <code>HighScoresScreen</code>, <code>MainNavScreen</code>, <code>MainScreen</code>, <code>SettingsScreen</code>, <code>StartGameScreen</code>. Ezek lesznek az alkalmazás képernyői, kezdetben még csak Demo-ra lesz állítva, és a későbbiekben fogjuk megvalósítani a tényleges kinézetüket.</p>
+<p>Ezután hozzunk létre a <code>feature</code> packagen belül újabb packageket, illetve bennük az oldalhoz tartozó fájlokat: <code>game</code>/<code>GameScreen</code>, <code>highscores</code>/<code>HighScoresScreen</code>, <code>main</code>/<code>MainNavScreen</code>, <code>main</code>/<code>MainScreen</code>, <code>settings</code>/<code>SettingsScreen</code>, <code>startgame</code>/<code>StartGameScreen</code>. Ezek lesznek az alkalmazás képernyői, kezdetben még csak Demo-ra lesz állítva, és a későbbiekben fogjuk megvalósítani a tényleges kinézetüket.</p>
 <p>Folytatásként kezdjük el a <code>MainNavScreen</code> megírását, ugyanis ez fog felelni azért, hogy a <code>NavHost</code> <em>Graphot</em> tartalmazza.</p>
 <p>Ennek egy Scaffoldból kell állnia ami dinamikusan fogja kezelni a TopBar-t a képernyőtől függően. Ehhez korábban már létrehoztuk a viewModellünket, ennek a segítségével fogjuk megvalósítani ezt a működést.</p>
-<p>Mielőtt elkezdenénk a Scaffold-ot, valósítsuk meg a NavGraph-ot a <code>NavGraph.kt</code> file-ban.</p>
+<p>Mielőtt elkezdenénk a Scaffold-ot, valósítsuk meg a NavGraph-ot a <code>navigation</code>/<code>NavGraph.kt</code> file-ban.</p>
 <p><div class="highlight"><pre><span></span><code><span class="nd">@Composable</span>
 <span class="kd">fun</span><span class="w"> </span><span class="nf">NavGraph</span><span class="p">(</span>
 <span class="w">    </span><span class="n">modifier</span><span class="p">:</span><span class="w"> </span><span class="n">Modifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Modifier</span><span class="p">,</span>
@@ -2133,7 +2159,7 @@ Ez egy szimpla gomb, ami azért felel, hogy elindítsa a játékot, hogy ha a fe
 </div>
 <h2 id="snake-state-snake-view-model-4-pont">Snake State / Snake View Model (4 pont)<a class="headerlink" href="#snake-state-snake-view-model-4-pont" title="Permanent link">&para;</a></h2>
 <h3 id="snake-state">Snake State<a class="headerlink" href="#snake-state" title="Permanent link">&para;</a></h3>
-<p>Első lépésben elkészítjük a kígyó állapotáért felelős Data Classt. Készítsünk a <code>model</code> packagen belül egy <code>snake</code> packaget, amiben egy <code>SnakeState</code> Kotlin filet hozunk létre, majd a mellékelt kód segítségével megvalósítjuk a logikát.</p>
+<p>Első lépésben elkészítjük a kígyó állapotáért felelős Data Classt. Készítsünk egy <code>model</code> packaget, amiben egy <code>SnakeState</code> Kotlin filet hozunk létre, majd a mellékelt kód segítségével megvalósítjuk a logikát.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">SnakeState</span><span class="p">(</span>
 <span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">xSize</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="p">,</span>
 <span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">ySize</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">30</span><span class="p">,</span>
@@ -2215,7 +2241,8 @@ Azonban ez még hibát fog mutatni a kódszerkesztő felületen, de ennek a hiá
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">gameState</span>
 <span class="p">}</span>
 </code></pre></div>
-Ez egy egyszerű getter függvény, amely vissza adja a játék jelenlegi állapotát.</p>
+Ez egy egyszerű getter függvény, amely vissza adja a játék jelenlegi állapotát.
+(Ha a GameState-re hibát dobna az Android Studio, töröljük az android-os <code>GameState</code> importot a fájl tetejéről)</p>
 <p>Ezen kívűl meg kell valósítanunk egy egyszerű Sealed Class-t ami magáért az Eventekért fog felelni. </p>
 <ul>
 <li>Start Game</li>
@@ -2223,7 +2250,7 @@ Ez egy egyszerű getter függvény, amely vissza adja a játék jelenlegi állap
 <li>Reset Game</li>
 <li>Change Dir</li>
 </ul>
-<p>Ehhez hozzunk létre egy új Kotlin File-t a <code>snake</code> Packageba <code>SnakeEvent</code> néven, majd egészítsük ki az alábbi kód alapján:</p>
+<p>Ehhez hozzunk létre egy új Kotlin File-t a <code>model</code> packageba <code>SnakeEvent</code> néven, majd egészítsük ki az alábbi kód alapján:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">sealed</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">SnakeEvent</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">data</span><span class="w"> </span><span class="kd">object</span><span class="w"> </span><span class="nc">StartGame</span><span class="p">:</span><span class="w"> </span><span class="n">SnakeEvent</span><span class="p">()</span>
 <span class="w">    </span><span class="kd">data</span><span class="w"> </span><span class="kd">object</span><span class="w"> </span><span class="nc">PauseGame</span><span class="p">:</span><span class="w"> </span><span class="n">SnakeEvent</span><span class="p">()</span>
@@ -2422,7 +2449,7 @@ Végül magát az irányváltoztatásért felelős eseményt is megvalósítjuk 
 
 <span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">newHead</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">state</span><span class="p">.</span><span class="na">food</span><span class="p">){</span>
 <span class="w">    </span><span class="n">newSnake</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newSnake</span><span class="p">.</span><span class="na">toMutableList</span><span class="p">()</span>
-<span class="w">    </span><span class="n">newSnake</span><span class="p">.</span><span class="na">removeLast</span><span class="p">()</span>
+<span class="w">    </span><span class="n">newSnake</span><span class="p">.</span><span class="na">removeAt</span><span class="p">(</span><span class="n">newSnake</span><span class="p">.</span><span class="na">lastIndex</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre></div>
 Itt létrehozunk egy új kígyót, amelynek az első eleme az új fej koordinátája lesz (newHead), majd ehhez hozzáfűzzük a már meglévő kígyónkat. Valamint új almát is kell generálnunk. Ehhez ellenőriznünk kell, hogy a kígyó megette-e az almát vagy sem. Ha megette akkor új almát generálunk, hogy ha nem ette meg, akkor a jelenlegi alma koordinátáját adjuk át az újnak.</p>
@@ -2479,7 +2506,7 @@ A függvény elején leellenőrizzük, hogy a játék még megy-e (az az nincs g
 </p>
 
 <p>Itt az alábbi példa megmutat egy olyan opciót amit meg kellene akadályoznunk ezekkel a függvényekkel.</p>
-<p>Első sorban valósítsuk meg a DrawScope függvényeket. Ehhez hozzunk létre 1 új Packaget a gyökér mappában <code>draw</code> néven, majd ezekben 3 újabb Packaget -- <strong>board</strong>, <strong>food</strong>, <strong>snake</strong> néven.</p>
+<p>Első sorban valósítsuk meg a DrawScope függvényeket. Ehhez hozzunk létre 1 új Packaget a gyökér mappában <code>draw</code> néven.</p>
 <p><strong>DrawBoard</strong></p>
 <p>Elsőnek valósítsuk meg a DrawBoard függvényünket. Ehhez hozzunk létre egy új Kotlin File-t a board packageben DrawBoard néven, majd írjuk bele az alábbi kódot.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">fun</span><span class="w"> </span><span class="n">DrawScope</span><span class="p">.</span><span class="nf">drawBoard</span><span class="p">(</span>
@@ -2893,7 +2920,7 @@ Mint már korábban is említettük, ez a sor három elemet fog tartalmazni. Egy
 <span class="w">            </span><span class="n">inclusive</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
+<span class="p">},</span>
 </code></pre></div>
 Szükségünk van arra, hogy a játék állapotát alaphelyzetbe állítsuk, ezt az onClick első sorával tehetjük meg, valamint a <code>navController.navigate(..){..}</code> lambda segítségével beállítjuk, hogy ha a felhasználó vissza gombot nyomna a főképernyőn ezután, ne tudjon visszanavigálni a játék képernyőjére. Ezt a <code>popUpTo(..){inclusive..}</code> segítségével tehetjük meg.</p>
 <p>A Text felirata az alábbiaktól függ:</p>
@@ -3532,12 +3559,18 @@ Ez az osztály egy Abstract osztály lesz, és szintén megkapja a Room egy anno
 <span class="kd">object</span><span class="w"> </span><span class="nc">AppModule</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nd">@Provides</span>
 <span class="w">    </span><span class="nd">@Singleton</span>
-<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">provideTopScoreDao</span><span class="p">(</span><span class="nd">@ApplicationContext</span><span class="w"> </span><span class="n">appContext</span><span class="p">:</span><span class="w"> </span><span class="n">Context</span><span class="p">):</span><span class="w"> </span><span class="n">TopScoreDao</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">TopScoreDatabase</span><span class="p">.</span><span class="na">getDatabase</span><span class="p">(</span><span class="n">appContext</span><span class="p">).</span><span class="na">topScoreDao</span><span class="p">()</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">provideDatabase</span><span class="p">(</span><span class="nd">@ApplicationContext</span><span class="w"> </span><span class="n">appContext</span><span class="p">:</span><span class="w"> </span><span class="n">Context</span><span class="p">):</span><span class="w"> </span><span class="n">TopScoreDatabase</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">TopScoreDatabase</span><span class="p">.</span><span class="na">getDatabase</span><span class="p">(</span><span class="n">appContext</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Provides</span>
+<span class="w">    </span><span class="nd">@Singleton</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">provideTopScoreDao</span><span class="p">(</span><span class="n">database</span><span class="p">:</span><span class="w"> </span><span class="n">TopScoreDatabase</span><span class="p">):</span><span class="w"> </span><span class="n">TopScoreDao</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">database</span><span class="p">.</span><span class="na">topScoreDao</span><span class="p">()</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>Az AppModule objektumon belül rakunk két annotációt a <code>provideTopScoreDao</code> függvény-re, amely majd egy TopScoreDao objektumot ad vissza a meghívás után. Mivel <code>ApplicationContext</code>-et tud biztosítani, így ennek a segítségével meghívjuk a <code>getDatabase</code> függvényt ezzel a paraméterrel, majd legkérdezzük a Dao-t, így megkapva a szükséges paraméterünket.</p>
+<p>Az AppModule objektumon belül rakunk két annotációt a <code>provideTopScoreDao</code> és <code>provideDatabase</code> függvényekre. Mivel <code>ApplicationContext</code>-et tud biztosítani, így ennek a segítségével meghívjuk a <code>getDatabase</code> függvényt ezzel a paraméterrel, majd legkérdezzük a Dao-t, így megkapva a szükséges paraméterünket.</p>
 <p>Ahhoz, hogy a Dependency Injectionunk működjön globálisan az alkalmazás szintjén inicializálnunk kell a Daggert, hogy létrejöjjön egy kontextus, amelyben a függőségeket menedzseli. Ehhez hozzunk létre a gyökérmappában egy új Kotlin File-t <code>Application</code> néven, majd írjuk bele a következő egyszerű kódot:</p>
 <div class="highlight"><pre><span></span><code><span class="nd">@HiltAndroidApp</span>
 <span class="kd">class</span><span class="w"> </span><span class="nc">MyApplication</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Application</span><span class="p">()</span>
@@ -3575,7 +3608,7 @@ Ez az osztály egy Abstract osztály lesz, és szintén megkapja a Room egy anno
 <span class="kd">fun</span><span class="w"> </span><span class="nf">HighScoresScreen</span><span class="p">(</span>
 <span class="w">    </span><span class="n">snakeViewModel</span><span class="p">:</span><span class="w"> </span><span class="n">SnakeViewModel</span>
 <span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">highScores</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">snakeViewModel</span><span class="p">.</span><span class="na">topScores</span><span class="p">.</span><span class="na">collectAsStateWithLifecycle</span><span class="p">(</span><span class="n">listOf</span><span class="p">())</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">highScores</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">snakeViewModel</span><span class="p">.</span><span class="na">topScores</span><span class="p">.</span><span class="na">collectAsStateWithLifecycle</span><span class="p">(</span><span class="n">listOf</span><span class="p">())</span>
 
 <span class="w">    </span><span class="n">Column</span><span class="w"> </span><span class="p">(</span>
 <span class="w">        </span><span class="c1">//...</span>
@@ -3588,13 +3621,13 @@ Ez az osztály egy Abstract osztály lesz, és szintén megkapja a Room egy anno
 <span class="w">        </span><span class="n">LazyColumn</span><span class="w"> </span><span class="p">(</span>
 <span class="w">            </span><span class="c1">//...</span>
 <span class="w">        </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">items</span><span class="p">(</span><span class="n">highScores</span><span class="p">.</span><span class="na">value</span><span class="p">.</span><span class="na">size</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">-&gt;</span>
+<span class="w">            </span><span class="n">items</span><span class="p">(</span><span class="n">highScores</span><span class="p">.</span><span class="na">size</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">-&gt;</span>
 <span class="w">                </span><span class="n">Row</span><span class="w"> </span><span class="p">(</span>
 <span class="w">                    </span><span class="c1">//...</span>
 <span class="w">                </span><span class="p">){</span>
-<span class="w">                    </span><span class="n">TableText</span><span class="p">(</span><span class="n">highScores</span><span class="p">.</span><span class="na">value</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="p">.</span><span class="na">name</span><span class="p">,</span><span class="w"> </span><span class="n">Modifier</span><span class="p">.</span><span class="na">weight</span><span class="p">(</span><span class="m">2f</span><span class="p">))</span>
-<span class="w">                    </span><span class="n">TableText</span><span class="p">(</span><span class="n">highScores</span><span class="p">.</span><span class="na">value</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="p">.</span><span class="na">score</span><span class="p">.</span><span class="na">toString</span><span class="p">(),</span><span class="w"> </span><span class="n">Modifier</span><span class="p">.</span><span class="na">weight</span><span class="p">(</span><span class="m">1f</span><span class="p">))</span>
-<span class="w">                    </span><span class="n">TableText</span><span class="p">(</span><span class="n">highScores</span><span class="p">.</span><span class="na">value</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="p">.</span><span class="na">difficulty</span><span class="p">,</span><span class="w"> </span><span class="n">Modifier</span><span class="p">.</span><span class="na">weight</span><span class="p">(</span><span class="m">2f</span><span class="p">))</span>
+<span class="w">                    </span><span class="n">TableText</span><span class="p">(</span><span class="n">highScores</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="p">.</span><span class="na">name</span><span class="p">,</span><span class="w"> </span><span class="n">Modifier</span><span class="p">.</span><span class="na">weight</span><span class="p">(</span><span class="m">2f</span><span class="p">))</span>
+<span class="w">                    </span><span class="n">TableText</span><span class="p">(</span><span class="n">highScores</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="p">.</span><span class="na">score</span><span class="p">.</span><span class="na">toString</span><span class="p">(),</span><span class="w"> </span><span class="n">Modifier</span><span class="p">.</span><span class="na">weight</span><span class="p">(</span><span class="m">1f</span><span class="p">))</span>
+<span class="w">                    </span><span class="n">TableText</span><span class="p">(</span><span class="n">highScores</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="p">.</span><span class="na">difficulty</span><span class="p">,</span><span class="w"> </span><span class="n">Modifier</span><span class="p">.</span><span class="na">weight</span><span class="p">(</span><span class="m">2f</span><span class="p">))</span>
 <span class="w">                </span><span class="p">}</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">        </span><span class="p">}</span>
@@ -3659,7 +3692,7 @@ Ez az osztály egy Abstract osztály lesz, és szintén megkapja a Room egy anno
 <span class="p">}</span>
 </code></pre></div>
 <p>Ez a kódrészlet egy Kotlin alkalmazásban lévő adatmegőrző rendszer működését mutatja be, amelyet az Android <code>DataStore</code> API-jával valósítanak meg. A <code>PreferenceStorage</code> osztály a <code>Context</code>-et használja a beállítások mentéséhez és lekéréséhez. Egy <code>Flow</code>-val tér vissza, amely figyeli a <code>sensor_control</code> nevű preferencia változásait, és alapértelmezésben <code>false</code>-t ad vissza, ha a beállítás még nem létezik. A <code>setSensorControlled</code> függvény lehetővé teszi, hogy egy új értéket állítsunk be ehhez a kulcshoz aszinkron módon.</p>
-<p>Ezután hozzuk létre az új ViewModellünket. A <code>model</code> mappán belül készítsünk egy <code>settings</code> mappát, és ezen belül hozzunk létre egy új Kotlin Filet. Majd írjuk meg a kódot az alábbiak alapján:</p>
+<p>Ezután hozzuk létre az új ViewModellünket. A <code>feature</code> mappán belül a <code>settings</code> mappában hozzunk létre egy új Kotlin Filet. Majd írjuk meg a kódot az alábbiak alapján:</p>
 <div class="highlight"><pre><span></span><code><span class="nd">@HiltViewModel</span>
 <span class="kd">class</span><span class="w"> </span><span class="nc">SettingsViewModel</span><span class="w"> </span><span class="nd">@Inject</span><span class="w"> </span><span class="k">constructor</span><span class="p">(</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">preferenceStorage</span><span class="p">:</span><span class="w"> </span><span class="n">PreferenceStorage</span>
@@ -3711,13 +3744,11 @@ Ennek a segítségével elő fogja tudni állítani a szükséges paramétert az
 <div class="highlight"><pre><span></span><code><span class="nd">@AndroidEntryPoint</span>
 <span class="kd">class</span><span class="w"> </span><span class="nc">MainActivity</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ComponentActivity</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">lateinit</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">settingsViewModel</span><span class="p">:</span><span class="w"> </span><span class="n">SettingsViewModel</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">settingsViewModel</span><span class="p">:</span><span class="w"> </span><span class="n">SettingsViewModel</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">viewModels</span><span class="p">()</span>
 <span class="w">    </span><span class="c1">//Other Vals</span>
 
 <span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span><span class="w"> </span><span class="n">Bundle?)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">super</span><span class="p">.</span><span class="na">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
-
-<span class="w">        </span><span class="n">settingsViewModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ViewModelProvider</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="o">[</span><span class="n">SettingsViewModel</span><span class="o">::</span><span class="n">class</span><span class="p">.</span><span class="na">java</span><span class="o">]</span>
 <span class="w">        </span><span class="n">enableEdgeToEdge</span><span class="p">()</span>
 <span class="w">        </span><span class="n">setContent</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="n">SnakeDemoTestTheme</span><span class="w"> </span><span class="p">{</span>
@@ -4111,8 +4142,8 @@ Az else elágazás kitöltéséhez használjuk fel az alábbiakat:</p>
           </path>
         </svg>
       </span>
-      <span title="2024. szeptember 24. 18:22:30">
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2024-09-24T18:22:30+02:00" locale="hu"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-09-24</span>
+      <span title="2025. február 24. 00:42:41">
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-02-24T00:42:41+01:00" locale="hu"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-02-24</span>
       </span>
     </span>
 
