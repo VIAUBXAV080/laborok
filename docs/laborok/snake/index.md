@@ -73,45 +73,69 @@ Miután ezekkel megvagyunk vegyük fel a következő függőségeket a `libs.ver
 
 ```toml
 [versions]
-navigationComposeVersion = "2.7.7"
+agp = "8.8.1"
+kotlin = "2.0.0"
+coreKtx = "1.15.0"
+navigationComposeVersion = "2.8.7"
 roomRuntime = "2.6.1"
-datastorePreferences = "1.1.1"
-lifecycleRuntimeComposeAndroid = "2.8.3"
-lifecycleRuntimeKtxVersion = "2.4.0"
-androidxLifecycleRuntimeKtx = "2.8.4"
-lifecycleLivedataKtx = "2.8.4"
-runtimeLivedata = "1.6.8"
+datastorePreferences = "1.1.2"
+lifecycleRuntimeKtx = "2.8.7"
+runtimeLivedata = "1.7.8"
 hiltNavigationCompose = "1.2.0"
 hiltAndroid = "2.51.1"
-# Other versions
-```
+activityCompose = "1.10.0"
+composeBom = "2025.02.00"
 
-```toml
 [libraries]
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
+androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
+androidx-ui = { group = "androidx.compose.ui", name = "ui" }
+androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
+androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
+androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
+
 navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationComposeVersion" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomRuntime" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
-androidx-lifecycle-runtime-compose-android = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose-android", version.ref = "lifecycleRuntimeComposeAndroid" }
-androidx-lifecycle-runtime-ktx-v240 = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtxVersion" }
+androidx-lifecycle-runtime-compose-android = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose-android", version.ref = "lifecycleRuntimeKtx" }
+androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
 androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycleRuntimeKtx" }
-androidx-lifecycle-runtime-ktx-v284 = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidxLifecycleRuntimeKtx" }
-androidx-lifecycle-livedata-ktx = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycleLivedataKtx" }
+androidx-lifecycle-livedata-ktx = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycleRuntimeKtx" }
 androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleRuntimeKtx" }
 androidx-runtime-livedata = { group = "androidx.compose.runtime", name = "runtime-livedata", version.ref = "runtimeLivedata" }
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hiltAndroid" }
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomRuntime" }
-
-
-# Other libs
-
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hiltAndroid" }
+kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 ```
 
-`build.gradles.kts`
+`build.gradles.kts` (Modul szintű)
 ```kts
 dependencies {
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.activity.compose)
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.ui.graphics)
+    implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.androidx.material3)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.ui.test.junit4)
+    debugImplementation(libs.androidx.ui.tooling)
+    debugImplementation(libs.androidx.ui.test.manifest)
+
     // Hilt for DI
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
@@ -121,11 +145,10 @@ dependencies {
     implementation(libs.androidx.runtime.livedata)
     implementation (libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.lifecycle.livedata.ktx)
-    implementation( libs.androidx.lifecycle.runtime.ktx.v284)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
-    implementation(libs.androidx.lifecycle.runtime.ktx.v240)
     implementation(libs.androidx.lifecycle.runtime.compose.android)
-    
+
     // DataStore for preferences
     implementation (libs.androidx.datastore.preferences)
 
@@ -136,42 +159,42 @@ dependencies {
 
     //Navigation, lifecycle
     implementation(libs.navigation.compose)
-
-    // ... Other dependencies
 }
 ```
-`build.gradle.kts`
+`build.gradle.kts` (Modul szintű)
 ```kotlin
 plugins{
-    //...
-    id("com.google.dagger.hilt.android")
-    kotlin("kapt") version "1.9.0"
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.hilt.android)
+    alias(libs.plugins.kotlin.kapt)
 }
 android {
     //...
-    compileSdk = 34
+    compileSdk = 35
     defaultConfig{
         //...
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         //...
     }
     //...
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.15"
     }
     //...
 }
 ```
 
-Majd a Top-Level `build.gradle.kts` filet nyissuk meg és adjuk hozzá a HILT-et illetve a KAPT-ot.
+Majd a Project szintű `build.gradle.kts` filet nyissuk meg és adjuk hozzá a HILT-et illetve a KAPT-ot.
 
 `build.gradle.kts (Snake)`
 ```kts
 plugins {
     //...
-    kotlin("kapt") version "1.9.0" apply false
-    id("com.google.dagger.hilt.android") version "2.51.1" apply false
+    alias(libs.plugins.hilt.android) apply false
+    alias(libs.plugins.kotlin.kapt) apply false
 }
 ```
 
@@ -179,7 +202,7 @@ Hogy ha mindennel megvagyunk Sync-eljük le a projektet és várjuk meg míg leg
 
 ## Navigáció a képernyők között (2.5 pont)
 
-Elsőként hozzuk létre a szükséges képernyőket. Még csak demoként lesznek meg, egy teszt szöveggel, majd a további feladatok során kiegészítjük a tényleges képernyővel. Ahhoz hogy a képernyők között navigálni tudjuk szükségünk van a NavHost-ra amiben definiáljuk az egyes kijelzőkre mutató utat. Ehhez hozzunk létre egy új Packaget `model` néven majd ebben egy `navigation` néven egy újabb packaget. Ezen belül fogunk első sorban dolgozni. Itt hozzunk létre egy `NavGraph` nevü Kotlin Filet. 
+Elsőként hozzuk létre a szükséges képernyőket. Még csak demoként lesznek meg, egy teszt szöveggel, majd a további feladatok során kiegészítjük a tényleges képernyővel. Ahhoz hogy a képernyők között navigálni tudjunk, szükségünk van a NavHost-ra amiben definiáljuk az egyes kijelzőkre mutató utat. Ehhez hozzunk létre egy új Packaget `navigation` néven. Ezen belül fogunk első sorban dolgozni. Itt hozzunk létre egy `NavGraph` nevü Kotlin fájlt. 
 
 Az alkalmazásban 6 képernyőnk lesz, ezek:
 
@@ -200,7 +223,7 @@ A TopBar megvalósítását az alábbiak alapján szeretnénk megvalósítani:
 *   StartGameScreen-en hasonlóan legyen egy vissza gomb, illetve title-nek "Game Settings" legyen beállítva.
 *   A GameScreen-en a felirat legyen egy üres string, ilyenkor a TopAppBar kikapcsolt állapotba fog kerülni.
 
-Első sorban hozzunk létre egy új Package-t `main` néven a `model` packageba, majd ebben egy `MainViewModel` nevű Kotlin Filet. Erre azért lesz szükség, hogy a TopBar feliratát, dinamikussan tudjuk majd kezelni, illetve az ikon működését is. Ebben a fájlban helyezzük el az alábbi kódot:
+Első sorban hozzunk létre egy új Package-t `main` néven a `feature` packageba, majd ebben egy `MainViewModel` nevű Kotlin fájlt. Erre azért lesz szükség, hogy a TopBar feliratát dinamikussan tudjuk majd kezelni, illetve az ikon működését is. Ebben a fájlban helyezzük el az alábbi kódot:
 
 ```kotlin
 class MainViewModel : ViewModel() {
@@ -227,13 +250,13 @@ class MainViewModel : ViewModel() {
 Három változónk lesz, ezek közül az egyik egy Lambda. Ez a navigálásért fog felelni később, illetve van kettő függvényünk aminek a segítségével beállítjuk a privát változók értékét.
 
 
-Ezután hozzunk létre `screen` néven egy új Packaget a gyökérmappában (`hu.bme.aut...`), majd ebben több új Kotlin Filet az alábbi nevekkel: `GameScreen`, `HighScoresScreen`, `MainNavScreen`, `MainScreen`, `SettingsScreen`, `StartGameScreen`. Ezek lesznek az alkalmazás képernyői, kezdetben még csak Demo-ra lesz állítva, és a későbbiekben fogjuk megvalósítani a tényleges kinézetüket.
+Ezután hozzunk létre a `feature` packagen belül újabb packageket, illetve bennük az oldalhoz tartozó fájlokat: `game`/`GameScreen`, `highscores`/`HighScoresScreen`, `main`/`MainNavScreen`, `main`/`MainScreen`, `settings`/`SettingsScreen`, `startgame`/`StartGameScreen`. Ezek lesznek az alkalmazás képernyői, kezdetben még csak Demo-ra lesz állítva, és a későbbiekben fogjuk megvalósítani a tényleges kinézetüket.
 
 Folytatásként kezdjük el a `MainNavScreen` megírását, ugyanis ez fog felelni azért, hogy a `NavHost` *Graphot* tartalmazza.
 
 Ennek egy Scaffoldból kell állnia ami dinamikusan fogja kezelni a TopBar-t a képernyőtől függően. Ehhez korábban már létrehoztuk a viewModellünket, ennek a segítségével fogjuk megvalósítani ezt a működést.
 
-Mielőtt elkezdenénk a Scaffold-ot, valósítsuk meg a NavGraph-ot a `NavGraph.kt` file-ban.
+Mielőtt elkezdenénk a Scaffold-ot, valósítsuk meg a NavGraph-ot a `navigation`/`NavGraph.kt` file-ban.
 
 ```kotlin
 @Composable
@@ -976,7 +999,7 @@ Ahhoz hogy a GameScreen-t is meg tudjuk csinálni, ahhoz előtte magát a játé
 
 ### Snake State
 
-Első lépésben elkészítjük a kígyó állapotáért felelős Data Classt. Készítsünk a `model` packagen belül egy `snake` packaget, amiben egy `SnakeState` Kotlin filet hozunk létre, majd a mellékelt kód segítségével megvalósítjuk a logikát.
+Első lépésben elkészítjük a kígyó állapotáért felelős Data Classt. Készítsünk egy `model` packaget, amiben egy `SnakeState` Kotlin filet hozunk létre, majd a mellékelt kód segítségével megvalósítjuk a logikát.
 
 ```kotlin
 data class SnakeState(
@@ -1076,6 +1099,7 @@ fun getState(): GameState {
 }
 ```
 Ez egy egyszerű getter függvény, amely vissza adja a játék jelenlegi állapotát.
+(Ha a GameState-re hibát dobna az Android Studio, töröljük az android-os `GameState` importot a fájl tetejéről)
 
 Ezen kívűl meg kell valósítanunk egy egyszerű Sealed Class-t ami magáért az Eventekért fog felelni. 
 
@@ -1084,7 +1108,7 @@ Ezen kívűl meg kell valósítanunk egy egyszerű Sealed Class-t ami magáért 
 *   Reset Game
 *   Change Dir
 
-Ehhez hozzunk létre egy új Kotlin File-t a `snake` Packageba `SnakeEvent` néven, majd egészítsük ki az alábbi kód alapján:
+Ehhez hozzunk létre egy új Kotlin File-t a `model` packageba `SnakeEvent` néven, majd egészítsük ki az alábbi kód alapján:
 
 ```kotlin
 sealed class SnakeEvent {
@@ -1326,7 +1350,7 @@ val newFood = if (newHead == state.food){
 
 if (newHead != state.food){
     newSnake = newSnake.toMutableList()
-    newSnake.removeLast()
+    newSnake.removeAt(newSnake.lastIndex)
 }
 ```
 Itt létrehozunk egy új kígyót, amelynek az első eleme az új fej koordinátája lesz (newHead), majd ehhez hozzáfűzzük a már meglévő kígyónkat. Valamint új almát is kell generálnunk. Ehhez ellenőriznünk kell, hogy a kígyó megette-e az almát vagy sem. Ha megette akkor új almát generálunk, hogy ha nem ette meg, akkor a jelenlegi alma koordinátáját adjuk át az újnak.
@@ -1400,7 +1424,7 @@ A 3 DrawScopen kívül szükségünk van még egy pár segédfüggvényre, ezek 
 
 Itt az alábbi példa megmutat egy olyan opciót amit meg kellene akadályoznunk ezekkel a függvényekkel.
 
-Első sorban valósítsuk meg a DrawScope függvényeket. Ehhez hozzunk létre 1 új Packaget a gyökér mappában `draw` néven, majd ezekben 3 újabb Packaget -- **board**, **food**, **snake** néven.
+Első sorban valósítsuk meg a DrawScope függvényeket. Ehhez hozzunk létre 1 új Packaget a gyökér mappában `draw` néven.
 
 **DrawBoard**
 
@@ -1898,7 +1922,7 @@ onClick = {
             inclusive = true
         }
     }
-}
+},
 ```
 Szükségünk van arra, hogy a játék állapotát alaphelyzetbe állítsuk, ezt az onClick első sorával tehetjük meg, valamint a `navController.navigate(..){..}` lambda segítségével beállítjuk, hogy ha a felhasználó vissza gombot nyomna a főképernyőn ezután, ne tudjon visszanavigálni a játék képernyőjére. Ezt a `popUpTo(..){inclusive..}` segítségével tehetjük meg.
 
@@ -2513,13 +2537,19 @@ Ehhez hozzunk létre egy új Packaget `di` néven, majd ebben egy új Kotlin Fil
 object AppModule {
     @Provides
     @Singleton
-    fun provideTopScoreDao(@ApplicationContext appContext: Context): TopScoreDao {
-        return TopScoreDatabase.getDatabase(appContext).topScoreDao()
+    fun provideDatabase(@ApplicationContext appContext: Context): TopScoreDatabase {
+        return TopScoreDatabase.getDatabase(appContext)
+    }
+    
+    @Provides
+    @Singleton
+    fun provideTopScoreDao(database: TopScoreDatabase): TopScoreDao {
+        return database.topScoreDao()
     }
 }
 ```
 
-Az AppModule objektumon belül rakunk két annotációt a `provideTopScoreDao` függvény-re, amely majd egy TopScoreDao objektumot ad vissza a meghívás után. Mivel `ApplicationContext`-et tud biztosítani, így ennek a segítségével meghívjuk a `getDatabase` függvényt ezzel a paraméterrel, majd legkérdezzük a Dao-t, így megkapva a szükséges paraméterünket.
+Az AppModule objektumon belül rakunk két annotációt a `provideTopScoreDao` és `provideDatabase` függvényekre. Mivel `ApplicationContext`-et tud biztosítani, így ennek a segítségével meghívjuk a `getDatabase` függvényt ezzel a paraméterrel, majd legkérdezzük a Dao-t, így megkapva a szükséges paraméterünket.
 
 Ahhoz, hogy a Dependency Injectionunk működjön globálisan az alkalmazás szintjén inicializálnunk kell a Daggert, hogy létrejöjjön egy kontextus, amelyben a függőségeket menedzseli. Ehhez hozzunk létre a gyökérmappában egy új Kotlin File-t `Application` néven, majd írjuk bele a következő egyszerű kódot:
 
@@ -2570,7 +2600,7 @@ Végül módosítsuk úgy a `HighScoreScreen` file-t hogy használja ezt az adat
 fun HighScoresScreen(
     snakeViewModel: SnakeViewModel
 ) {
-    val highScores = snakeViewModel.topScores.collectAsStateWithLifecycle(listOf())
+    val highScores by snakeViewModel.topScores.collectAsStateWithLifecycle(listOf())
 
     Column (
         //...
@@ -2583,13 +2613,13 @@ fun HighScoresScreen(
         LazyColumn (
             //...
         ) {
-            items(highScores.value.size) { index ->
+            items(highScores.size) { index ->
                 Row (
                     //...
                 ){
-                    TableText(highScores.value[index].name, Modifier.weight(2f))
-                    TableText(highScores.value[index].score.toString(), Modifier.weight(1f))
-                    TableText(highScores.value[index].difficulty, Modifier.weight(2f))
+                    TableText(highScores[index].name, Modifier.weight(2f))
+                    TableText(highScores[index].score.toString(), Modifier.weight(1f))
+                    TableText(highScores[index].difficulty, Modifier.weight(2f))
                 }
             }
         }
@@ -2666,7 +2696,7 @@ class PreferenceStorage(private val context: Context) {
 
 Ez a kódrészlet egy Kotlin alkalmazásban lévő adatmegőrző rendszer működését mutatja be, amelyet az Android `DataStore` API-jával valósítanak meg. A `PreferenceStorage` osztály a `Context`-et használja a beállítások mentéséhez és lekéréséhez. Egy `Flow`-val tér vissza, amely figyeli a `sensor_control` nevű preferencia változásait, és alapértelmezésben `false`-t ad vissza, ha a beállítás még nem létezik. A `setSensorControlled` függvény lehetővé teszi, hogy egy új értéket állítsunk be ehhez a kulcshoz aszinkron módon.
 
-Ezután hozzuk létre az új ViewModellünket. A `model` mappán belül készítsünk egy `settings` mappát, és ezen belül hozzunk létre egy új Kotlin Filet. Majd írjuk meg a kódot az alábbiak alapján:
+Ezután hozzuk létre az új ViewModellünket. A `feature` mappán belül a `settings` mappában hozzunk létre egy új Kotlin Filet. Majd írjuk meg a kódot az alábbiak alapján:
 
 ```kotlin
 @HiltViewModel
@@ -2733,13 +2763,11 @@ Ahhoz, hogy a SettingsScreen-en tudjuk használni ezt a viewModelt, vissza kell 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    private lateinit var settingsViewModel: SettingsViewModel
+    private val settingsViewModel: SettingsViewModel by viewModels()
     //Other Vals
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        settingsViewModel = ViewModelProvider(this)[SettingsViewModel::class.java]
         enableEdgeToEdge()
         setContent {
             SnakeDemoTestTheme {
