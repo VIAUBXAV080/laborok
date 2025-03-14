@@ -17,11 +17,9 @@ A feladat során az alábbi technológiákkal fogunk találkozni:
 
 Az alkalmazásban mindössze két lényeges felület lesz. A főképernyőn a legutóbbi hírek láthatóak beküldésük
 szerint csökkenő sorrendben. Minden hírhez megjelenik a címe, szövege, a beküldő neve és a beküldés ideje.
-A képernyőt rövid időközönként automatikusan frissül. A képernyőn levő floating action buttonra kattintva pedig
+A képernyő rövid időközönként automatikusan frissül. A képernyőn levő floating action buttonra kattintva pedig
 egy másik képernyő jelenik meg, ahol újabb hírt küldhetünk be.
 
-
-TODO
 <p align="center">
 <img src="./assets/news_main.png" width="320">
 <img src="./assets/news_create.png" width="320">
