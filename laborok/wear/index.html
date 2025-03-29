@@ -11,17 +11,17 @@
       
       
       
-        <link rel="prev" href="../travel/">
+        <link rel="prev" href="../news/">
       
       
-        <link rel="next" href="../ai/">
+        <link rel="next" href="../travel/">
       
       <link rel="icon" href="../../favicon.ico">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.14">
     
     
       
-        <title>Labor 4 - Maps & Wear - BMEVIAUBXAV080 - Haladó Android fejlesztés laborfeladatok</title>
+        <title>Labor 3 - Maps & Wear - BMEVIAUBXAV080 - Haladó Android fejlesztés laborfeladatok</title>
       
     
     
@@ -86,7 +86,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#labor-4-maps-wear" class="md-skip">
+        <a href="#labor-3-maps-wear" class="md-skip">
           Kihagyás
         </a>
       
@@ -118,7 +118,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Labor 4 - Maps & Wear
+              Labor 3 - Maps & Wear
             
           </span>
         </div>
@@ -470,20 +470,6 @@
               
   
   
-  
-    <li class="md-nav__item">
-      <a href="../travel/" class="md-nav__link">
-        Labor 3 - Travel
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
     
   
   
@@ -496,12 +482,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          Labor 4 - Maps & Wear
+          Labor 3 - Maps & Wear
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        Labor 4 - Maps & Wear
+        Labor 3 - Maps & Wear
       </a>
       
         
@@ -686,6 +672,20 @@
   
 </nav>
       
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../travel/" class="md-nav__link">
+        Labor 4 - Travel
+      </a>
     </li>
   
 
@@ -967,7 +967,7 @@
   
 
 
-<h1 id="labor-4-maps-wear">Labor 4 - Maps &amp; Wear<a class="headerlink" href="#labor-4-maps-wear" title="Permanent link">&para;</a></h1>
+<h1 id="labor-3-maps-wear">Labor 3 - Maps &amp; Wear<a class="headerlink" href="#labor-3-maps-wear" title="Permanent link">&para;</a></h1>
 <h2 id="bevezeto">Bevezető<a class="headerlink" href="#bevezeto" title="Permanent link">&para;</a></h2>
 <p>A labor során egy madár megfigyelő alkalmazást fogunk készíteni. </p>
 <p>Az alkalmazás az elmentett bejegyzéseket Firebase adatbázisban tárolja, illetve térképen is képes megjeleníteni több formában is. A megfigyelések hozzáadására nem csak a telefonos alkalmazásból, hanem okosóráról is lehetőség van szöveges és hang formában is. Az alkalmazás a Clean Architecture elveit követi.</p>
@@ -987,7 +987,7 @@
 <li><a href="https://developer.android.com/training/wearables/user-input/wear-ime"><code>Wear IME</code></a></li>
 <li><a href="https://developer.android.com/training/wearables/data/overview"><code>Data Layer API</code></a></li>
 <li><a href="https://developers.google.com/maps/documentation/android-sdk/utility"><code>Maps SDK for Android Utility Library</code></a></li>
-<li><a href="https://developers.google.com/maps/documentation/places/android-sdk/secrets-gradle-plugin">Secrets Gradle Plugin</a></li>
+<li><a href="https://developers.google.com/maps/documentation/places/android-sdk/secrets-gradle-plugin"><code>Secrets Gradle Plugin</code></a></li>
 </ul>
 <p align="center">
 <a class="glightbox" href="./assets/login.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="./assets/login.png" width="240"></a>
@@ -1041,15 +1041,15 @@
 </ol>
 <h3 id="a-projekt-attekintese">A projekt áttekintése<a class="headerlink" href="#a-projekt-attekintese" title="Permanent link">&para;</a></h3>
 <p>A kezdő projektben az egyszerűség kedvéért már megtalálhatók a <em>Firebase</em> -hez szükséges függőségek is, hogy a projekt rögtön fordítható legyen. </p>
-<p>Az alkalmazás küveti a <em>Clean Architecture</em> irányelveit, ami alapján a <em>viewModel</em> lekbe a <em>useCase</em>-ek vannak injektálja, amik majd szintén <em>dependency injectiont</em> használva továbbítják a kérést a <em>repositoryknak</em>.</p>
+<p>Az alkalmazás küveti a <em>Modern App Architecture</em> irányelveit, ami alapján a <em>viewModelekbe a *useCase</em>-ek vannak injektálja, amik majd szintén <em>dependency injectiont</em> használva továbbítják a kérést a <em>repositoryknak</em>.</p>
 <p>Az alkalmazás jelenlegi verziójában megtalálható egy bejelentkező valamint egy regisztrációs képernyő, illetve egy megfigyeléseket megjelenítő lista. Az új bejegyzés felvétele gomb hatására még nem történik semmi, hiszen az alkalmazásunk nincs összekötve a <em>Firestore</em> adatbázissal.</p>
 <p>A navigáció egy alsó <em>Navigation Bar</em>-ral történik.</p>
 <div class="admonition warning">
 <p class="admonition-title">Áttekintés</p>
-<p>Már a kezdő projekt is igen sokmindent tartalmaz, és igen komplex architektúrával bír. Szánjunk pár percet a teljes áttekintésére és megértésére, hogy a labor során elkészítendő új funkciók helyét és mikéntjét könnyebben feldolgozzuk!</p>
+<p>Már a kezdő projekt is igen sok mindent tartalmaz, és igen komplex architektúrával bír. Szánjunk pár percet a teljes áttekintésére és megértésére, hogy a labor során elkészítendő új funkciók helyét és mikéntjét könnyebben feldolgozzuk!</p>
 </div>
 <h2 id="az-alkalmazas-osszekotese-a-firebase-szel">Az alkalmazás összekötése a Firebase-szel<a class="headerlink" href="#az-alkalmazas-osszekotese-a-firebase-szel" title="Permanent link">&para;</a></h2>
-<p>Először is hozzunk létre egy projektet a <a href="https://console.firebase.google.com/">Firebase Console</a>-on, és kössük azt össze az alkalmazásunkkal. A labor során az <em>authentikáció</em> és a <em>Firestore Database</em> funkciókat fogjuk használni. (A folyamatot részletesen lásd a <a href="https://viauav21.github.io/laborok/laborok/firebase/">Firebase</a> laborban. A jelenlegi projekt tartalmaz egy <em>dummy</em> google-services.json fájlt a hibamentes futás érdekében, ezt eltávolítva a folyamat nulláról újrakezdhető.)</p>
+<p>Először is hozzunk létre egy projektet a <a href="https://console.firebase.google.com/">Firebase Console</a>-on, és kössük azt össze az alkalmazásunkkal. A labor során az <em>authentikáció</em> és a <em>Firestore Database</em> funkciókat fogjuk használni. (A folyamatot részletesen lásd a <a href="https://viauav21.github.io/laborok/laborok/firebase/">Firebase</a> laborban.)</p>
 <p>Az összekapcsolás után a regisztrációnak, a bejelentkezésnek és az új tétel felvételének is működnie kell.</p>
 <h2 id="poziciomeghatarozas-1-pont">Pozíciómeghatározás ( 1 pont)<a class="headerlink" href="#poziciomeghatarozas-1-pont" title="Permanent link">&para;</a></h2>
 <p>Az újonnan felvett madaraink egyelőre 0,0 koordinátával kerülnek be az adatbázisba. Ahhoz, hogy a saját helyzetünket adjuk hozzá a megfigyeléshez, használnunk kell a telefon pozíciómeghatározását.</p>
@@ -1114,7 +1114,7 @@
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>A pozícióhemhatározást akkor fogjuk megkezdeni, amikor a felhasználó a <em>Floating Action Buttonre</em> kattint, tehát a <code>BirdScreen</code>en van szükségünk az engedélykezelésre. Vegyük föl a szükséges engedélyeket egy listába, majd pedig tegyük bele egy <code>MultiplePermissionsState</code> állapotba. Ha ez az állapot megfelelő, akkor megkezdjük a pozíciómeghatározást és megjelenítjük a dialógust, ha nem, akkor elkérjük az engedélyt.</p>
+<p>A pozícióhemhatározást akkor fogjuk megkezdeni, amikor a felhasználó a <em>Floating Action Buttonre</em> kattint, tehát a <code>BirdListScreen</code>en van szükségünk az engedélykezelésre. Vegyük föl a szükséges engedélyeket egy listába, majd pedig tegyük bele egy <code>MultiplePermissionsState</code> állapotba. Ha ez az állapot megfelelő, akkor megkezdjük a pozíciómeghatározást és megjelenítjük a dialógust, ha nem, akkor elkérjük az engedélyt.</p>
 <div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">state</span><span class="p">.</span><span class="na">isDialogOpen</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">locationPermissions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rememberMultiplePermissionsState</span><span class="p">(</span>
 <span class="w">        </span><span class="n">permissions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">listOf</span><span class="p">(</span>
@@ -1123,21 +1123,21 @@
 <span class="w">        </span><span class="p">)</span>
 <span class="w">    </span><span class="p">)</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">locationPermissions</span><span class="p">.</span><span class="na">allPermissionsGranted</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">viewModel</span><span class="p">.</span><span class="na">onEvent</span><span class="p">(</span><span class="n">SightingsEvent</span><span class="p">.</span><span class="na">StartLocationMonitoring</span><span class="p">)</span>
+<span class="w">        </span><span class="n">viewModel</span><span class="p">.</span><span class="na">onEvent</span><span class="p">(</span><span class="n">BirdListEvent</span><span class="p">.</span><span class="na">StartLocationMonitoring</span><span class="p">)</span>
 
 <span class="w">        </span><span class="n">StringInputDialog</span><span class="p">(</span>
 <span class="w">            </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stringResource</span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">R</span><span class="p">.</span><span class="na">string</span><span class="p">.</span><span class="na">label_new_sighting</span><span class="p">),</span>
 <span class="w">            </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stringResource</span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">R</span><span class="p">.</span><span class="na">string</span><span class="p">.</span><span class="na">label_bird_name</span><span class="p">),</span>
-<span class="w">            </span><span class="n">onDismiss</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">viewModel</span><span class="p">.</span><span class="na">onEvent</span><span class="p">(</span><span class="n">SightingsEvent</span><span class="p">.</span><span class="na">CancelButtonClicked</span><span class="p">)</span><span class="w"> </span><span class="p">},</span>
+<span class="w">            </span><span class="n">onDismiss</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">viewModel</span><span class="p">.</span><span class="na">onEvent</span><span class="p">(</span><span class="n">BirdListEvent</span><span class="p">.</span><span class="na">CancelButtonClicked</span><span class="p">)</span><span class="w"> </span><span class="p">},</span>
 <span class="w">            </span><span class="n">onConfirm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="n">viewModel</span><span class="p">.</span><span class="na">onEvent</span><span class="p">(</span><span class="n">SightingsEvent</span><span class="p">.</span><span class="na">NewBirdNameChanged</span><span class="p">(</span><span class="nb">it</span><span class="p">))</span>
-<span class="w">                </span><span class="n">viewModel</span><span class="p">.</span><span class="na">onEvent</span><span class="p">(</span><span class="n">SightingsEvent</span><span class="p">.</span><span class="na">SaveButtonClicked</span><span class="p">)</span>
+<span class="w">                </span><span class="n">viewModel</span><span class="p">.</span><span class="na">onEvent</span><span class="p">(</span><span class="n">BirdListEvent</span><span class="p">.</span><span class="na">NewBirdNameChanged</span><span class="p">(</span><span class="nb">it</span><span class="p">))</span>
+<span class="w">                </span><span class="n">viewModel</span><span class="p">.</span><span class="na">onEvent</span><span class="p">(</span><span class="n">BirdListEvent</span><span class="p">.</span><span class="na">SaveButtonClicked</span><span class="p">)</span>
 <span class="w">            </span><span class="p">}</span>
 
 <span class="w">        </span><span class="p">)</span>
 <span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="n">AlertDialog</span><span class="p">(</span>
-<span class="w">            </span><span class="n">onDismissRequest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">viewModel</span><span class="p">.</span><span class="na">onEvent</span><span class="p">(</span><span class="n">SightingsEvent</span><span class="p">.</span><span class="na">CancelButtonClicked</span><span class="p">)</span><span class="w"> </span><span class="p">},</span>
+<span class="w">            </span><span class="n">onDismissRequest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">viewModel</span><span class="p">.</span><span class="na">onEvent</span><span class="p">(</span><span class="n">BirdListEvent</span><span class="p">.</span><span class="na">CancelButtonClicked</span><span class="p">)</span><span class="w"> </span><span class="p">},</span>
 <span class="w">            </span><span class="n">confirmButton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                </span><span class="n">Button</span><span class="p">(</span>
 <span class="w">                    </span><span class="n">onClick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">locationPermissions</span><span class="p">.</span><span class="na">launchMultiplePermissionRequest</span><span class="p">()</span><span class="w"> </span><span class="p">},</span>
@@ -1159,8 +1159,8 @@
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>Ezek után vegyük föl a hiányzó <code>StartLocationMonitoring</code>eseményt a <code>SightingsEvent</code> osztályba, és kezeljük is le az eseményt az <code>onEvent</code> függvényben:</p>
-<div class="highlight"><pre><span></span><code><span class="k">is</span><span class="w"> </span><span class="n">SightingsEvent</span><span class="p">.</span><span class="na">StartLocationMonitoring</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<p>Ezek után vegyük föl a hiányzó <code>StartLocationMonitoring</code>eseményt a <code>BirdListEvent</code> osztályba, és kezeljük is le az eseményt az <code>onEvent</code> függvényben:</p>
+<div class="highlight"><pre><span></span><code><span class="k">is</span><span class="w"> </span><span class="n">BirdListEvent</span><span class="p">.</span><span class="na">StartLocationMonitoring</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">///TODO start location monitoring</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -1169,7 +1169,7 @@
 <div class="highlight"><pre><span></span><code>    //Location
     implementation(libs.play.services.location)
 </code></pre></div>
-<p>Ezek után már elkészíthetjük a szükséges osztályokat a <em>repository</em> rétegben egy <code>location</code> <em>package</em>-ben. Először egy <em>interface</em>-t készítünk:</p>
+<p>Ezek után már elkészíthetjük a szükséges osztályokat a <em>data</em> rétegben egy <code>location</code> <em>package</em>-ben. Először egy <em>interface</em>-t készítünk:</p>
 <p><code>ILocationService.kt</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">hu.bme.aut.android.birdwatchingapp.data.location</span>
 
@@ -1185,76 +1185,76 @@
 </code></pre></div>
 <p>Majd pedig azt a megvalósítást, ami a <code>FusedLocationProviderClient</code> segítségével egy <code>callbackFlow</code>-ban visszaadja nekünk az aktuális pozíciót:</p>
 <p><code>LocationService.kt</code>:</p>
-<div class="highlight"><pre><span></span><code>package hu.bme.aut.android.birdwatchingapp.data.location
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">hu.bme.aut.android.birdwatchingapp.data.location</span>
 
-import android.Manifest
-import android.content.Context
-import android.content.pm.PackageManager
-import android.os.Build
-import android.os.Looper
-import android.util.Log
-import androidx.annotation.RequiresApi
-import androidx.core.content.ContextCompat
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationCallback
-import com.google.android.gms.location.LocationRequest
-import com.google.android.gms.location.LocationResult
-import com.google.android.gms.location.Priority
-import com.google.android.gms.maps.model.LatLng
-import kotlinx.coroutines.channels.awaitClose
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.callbackFlow
-import javax.inject.Inject
+<span class="k">import</span><span class="w"> </span><span class="nn">android.Manifest</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">android.content.Context</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">android.content.pm.PackageManager</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">android.os.Build</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">android.os.Looper</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">android.util.Log</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.annotation.RequiresApi</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.core.content.ContextCompat</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.google.android.gms.location.FusedLocationProviderClient</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.google.android.gms.location.LocationCallback</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.google.android.gms.location.LocationRequest</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.google.android.gms.location.LocationResult</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.google.android.gms.location.Priority</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.google.android.gms.maps.model.LatLng</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">kotlinx.coroutines.channels.awaitClose</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">kotlinx.coroutines.flow.Flow</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">kotlinx.coroutines.flow.callbackFlow</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">javax.inject.Inject</span>
 
-class LocationService @Inject constructor(
-    private val context: Context,
-    private val locationClient: FusedLocationProviderClient
-): ILocationService {
+<span class="kd">class</span><span class="w"> </span><span class="nc">LocationService</span><span class="w"> </span><span class="nd">@Inject</span><span class="w"> </span><span class="k">constructor</span><span class="p">(</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">context</span><span class="p">:</span><span class="w"> </span><span class="n">Context</span><span class="p">,</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">locationClient</span><span class="p">:</span><span class="w"> </span><span class="n">FusedLocationProviderClient</span>
+<span class="p">):</span><span class="w"> </span><span class="n">ILocationService</span><span class="w"> </span><span class="p">{</span>
 
-    @RequiresApi(Build.VERSION_CODES.S)
-    override fun requestLocationUpdates(): Flow&lt;LatLng?&gt; = callbackFlow {
+<span class="w">    </span><span class="nd">@RequiresApi</span><span class="p">(</span><span class="n">Build</span><span class="p">.</span><span class="na">VERSION_CODES</span><span class="p">.</span><span class="na">S</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">requestLocationUpdates</span><span class="p">():</span><span class="w"> </span><span class="n">Flow</span><span class="o">&lt;</span><span class="n">LatLng?&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">callbackFlow</span><span class="w"> </span><span class="p">{</span>
 
-        if (ContextCompat.checkSelfPermission(
-                context,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED &amp;&amp; ContextCompat.checkSelfPermission(
-                context,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED) {
-            trySend(null)
-            return@callbackFlow
-        }
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ContextCompat</span><span class="p">.</span><span class="na">checkSelfPermission</span><span class="p">(</span>
+<span class="w">                </span><span class="n">context</span><span class="p">,</span>
+<span class="w">                </span><span class="n">Manifest</span><span class="p">.</span><span class="na">permission</span><span class="p">.</span><span class="na">ACCESS_FINE_LOCATION</span>
+<span class="w">            </span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">PackageManager</span><span class="p">.</span><span class="na">PERMISSION_GRANTED</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">ContextCompat</span><span class="p">.</span><span class="na">checkSelfPermission</span><span class="p">(</span>
+<span class="w">                </span><span class="n">context</span><span class="p">,</span>
+<span class="w">                </span><span class="n">Manifest</span><span class="p">.</span><span class="na">permission</span><span class="p">.</span><span class="na">ACCESS_COARSE_LOCATION</span>
+<span class="w">            </span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">PackageManager</span><span class="p">.</span><span class="na">PERMISSION_GRANTED</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">trySend</span><span class="p">(</span><span class="kc">null</span><span class="p">)</span>
+<span class="w">            </span><span class="k">return</span><span class="nd">@callbackFlow</span>
+<span class="w">        </span><span class="p">}</span>
 
-        val request = LocationRequest.Builder(10000L)
-            .setIntervalMillis(10000L)
-            .setPriority(Priority.PRIORITY_HIGH_ACCURACY)
-            .build()
+<span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">request</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocationRequest</span><span class="p">.</span><span class="na">Builder</span><span class="p">(</span><span class="m">10000L</span><span class="p">)</span>
+<span class="w">            </span><span class="p">.</span><span class="na">setIntervalMillis</span><span class="p">(</span><span class="m">10000L</span><span class="p">)</span>
+<span class="w">            </span><span class="p">.</span><span class="na">setPriority</span><span class="p">(</span><span class="n">Priority</span><span class="p">.</span><span class="na">PRIORITY_HIGH_ACCURACY</span><span class="p">)</span>
+<span class="w">            </span><span class="p">.</span><span class="na">build</span><span class="p">()</span>
 
-        val locationCallback = object : LocationCallback() {
-            override fun onLocationResult(locationResult: LocationResult) {
-                locationResult.locations.lastOrNull()?.let {
-                    trySend(LatLng(it.latitude, it.longitude))
-                    Log.i(&quot;locationExample&quot;, &quot;onLocationResult: $it&quot;)
-                }
-            }
-        }
+<span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">locationCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">object</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nc">LocationCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">onLocationResult</span><span class="p">(</span><span class="n">locationResult</span><span class="p">:</span><span class="w"> </span><span class="n">LocationResult</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">locationResult</span><span class="p">.</span><span class="na">locations</span><span class="p">.</span><span class="na">lastOrNull</span><span class="p">()</span><span class="o">?.</span><span class="na">let</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">trySend</span><span class="p">(</span><span class="n">LatLng</span><span class="p">(</span><span class="nb">it</span><span class="p">.</span><span class="na">latitude</span><span class="p">,</span><span class="w"> </span><span class="nb">it</span><span class="p">.</span><span class="na">longitude</span><span class="p">))</span>
+<span class="w">                    </span><span class="n">Log</span><span class="p">.</span><span class="na">i</span><span class="p">(</span><span class="s">&quot;locationExample&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;onLocationResult: </span><span class="si">$</span><span class="n">it</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
 
-        locationClient.requestLocationUpdates(
-            request,
-            locationCallback,
-            Looper.getMainLooper()
-        )
+<span class="w">        </span><span class="n">locationClient</span><span class="p">.</span><span class="na">requestLocationUpdates</span><span class="p">(</span>
+<span class="w">            </span><span class="n">request</span><span class="p">,</span>
+<span class="w">            </span><span class="n">locationCallback</span><span class="p">,</span>
+<span class="w">            </span><span class="n">Looper</span><span class="p">.</span><span class="na">getMainLooper</span><span class="p">()</span>
+<span class="w">        </span><span class="p">)</span>
 
-        awaitClose {
-            locationClient.removeLocationUpdates(locationCallback)
-        }
-    }
+<span class="w">        </span><span class="n">awaitClose</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">locationClient</span><span class="p">.</span><span class="na">removeLocationUpdates</span><span class="p">(</span><span class="n">locationCallback</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
 
-    override fun requestCurrentLocation(): Flow&lt;LatLng?&gt; {
-        TODO(&quot;Not yet implemented&quot;)
-    }
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">requestCurrentLocation</span><span class="p">():</span><span class="w"> </span><span class="n">Flow</span><span class="o">&lt;</span><span class="n">LatLng?&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">TODO</span><span class="p">(</span><span class="s">&quot;Not yet implemented&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
 
-}
+<span class="p">}</span>
 </code></pre></div>
 <p>A <code>LocationService</code>-nek szüksége van a <code>FusedLocationProviderClient</code> injektálására. Készítsünk erre egy DI modult:</p>
 <div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">hu.bme.aut.android.birdwatchingapp.domain.di</span>
@@ -1293,8 +1293,8 @@ class LocationService @Inject constructor(
 <span class="p">}</span>
 </code></pre></div>
 <p>Ezek után illesszük be az architektúrába az új funkciót először a <code>RequestLocationUpdatesUseCase</code> majd a <code>RequestLocationUpdateUseCaseModule</code> megvalósításával.</p>
-<p>Ha ezzel megvagyunk, már használhatjuk is a pozíciómeghatározásunkat. A <code>BirdsViewModel</code> konstruktorába injektáljuk be a <code>RequestLocationUpdatesUseCase</code>-t és írjuk meg a pozíciómeghatározásért felelős függvényünket:</p>
-<div class="highlight"><pre><span></span><code><span class="kd">private</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">onStartLocationMonitoring</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<p>Ha ezzel megvagyunk, már használhatjuk is a pozíciómeghatározásunkat. A <code>BirdListViewModel</code> konstruktorába injektáljuk be a <code>RequestLocationUpdatesUseCase</code>-t és írjuk meg a pozíciómeghatározásért felelős függvényünket:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">private</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">startLocationMonitoring</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">state</span><span class="p">.</span><span class="na">value</span><span class="p">.</span><span class="na">currentLocation</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span>
 <span class="w">        </span><span class="n">viewModelScope</span><span class="p">.</span><span class="na">launch</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="n">locationUseCase</span><span class="p">().</span><span class="na">collectLatest</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">pos</span><span class="w"> </span><span class="o">-&gt;</span>
@@ -1312,7 +1312,7 @@ class LocationService @Inject constructor(
 <p>A képernyőkép szükséges feltétele a pontszám megszerzésének.</p>
 </div>
 <h2 id="terkep-megvalositasa-2-pont">Térkép megvalósítása (2 pont)<a class="headerlink" href="#terkep-megvalositasa-2-pont" title="Permanent link">&para;</a></h2>
-<p>Most, hogy már el tudjuk menteni a pozíciót is a megfigyeléseinkhez, célszerű lenne a megjelenítésüket is megoldani. Hozzunk létre ehhez egy térkép nézetet <code>OSMapScreen</code> néven, majd a hozzá tartozó <em>viewModelt</em> is <code>OSMapViewModel</code> néven a <code>feature.osm</code> <em>package</em>-ben.</p>
+<p>Most, hogy már el tudjuk menteni a pozíciót is a megfigyeléseinkhez, célszerű lenne a megjelenítésüket is megoldani. Hozzunk létre ehhez egy térkép nézetet <code>OSMapScreen</code> néven, majd a hozzá tartozó <em>viewModelt</em> is <code>OSMapViewModel</code> néven a <code>presentation.screen.osm</code> <em>package</em>-ben.</p>
 <p>Illesszük be az új felületet a navigációba! (Screen osztály kiegészítése, NavGraph kiegészítése, BottomNavigationItems kiegészítése)</p>
 <p>A térképes nézetet <a href="https://developers.google.com/maps/documentation/android-sdk/overview">Google Maps</a> helyett, <a href="https://www.openstreetmap.org/">OpenStreetMap</a>pel fogjuk megvalósítani. A Google megoldása az API kulcshoz bankkártya adatok megadását igényli, ami miatt csak extra feladatként nézzük meg.</p>
 <p>Az OSM-nek nincs hivatalos Androidos könyvtára, de számos <em>3<sup>rd</sup> party</em> megoldás található. A legelterjedtebb talán az <a href="https://github.com/osmdroid/osmdroid"><code>OSMDroid</code></a>, azonban ennek is sajnos már abba hagyták a fejlesztését, így a <em>Jetpack Compose</em> technológiára nem készítették föl. Ennek ellenére megbízhatósága és könnyű kezelhetősége miatt ezt a könyvtárat fogjuk használni, és beilleszteni a <em>Compose</em> kódba.</p>
@@ -1321,13 +1321,11 @@ class LocationService @Inject constructor(
    implementation(libs.osmdroid.android)
 </code></pre></div>
 <p>Először valósítsuk meg az <code>OSMapViewModel</code>t, ami nem különbözik nagyban a korábbi <code>BirdsViewModel</code>től:</p>
-<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">hu.bme.aut.android.birdwatchingapp.feature.osm</span>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">hu.bme.aut.android.birdwatchingapp.presentation.screen.osm</span>
 
 <span class="k">import</span><span class="w"> </span><span class="nn">androidx.lifecycle.ViewModel</span>
 <span class="k">import</span><span class="w"> </span><span class="nn">androidx.lifecycle.viewModelScope</span>
-<span class="k">import</span><span class="w"> </span><span class="nn">com.google.firebase.firestore.GeoPoint</span>
 <span class="k">import</span><span class="w"> </span><span class="nn">dagger.hilt.android.lifecycle.HiltViewModel</span>
-<span class="k">import</span><span class="w"> </span><span class="nn">hu.bme.aut.android.birdwatchingapp.data.bird.model.Bird</span>
 <span class="k">import</span><span class="w"> </span><span class="nn">hu.bme.aut.android.birdwatchingapp.domain.usecases.auth.CurrentUserUseCase</span>
 <span class="k">import</span><span class="w"> </span><span class="nn">hu.bme.aut.android.birdwatchingapp.domain.usecases.bird.AllBirdsUseCases</span>
 <span class="k">import</span><span class="w"> </span><span class="nn">kotlinx.coroutines.flow.MutableStateFlow</span>
@@ -1381,6 +1379,13 @@ class LocationService @Inject constructor(
 <span class="w">        </span><span class="n">_state</span><span class="p">.</span><span class="na">update</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nb">it</span><span class="p">.</span><span class="na">copy</span><span class="p">(</span><span class="n">isLoggedIn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">currentUser</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
 
 <span class="p">}</span>
+</code></pre></div>
+<p>A hozzá tartozó állapot:</p>
+<p><code>OSMapState.kt</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">hu.bme.aut.android.birdwatchingapp.presentation.screen.osm</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">com.google.firebase.firestore.GeoPoint</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">hu.bme.aut.android.birdwatchingapp.domain.model.Bird</span>
 
 <span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">OSMapState</span><span class="p">(</span>
 <span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">cameraPosition</span><span class="p">:</span><span class="w"> </span><span class="n">GeoPoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GeoPoint</span><span class="p">(</span><span class="m">47.0</span><span class="p">,</span><span class="w"> </span><span class="m">19.0</span><span class="p">),</span>
@@ -1392,6 +1397,10 @@ class LocationService @Inject constructor(
 <span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">isError</span><span class="p">:</span><span class="w"> </span><span class="kt">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
 <span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">birds</span><span class="p">:</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Bird</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">emptyList</span><span class="p">()</span>
 <span class="p">)</span>
+</code></pre></div>
+<p>És event-ek:</p>
+<p><code>OSMapEvent</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">hu.bme.aut.android.birdwatchingapp.presentation.screen.osm</span>
 
 <span class="kd">sealed</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">OSMapEvent</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">CommunityModeChanged</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">switchState</span><span class="p">:</span><span class="w"> </span><span class="kt">Boolean</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">OSMapEvent</span><span class="p">()</span>
@@ -1494,8 +1503,8 @@ dependencies {
 </code></pre></div>
 <p>Ezek után a szokásoknak megfelelően készítsük el az <code>Application</code> osztályunkat, lássuk el a <code>@HiltAndroidApp</code> <em>annotációval</em> és regisztráljuk a <code>Manifest</code> fájlban. <em>Annotáljuk</em> fel az <em>Activity</em>-nket is.</p>
 <h3 id="a-felulet-elkeszitese">A felület elkészítése<a class="headerlink" href="#a-felulet-elkeszitese" title="Permanent link">&para;</a></h3>
-<p>Készítsük el a <code>NewBirdScreen</code> képernyőnket a <code>hu.bme.aut.android.birdwatchingapp.presentation.newbird</code> <em>package</em>-ben:</p>
-<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">hu.bme.aut.android.birdwatchingapp.presentation.newbird</span>
+<p>Készítsük el a <code>NewBirdScreen</code> képernyőnket a <code>hu.bme.aut.android.birdwatchingapp.presentation.screen.newbird</code> <em>package</em>-ben:</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">hu.bme.aut.android.birdwatchingapp.presentation.screen.newbird</span>
 
 
 <span class="k">import</span><span class="w"> </span><span class="nn">androidx.compose.foundation.background</span>
@@ -1525,7 +1534,6 @@ dependencies {
 <span class="k">import</span><span class="w"> </span><span class="nn">androidx.wear.compose.material3.Icon</span>
 <span class="k">import</span><span class="w"> </span><span class="nn">androidx.wear.compose.material3.Text</span>
 <span class="k">import</span><span class="w"> </span><span class="nn">hu.bme.aut.android.birdwatchingapp.R</span>
-<span class="k">import</span><span class="w"> </span><span class="nn">hu.bme.aut.android.birdwatchingapp.presentation.newbird.NewBirdViewModel.NewBirdScreenEvent</span>
 
 <span class="nd">@Composable</span>
 <span class="kd">fun</span><span class="w"> </span><span class="nf">NewBirdScreen</span><span class="p">(</span>
@@ -1617,7 +1625,16 @@ dependencies {
 <p>Ezen a képernyőn a bevivendő szöveget jelenítjük meg. Amennyiben ez üres, akkor csak egy hozzáadó <em>chipet</em> jelenítünk meg, amennyiben nem üres, akkor a szöveget valamint a mentés és törlés <em>chipeket</em>.</p>
 <p>A <em>viewModel</em> ennek megfelelően a következőképpen alakul:</p>
 <p><code>NewBirdViewModel</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="nd">@HiltViewModel</span>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">hu.bme.aut.android.birdwatchingapp.presentation.screen.newbird</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.lifecycle.ViewModel</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">dagger.hilt.android.lifecycle.HiltViewModel</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">kotlinx.coroutines.flow.MutableStateFlow</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">kotlinx.coroutines.flow.asStateFlow</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">kotlinx.coroutines.flow.update</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">javax.inject.Inject</span>
+
+<span class="nd">@HiltViewModel</span>
 <span class="kd">class</span><span class="w"> </span><span class="nc">NewBirdViewModel</span><span class="w"> </span><span class="nd">@Inject</span><span class="w"> </span><span class="k">constructor</span><span class="p">(</span>
 <span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ViewModel</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 
@@ -1642,19 +1659,25 @@ dependencies {
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">NewBirdScreenState</span><span class="p">(</span>
-<span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">userInput</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span>
-<span class="w">    </span><span class="p">)</span>
-
-<span class="w">    </span><span class="kd">sealed</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">NewBirdScreenEvent</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="kd">object</span><span class="w"> </span><span class="nc">SaveButtonClicked</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">NewBirdScreenEvent</span><span class="p">()</span>
-<span class="w">        </span><span class="kd">object</span><span class="w"> </span><span class="nc">ClearButtonClicked</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">NewBirdScreenEvent</span><span class="p">()</span>
-<span class="w">        </span><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">UserInputChanged</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">userInput</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">NewBirdScreenEvent</span><span class="p">()</span>
-<span class="w">    </span><span class="p">}</span>
-
 <span class="w">    </span><span class="kd">companion</span><span class="w"> </span><span class="kd">object</span><span class="w"> </span><span class="err">{</span>
 <span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">inputTextKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;new_bird_name&quot;</span>
 <span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><code>NewBirdScreenState.kt</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">hu.bme.aut.android.birdwatchingapp.presentation.screen.newbird</span>
+
+<span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">NewBirdScreenState</span><span class="p">(</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">userInput</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+<span class="p">)</span>
+</code></pre></div>
+<p><code>NewBirdScreenEvent.kt</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">hu.bme.aut.android.birdwatchingapp.presentation.screen.newbird</span>
+
+<span class="kd">sealed</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">NewBirdScreenEvent</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">object</span><span class="w"> </span><span class="nc">SaveButtonClicked</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">NewBirdScreenEvent</span><span class="p">()</span>
+<span class="w">    </span><span class="kd">object</span><span class="w"> </span><span class="nc">ClearButtonClicked</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">NewBirdScreenEvent</span><span class="p">()</span>
+<span class="w">    </span><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">UserInputChanged</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">userInput</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">NewBirdScreenEvent</span><span class="p">()</span>
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="a-bevitel-megvalositasa">A bevitel megvalósítása<a class="headerlink" href="#a-bevitel-megvalositasa" title="Permanent link">&para;</a></h3>
@@ -1663,6 +1686,7 @@ dependencies {
 <div class="highlight"><pre><span></span><code>    //Wear Input
     implementation(libs.androidx.wear.input)
 </code></pre></div>
+<p>Ezek után már össze tudjuk rakni a <em>remote input</em> kérést:</p>
 <p><code>NewBirdScreen</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">val</span><span class="w"> </span><span class="nv">remoteInputs</span><span class="p">:</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">RemoteInput</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">listOf</span><span class="p">(</span>
 <span class="w">    </span><span class="n">RemoteInput</span><span class="p">.</span><span class="na">Builder</span><span class="p">(</span><span class="n">inputTextKey</span><span class="p">)</span>
@@ -1683,26 +1707,26 @@ dependencies {
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kd">val</span><span class="w"> </span><span class="nv">intent</span><span class="p">:</span><span class="w"> </span><span class="n">Intent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RemoteInputIntentHelper</span><span class="p">.</span><span class="na">createActionRemoteInputIntent</span><span class="p">()</span>
-<span class="n">RemoteInputIntentHelper</span><span class="p">.</span><span class="na">putRemoteInputsExtra</span><span class="p">(</span><span class="n">intent</span><span class="p">,</span><span class="w"> </span><span class="n">remoteInputs</span><span class="p">)</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">remoteInputIntent</span><span class="p">:</span><span class="w"> </span><span class="n">Intent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RemoteInputIntentHelper</span><span class="p">.</span><span class="na">createActionRemoteInputIntent</span><span class="p">()</span>
+<span class="n">RemoteInputIntentHelper</span><span class="p">.</span><span class="na">putRemoteInputsExtra</span><span class="p">(</span><span class="n">remoteInputIntent</span><span class="p">,</span><span class="w"> </span><span class="n">remoteInputs</span><span class="p">)</span>
 </code></pre></div>
 <p>A kérés összerakása után a beviteli gomb eseménykezelőjében ezt a kérést kell elküldeni:</p>
-<div class="highlight"><pre><span></span><code><span class="n">onClick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">launcher</span><span class="p">.</span><span class="na">launch</span><span class="p">(</span><span class="n">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">intent</span><span class="p">)}</span>
+<div class="highlight"><pre><span></span><code><span class="n">launcher</span><span class="p">.</span><span class="na">launch</span><span class="p">(</span><span class="n">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">remoteInputIntent</span><span class="p">)</span>
 </code></pre></div>
 <p>Rakjuk föl a <code>WearActivity</code>-re a <code>NewBirdScreen</code>t és próbáljuk ki az alkalmazást! </p>
 <p>Most már működik a bevitelünk, csak a szöveg telefonra való átküldését kell megoldanunk.</p>
 <h3 id="a-kommunikacio-megvalositasa">A kommunikáció megvalósítása<a class="headerlink" href="#a-kommunikacio-megvalositasa" title="Permanent link">&para;</a></h3>
 <h4 id="wear">Wear<a class="headerlink" href="#wear" title="Permanent link">&para;</a></h4>
-<p>A telefon és a <em>Wear</em> eszköz között egyszerű adatküldésre ad lehetőséget a <a href="https://developer.android.com/training/wearables/data/overview"><code>Data Layer API</code></a>. Használjuk ennek a funkcionalitását a <code>hu.bme.aut.android.birdwatchingapp.data</code> <em>package</em>-ben:</p>
+<p>A telefon és a <em>Wear</em> eszköz között egyszerű adatküldésre ad lehetőséget a <a href="https://developer.android.com/training/wearables/data/overview"><code>Data Layer API</code></a>. Használjuk ennek a funkcionalitását a <code>hu.bme.aut.android.birdwatchingapp.data.communication</code> <em>package</em>-ben:</p>
 <p><code>ISendDataRepository</code>:</p>
-<div class="highlight"><pre><span></span><code>package hu.bme.aut.android.birdwatchingapp.data
+<div class="highlight"><pre><span></span><code>package hu.bme.aut.android.birdwatchingapp.data.communication
 
 interface ISendDataRepository {
     fun sendMessage(message: String)
 }
 </code></pre></div>
 <p><code>SendDataRepository</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">hu.bme.aut.android.birdwatchingapp.data</span>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">hu.bme.aut.android.birdwatchingapp.data.communication</span>
 
 <span class="k">import</span><span class="w"> </span><span class="nn">android.content.Context</span>
 <span class="k">import</span><span class="w"> </span><span class="nn">android.util.Log</span>
@@ -1745,12 +1769,12 @@ interface ISendDataRepository {
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>Vezessük végig az architektúrán ezt a funkciót is, vagyis készítsük el a hozzá tartozó <code>SendMessageUseCase</code>-t, illetve az injektálandó kontextushoz a <code>ContextModule</code>-t, a <em>usecase</em>-hez pedig a <code>SendMessageUseCaseModule</code>-t.</p>
+<p>Vezessük végig az architektúrán ezt a funkciót is, vagyis készítsük el a <code>BirdWearApp</code>-ban a hozzá tartozó <code>SendMessageUseCase</code>-t, a <em>usecase</em>-hez pedig a <code>SendMessageUseCaseModule</code>-t.</p>
 <p>Ha megvagyunk, már fel is használhatjuk ezeket a <code>NewBirdViewModel</code>ben:</p>
-<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nc">NewBirdViewModel</span><span class="w"> </span><span class="nd">@Inject</span><span class="w"> </span><span class="k">constructor</span><span class="p">(</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">context</span><span class="p">:</span><span class="w"> </span><span class="n">Context</span><span class="p">,</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@HiltViewModel</span>
+<span class="kd">class</span><span class="w"> </span><span class="nc">NewBirdViewModel</span><span class="w"> </span><span class="nd">@Inject</span><span class="w"> </span><span class="k">constructor</span><span class="p">(</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">sendMessageUseCase</span><span class="p">:</span><span class="w"> </span><span class="n">SendMessageUseCase</span>
-<span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ViewModel</span><span class="p">()</span>
+<span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ViewModel</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="p">...</span>
 <span class="w">            </span><span class="k">is</span><span class="w"> </span><span class="n">NewBirdScreenEvent</span><span class="p">.</span><span class="na">SaveButtonClicked</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">state</span><span class="p">.</span><span class="na">value</span><span class="p">.</span><span class="na">userInput</span><span class="p">.</span><span class="na">isNotEmpty</span><span class="p">())</span>
@@ -1764,8 +1788,8 @@ interface ISendDataRepository {
 <div class="highlight"><pre><span></span><code>    //Wearable
     implementation(libs.play.services.wearable)
 </code></pre></div>
-<p>A <code>domain</code> <em>package</em>-ben készítsük el az üzeneteket feldolgozó <em>viewModellünket</em>:</p>
-<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">hu.bme.aut.android.birdwatchingapp.domain</span>
+<p>A <code>domain.location</code> <em>package</em>-ben készítsük el az üzeneteket feldolgozó <em>viewModellünket</em>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">hu.bme.aut.android.birdwatchingapp.domain.location</span>
 
 <span class="k">import</span><span class="w"> </span><span class="nn">android.util.Log</span>
 <span class="k">import</span><span class="w"> </span><span class="nn">androidx.lifecycle.ViewModel</span>
@@ -1775,7 +1799,7 @@ interface ISendDataRepository {
 <span class="k">import</span><span class="w"> </span><span class="nn">com.google.android.gms.wearable.MessageEvent</span>
 <span class="k">import</span><span class="w"> </span><span class="nn">com.google.firebase.firestore.GeoPoint</span>
 <span class="k">import</span><span class="w"> </span><span class="nn">dagger.hilt.android.lifecycle.HiltViewModel</span>
-<span class="k">import</span><span class="w"> </span><span class="nn">hu.bme.aut.android.birdwatchingapp.data.bird.model.Bird</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">hu.bme.aut.android.birdwatchingapp.domain.model.Bird</span>
 <span class="k">import</span><span class="w"> </span><span class="nn">hu.bme.aut.android.birdwatchingapp.domain.usecases.auth.CurrentUserUseCase</span>
 <span class="k">import</span><span class="w"> </span><span class="nn">hu.bme.aut.android.birdwatchingapp.domain.usecases.bird.SaveBirdUseCase</span>
 <span class="k">import</span><span class="w"> </span><span class="nn">hu.bme.aut.android.birdwatchingapp.domain.usecases.location.RequestLocationUpdatesUseCase</span>
@@ -1857,6 +1881,7 @@ interface ISendDataRepository {
 
 <span class="w">        </span><span class="n">messageClient</span><span class="p">.</span><span class="na">addListener</span><span class="p">(</span><span class="n">clientDataViewModel</span><span class="p">)</span>
 
+<span class="w">        </span><span class="c1">///TODO Permission handling</span>
 <span class="w">        </span><span class="n">clientDataViewModel</span><span class="p">.</span><span class="na">startLocationMonitoring</span><span class="p">()</span>
 <span class="w">    </span><span class="p">}</span>
 
@@ -1867,6 +1892,7 @@ interface ISendDataRepository {
 
 <span class="p">}</span>
 </code></pre></div>
+<p>Ne felejtsük el a pozíciómeghatározáshoz a futásidejű engedélykérést!</p>
 <p><a href="https://developer.android.com/training/wearables/get-started/connect-phone">Kapcsoljuk össze</a> az órát a telefonnal, és próbáljuk ki az almalmazást! </p>
 <div class="admonition example">
 <p class="admonition-title">BEADANDÓ (2 pont)</p>
@@ -1875,7 +1901,8 @@ interface ISendDataRepository {
 </div>
 <h2 id="google-maps">Google Maps<a class="headerlink" href="#google-maps" title="Permanent link">&para;</a></h2>
 <p>Először is vegyük föl a szükséges függőséget a <code>BirdPhoneApp</code> modul <code>build.gradle.kts</code> fájljában. A referenciák már szerepelnek a <code>libs.versions.toml</code> fájlban, így csak a <code>build.gradle.kts</code>-be kell felvennünk a függőséget:</p>
-<div class="highlight"><pre><span></span><code>    implementation(libs.maps.compose.utils)
+<div class="highlight"><pre><span></span><code>//Google Maps Utility Library
+implementation(libs.maps.compose.utils)
 </code></pre></div>
 <h3 id="api-kulcs">API kulcs<a class="headerlink" href="#api-kulcs" title="Permanent link">&para;</a></h3>
 <p>A <a href="https://developers.google.com/maps/documentation/android-sdk/utility"><code>Maps SDK for Android Utility Library</code></a> használatához szükségünk van egy API kulcsra, amelynek megszerzéséhez itt találunk információkat: <a href="https://developers.google.com/maps/documentation/android-sdk/get-api-key">API kulcsok</a>.</p>
@@ -1907,15 +1934,15 @@ interface ISendDataRepository {
 </code></pre></div>
 <p>Ezek után már használhatjuk a <code>Google Maps</code>-et a projektünkben.</p>
 <h3 id="felulet">Felület<a class="headerlink" href="#felulet" title="Permanent link">&para;</a></h3>
-<p>Vegyük fel a <code>hu.bme.aut.android.birdwatchingapp.feature.googlemap</code> <em>package</em>-ben a <code>GoogleMapScreen</code>-t valamint a <code>GoogleMapViewModel</code>-t és illesszük be őket a navigációba.</p>
+<p>Vegyük fel a <code>hu.bme.aut.android.birdwatchingapp.presentation.screen.googlemap</code> <em>package</em>-ben a <code>GoogleMapScreen</code>-t valamint a <code>GoogleMapViewModel</code>-t és illesszük be őket a navigációba.</p>
 <p>A felületen több funkciót is szeretnénk megvelósítani:</p>
 <ol>
 <li>Az egyszerű megjelenítés helyett, amit már láttunk, hogy minden <em>marker</em> külön jelenik meg, ezen a térképen ezeket csoportosítva szeretnénk megjeleníteni. </li>
 <li>Szeretnénk egy bekapcsolható hőtérképet is megvalósítani.</li>
 <li>Egy keresőmezőt is szeretnénk implementálni.</li>
 </ol>
-<p>A csoportosításhoz <code>ClusterItem</code>-ekre van szükségünk. Valósítsuk meg ezt a <code>hu.bme.aut.android.birdwatchingapp.ui.model</code> <em>package</em>-ben.</p>
-<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">hu.bme.aut.android.birdwatchingapp.ui.model</span>
+<p>A csoportosításhoz <code>ClusterItem</code>-ekre van szükségünk. Valósítsuk meg ezt a <code>hu.bme.aut.android.birdwatchingapp.presentation.ui.model</code> <em>package</em>-ben.</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">hu.bme.aut.android.birdwatchingapp.presentation.ui.model</span>
 
 <span class="k">import</span><span class="w"> </span><span class="nn">com.google.android.gms.maps.model.LatLng</span>
 <span class="k">import</span><span class="w"> </span><span class="nn">com.google.maps.android.clustering.ClusterItem</span>
@@ -2037,16 +2064,39 @@ interface ISendDataRepository {
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>A <code>GoogleMapViewModel</code>-ben ennek megfelleően vegyük fön az alábbi függvényeket, majd egészítsük ki őket:</p>
-<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">hu.bme.aut.android.birdwatchingapp.feature.googlemap</span>
+<p><code>GoogleMapState.kt</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">hu.bme.aut.android.birdwatchingapp.presentation.screen.googlemap</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">com.google.android.gms.maps.model.CameraPosition</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.google.android.gms.maps.model.LatLng</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">hu.bme.aut.android.birdwatchingapp.presentation.ui.model.MyClusterItem</span>
+
+<span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">GoogleMapState</span><span class="p">(</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">cameraPosition</span><span class="p">:</span><span class="w"> </span><span class="n">CameraPosition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CameraPosition</span><span class="p">.</span><span class="na">fromLatLngZoom</span><span class="p">(</span><span class="n">LatLng</span><span class="p">(</span><span class="m">47.0</span><span class="p">,</span><span class="w"> </span><span class="m">19.0</span><span class="p">),</span><span class="w"> </span><span class="m">10f</span><span class="p">),</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">searchTerm</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">isHeatMapOn</span><span class="p">:</span><span class="w"> </span><span class="kt">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">isLoading</span><span class="p">:</span><span class="w"> </span><span class="kt">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">error</span><span class="p">:</span><span class="w"> </span><span class="n">Throwable? </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">isError</span><span class="p">:</span><span class="w"> </span><span class="kt">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">birds</span><span class="p">:</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">MyClusterItem</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">emptyList</span><span class="p">()</span>
+<span class="p">)</span>
+</code></pre></div>
+<p><code>GoogleMapEvent.kt</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">hu.bme.aut.android.birdwatchingapp.presentation.screen.googlemap</span>
+
+<span class="kd">sealed</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">GoogleMapEvent</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">SearchTermChanged</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">name</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">GoogleMapEvent</span><span class="p">()</span>
+<span class="w">    </span><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">GoogleMapModeChanged</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">switchState</span><span class="p">:</span><span class="w"> </span><span class="kt">Boolean</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">GoogleMapEvent</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>A <code>GoogleMapViewModel</code>-ben ennek megfelleően vegyük föl az alábbi függvényeket, majd egészítsük ki őket:</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">hu.bme.aut.android.birdwatchingapp.presentation.screen.googlemap</span>
 
 <span class="k">import</span><span class="w"> </span><span class="nn">androidx.lifecycle.ViewModel</span>
 <span class="k">import</span><span class="w"> </span><span class="nn">androidx.lifecycle.viewModelScope</span>
-<span class="k">import</span><span class="w"> </span><span class="nn">com.google.android.gms.maps.model.CameraPosition</span>
 <span class="k">import</span><span class="w"> </span><span class="nn">com.google.android.gms.maps.model.LatLng</span>
 <span class="k">import</span><span class="w"> </span><span class="nn">dagger.hilt.android.lifecycle.HiltViewModel</span>
 <span class="k">import</span><span class="w"> </span><span class="nn">hu.bme.aut.android.birdwatchingapp.domain.usecases.bird.AllBirdsUseCases</span>
-<span class="k">import</span><span class="w"> </span><span class="nn">hu.bme.aut.android.birdwatchingapp.ui.model.MyClusterItem</span>
 <span class="k">import</span><span class="w"> </span><span class="nn">kotlinx.coroutines.flow.MutableStateFlow</span>
 <span class="k">import</span><span class="w"> </span><span class="nn">kotlinx.coroutines.flow.asStateFlow</span>
 <span class="k">import</span><span class="w"> </span><span class="nn">kotlinx.coroutines.flow.update</span>
@@ -2098,21 +2148,6 @@ interface ISendDataRepository {
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">list</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
-
-<span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">GoogleMapState</span><span class="p">(</span>
-<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">cameraPosition</span><span class="p">:</span><span class="w"> </span><span class="n">CameraPosition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CameraPosition</span><span class="p">.</span><span class="na">fromLatLngZoom</span><span class="p">(</span><span class="n">LatLng</span><span class="p">(</span><span class="m">47.0</span><span class="p">,</span><span class="w"> </span><span class="m">19.0</span><span class="p">),</span><span class="w"> </span><span class="m">10f</span><span class="p">),</span>
-<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">searchTerm</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">isHeatMapOn</span><span class="p">:</span><span class="w"> </span><span class="kt">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">isLoading</span><span class="p">:</span><span class="w"> </span><span class="kt">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">error</span><span class="p">:</span><span class="w"> </span><span class="n">Throwable? </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">isError</span><span class="p">:</span><span class="w"> </span><span class="kt">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">birds</span><span class="p">:</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">MyClusterItem</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">emptyList</span><span class="p">()</span>
-<span class="p">)</span>
-
-<span class="kd">sealed</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">GoogleMapEvent</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">SearchTermChanged</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">name</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">GoogleMapEvent</span><span class="p">()</span>
-<span class="w">    </span><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">GoogleMapModeChanged</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">switchState</span><span class="p">:</span><span class="w"> </span><span class="kt">Boolean</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">GoogleMapEvent</span><span class="p">()</span>
-<span class="p">}</span>
 </code></pre></div>
 <p>Ha kiegészítettük a függvényeket, próbáljuk ki az alkalmazást!</p>
 <div class="admonition example">
@@ -2130,8 +2165,8 @@ interface ISendDataRepository {
           </path>
         </svg>
       </span>
-      <span title="2024. november 30. 19:36:34">
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2024. november 30. 19:36:34"><span class="timeago" datetime="2024-11-30T19:36:34+01:00" locale="hu"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2024. november 30. 19:36:34">2024-11-30</span>
+      <span title="2025. március 29. 18:03:34">
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2025. március 29. 18:03:34"><span class="timeago" datetime="2025-03-29T18:03:34+01:00" locale="hu"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2025. március 29. 18:03:34">2025-03-29</span>
       </span>
     </span>
 
