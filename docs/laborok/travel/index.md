@@ -1,4 +1,4 @@
-# Labor 3 - Travel
+# Labor 4 - Travel
 
 A harmadik laborban egy utazási iroda applikációját fejlesztjük ki, amelyet az utazási iroda munkatársai használnak.
 Az utazási iroda az ügyfeleinek több dolgot elvégez, és ehhez változatos technológiák használatára van szükség.

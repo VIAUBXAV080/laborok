@@ -1,4 +1,4 @@
-# Labor 4 - Maps & Wear
+# Labor 3 - Maps & Wear
 
 ## Bevezető
 
@@ -21,7 +21,7 @@ Felhasznált technológiák:
 - [`Wear IME`](https://developer.android.com/training/wearables/user-input/wear-ime)
 - [`Data Layer API`](https://developer.android.com/training/wearables/data/overview)
 - [`Maps SDK for Android Utility Library`](https://developers.google.com/maps/documentation/android-sdk/utility)
-- [Secrets Gradle Plugin](https://developers.google.com/maps/documentation/places/android-sdk/secrets-gradle-plugin)
+- [`Secrets Gradle Plugin`](https://developers.google.com/maps/documentation/places/android-sdk/secrets-gradle-plugin)
 
 
 <p align="center">
@@ -77,19 +77,19 @@ A feladatok megoldása során ne felejtsd el követni a [feladat beadás folyama
 
 A kezdő projektben az egyszerűség kedvéért már megtalálhatók a *Firebase* -hez szükséges függőségek is, hogy a projekt rögtön fordítható legyen. 
 
-Az alkalmazás küveti a *Clean Architecture* irányelveit, ami alapján a *viewModel* lekbe a *useCase*-ek vannak injektálja, amik majd szintén *dependency injectiont* használva továbbítják a kérést a *repositoryknak*.
+Az alkalmazás küveti a *Modern App Architecture* irányelveit, ami alapján a *viewModelekbe a *useCase*-ek vannak injektálja, amik majd szintén *dependency injectiont* használva továbbítják a kérést a *repositoryknak*.
 
 Az alkalmazás jelenlegi verziójában megtalálható egy bejelentkező valamint egy regisztrációs képernyő, illetve egy megfigyeléseket megjelenítő lista. Az új bejegyzés felvétele gomb hatására még nem történik semmi, hiszen az alkalmazásunk nincs összekötve a *Firestore* adatbázissal.
 
 A navigáció egy alsó *Navigation Bar*-ral történik.
 
 !!!warning "Áttekintés"
-	Már a kezdő projekt is igen sokmindent tartalmaz, és igen komplex architektúrával bír. Szánjunk pár percet a teljes áttekintésére és megértésére, hogy a labor során elkészítendő új funkciók helyét és mikéntjét könnyebben feldolgozzuk!
+	Már a kezdő projekt is igen sok mindent tartalmaz, és igen komplex architektúrával bír. Szánjunk pár percet a teljes áttekintésére és megértésére, hogy a labor során elkészítendő új funkciók helyét és mikéntjét könnyebben feldolgozzuk!
 
 
 ## Az alkalmazás összekötése a Firebase-szel
 
-Először is hozzunk létre egy projektet a [Firebase Console](https://console.firebase.google.com/)-on, és kössük azt össze az alkalmazásunkkal. A labor során az *authentikáció* és a *Firestore Database* funkciókat fogjuk használni. (A folyamatot részletesen lásd a [Firebase](https://viauav21.github.io/laborok/laborok/firebase/) laborban. A jelenlegi projekt tartalmaz egy *dummy* google-services.json fájlt a hibamentes futás érdekében, ezt eltávolítva a folyamat nulláról újrakezdhető.)
+Először is hozzunk létre egy projektet a [Firebase Console](https://console.firebase.google.com/)-on, és kössük azt össze az alkalmazásunkkal. A labor során az *authentikáció* és a *Firestore Database* funkciókat fogjuk használni. (A folyamatot részletesen lásd a [Firebase](https://viauav21.github.io/laborok/laborok/firebase/) laborban.)
 
 Az összekapcsolás után a regisztrációnak, a bejelentkezésnek és az új tétel felvételének is működnie kell.
 
@@ -167,7 +167,7 @@ object PermissionsUtil {
 }
 ```
 
-A pozícióhemhatározást akkor fogjuk megkezdeni, amikor a felhasználó a *Floating Action Buttonre* kattint, tehát a `BirdScreen`en van szükségünk az engedélykezelésre. Vegyük föl a szükséges engedélyeket egy listába, majd pedig tegyük bele egy `MultiplePermissionsState` állapotba. Ha ez az állapot megfelelő, akkor megkezdjük a pozíciómeghatározást és megjelenítjük a dialógust, ha nem, akkor elkérjük az engedélyt.
+A pozícióhemhatározást akkor fogjuk megkezdeni, amikor a felhasználó a *Floating Action Buttonre* kattint, tehát a `BirdListScreen`en van szükségünk az engedélykezelésre. Vegyük föl a szükséges engedélyeket egy listába, majd pedig tegyük bele egy `MultiplePermissionsState` állapotba. Ha ez az állapot megfelelő, akkor megkezdjük a pozíciómeghatározást és megjelenítjük a dialógust, ha nem, akkor elkérjük az engedélyt.
 
 ```kotlin
 if (state.isDialogOpen) {
@@ -178,21 +178,21 @@ if (state.isDialogOpen) {
         )
     )
     if (locationPermissions.allPermissionsGranted) {
-        viewModel.onEvent(SightingsEvent.StartLocationMonitoring)
+        viewModel.onEvent(BirdListEvent.StartLocationMonitoring)
 
         StringInputDialog(
             title = stringResource(id = R.string.label_new_sighting),
             label = stringResource(id = R.string.label_bird_name),
-            onDismiss = { viewModel.onEvent(SightingsEvent.CancelButtonClicked) },
+            onDismiss = { viewModel.onEvent(BirdListEvent.CancelButtonClicked) },
             onConfirm = {
-                viewModel.onEvent(SightingsEvent.NewBirdNameChanged(it))
-                viewModel.onEvent(SightingsEvent.SaveButtonClicked)
+                viewModel.onEvent(BirdListEvent.NewBirdNameChanged(it))
+                viewModel.onEvent(BirdListEvent.SaveButtonClicked)
             }
 
         )
     } else {
         AlertDialog(
-            onDismissRequest = { viewModel.onEvent(SightingsEvent.CancelButtonClicked) },
+            onDismissRequest = { viewModel.onEvent(BirdListEvent.CancelButtonClicked) },
             confirmButton = {
                 Button(
                     onClick = { locationPermissions.launchMultiplePermissionRequest() },
@@ -215,10 +215,10 @@ if (state.isDialogOpen) {
 }
 ```
 
-Ezek után vegyük föl a hiányzó `StartLocationMonitoring`eseményt a `SightingsEvent` osztályba, és kezeljük is le az eseményt az `onEvent` függvényben:
+Ezek után vegyük föl a hiányzó `StartLocationMonitoring`eseményt a `BirdListEvent` osztályba, és kezeljük is le az eseményt az `onEvent` függvényben:
 
 ```kotlin
-is SightingsEvent.StartLocationMonitoring -> {
+is BirdListEvent.StartLocationMonitoring -> {
     ///TODO start location monitoring
 }
 ```
@@ -232,7 +232,7 @@ Először vegyük föl a pozíciómeghatározást tartalmazó függőséget.A re
     implementation(libs.play.services.location)
 ```
 
-Ezek után már elkészíthetjük a szükséges osztályokat a *repository* rétegben egy `location` *package*-ben. Először egy *interface*-t készítünk:
+Ezek után már elkészíthetjük a szükséges osztályokat a *data* rétegben egy `location` *package*-ben. Először egy *interface*-t készítünk:
 
 `ILocationService.kt`:
 
@@ -254,7 +254,7 @@ Majd pedig azt a megvalósítást, ami a `FusedLocationProviderClient` segítsé
 
 `LocationService.kt`:
 
-```
+```kotlin
 package hu.bme.aut.android.birdwatchingapp.data.location
 
 import android.Manifest
@@ -368,10 +368,10 @@ object LocationModule {
 
 Ezek után illesszük be az architektúrába az új funkciót először a `RequestLocationUpdatesUseCase` majd a `RequestLocationUpdateUseCaseModule` megvalósításával.
 
-Ha ezzel megvagyunk, már használhatjuk is a pozíciómeghatározásunkat. A `BirdsViewModel` konstruktorába injektáljuk be a `RequestLocationUpdatesUseCase`-t és írjuk meg a pozíciómeghatározásért felelős függvényünket:
+Ha ezzel megvagyunk, már használhatjuk is a pozíciómeghatározásunkat. A `BirdListViewModel` konstruktorába injektáljuk be a `RequestLocationUpdatesUseCase`-t és írjuk meg a pozíciómeghatározásért felelős függvényünket:
 
 ```kotlin
-private fun onStartLocationMonitoring() {
+private fun startLocationMonitoring() {
     if (state.value.currentLocation == null)
         viewModelScope.launch {
             locationUseCase().collectLatest { pos ->
@@ -394,7 +394,7 @@ Most már a *Floating Action Button* megnyomására megkapjuk az engedélykéré
 
 ## Térkép megvalósítása (2 pont)
 
-Most, hogy már el tudjuk menteni a pozíciót is a megfigyeléseinkhez, célszerű lenne a megjelenítésüket is megoldani. Hozzunk létre ehhez egy térkép nézetet `OSMapScreen` néven, majd a hozzá tartozó *viewModelt* is `OSMapViewModel` néven a `feature.osm` *package*-ben.
+Most, hogy már el tudjuk menteni a pozíciót is a megfigyeléseinkhez, célszerű lenne a megjelenítésüket is megoldani. Hozzunk létre ehhez egy térkép nézetet `OSMapScreen` néven, majd a hozzá tartozó *viewModelt* is `OSMapViewModel` néven a `presentation.screen.osm` *package*-ben.
 
 Illesszük be az új felületet a navigációba! (Screen osztály kiegészítése, NavGraph kiegészítése, BottomNavigationItems kiegészítése)
 
@@ -412,13 +412,11 @@ Először is vegyük fel a szükséges függőséget. A referenciák már szerep
 Először valósítsuk meg az `OSMapViewModel`t, ami nem különbözik nagyban a korábbi `BirdsViewModel`től:
 
 ```kotlin
-package hu.bme.aut.android.birdwatchingapp.feature.osm
+package hu.bme.aut.android.birdwatchingapp.presentation.screen.osm
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.firebase.firestore.GeoPoint
 import dagger.hilt.android.lifecycle.HiltViewModel
-import hu.bme.aut.android.birdwatchingapp.data.bird.model.Bird
 import hu.bme.aut.android.birdwatchingapp.domain.usecases.auth.CurrentUserUseCase
 import hu.bme.aut.android.birdwatchingapp.domain.usecases.bird.AllBirdsUseCases
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -472,6 +470,17 @@ class OSMapViewModel @Inject constructor(
         _state.update { it.copy(isLoggedIn = currentUser() != null) }
 
 }
+```
+
+A hozzá tartozó állapot:
+
+`OSMapState.kt`:
+
+```kotlin
+package hu.bme.aut.android.birdwatchingapp.presentation.screen.osm
+
+import com.google.firebase.firestore.GeoPoint
+import hu.bme.aut.android.birdwatchingapp.domain.model.Bird
 
 data class OSMapState(
     val cameraPosition: GeoPoint = GeoPoint(47.0, 19.0),
@@ -483,6 +492,14 @@ data class OSMapState(
     val isError: Boolean = error != null,
     val birds: List<Bird> = emptyList()
 )
+```
+
+És event-ek:
+
+`OSMapEvent`:
+
+```kotlin
+package hu.bme.aut.android.birdwatchingapp.presentation.screen.osm
 
 sealed class OSMapEvent {
     data class CommunityModeChanged(val switchState: Boolean) : OSMapEvent()
@@ -606,10 +623,10 @@ Ezek után a szokásoknak megfelelően készítsük el az `Application` osztály
 
 ### A felület elkészítése
 
-Készítsük el a `NewBirdScreen` képernyőnket a `hu.bme.aut.android.birdwatchingapp.presentation.newbird` *package*-ben:
+Készítsük el a `NewBirdScreen` képernyőnket a `hu.bme.aut.android.birdwatchingapp.presentation.screen.newbird` *package*-ben:
 
 ```kotlin
-package hu.bme.aut.android.birdwatchingapp.presentation.newbird
+package hu.bme.aut.android.birdwatchingapp.presentation.screen.newbird
 
 
 import androidx.compose.foundation.background
@@ -639,7 +656,6 @@ import androidx.wear.compose.material3.Button
 import androidx.wear.compose.material3.Icon
 import androidx.wear.compose.material3.Text
 import hu.bme.aut.android.birdwatchingapp.R
-import hu.bme.aut.android.birdwatchingapp.presentation.newbird.NewBirdViewModel.NewBirdScreenEvent
 
 @Composable
 fun NewBirdScreen(
@@ -736,6 +752,15 @@ A *viewModel* ennek megfelelően a következőképpen alakul:
 `NewBirdViewModel`:
 
 ```kotlin
+package hu.bme.aut.android.birdwatchingapp.presentation.screen.newbird
+
+import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
+import javax.inject.Inject
+
 @HiltViewModel
 class NewBirdViewModel @Inject constructor(
 ) : ViewModel() {
@@ -761,19 +786,31 @@ class NewBirdViewModel @Inject constructor(
         }
     }
 
-    data class NewBirdScreenState(
-        val userInput: String = ""
-    )
-
-    sealed class NewBirdScreenEvent {
-        object SaveButtonClicked : NewBirdScreenEvent()
-        object ClearButtonClicked : NewBirdScreenEvent()
-        data class UserInputChanged(val userInput: String) : NewBirdScreenEvent()
-    }
-
     companion object {
         val inputTextKey = "new_bird_name"
     }
+}
+```
+
+`NewBirdScreenState.kt`:
+
+```kotlin
+package hu.bme.aut.android.birdwatchingapp.presentation.screen.newbird
+
+data class NewBirdScreenState(
+    val userInput: String = ""
+)
+```
+
+`NewBirdScreenEvent.kt`:
+
+```kotlin
+package hu.bme.aut.android.birdwatchingapp.presentation.screen.newbird
+
+sealed class NewBirdScreenEvent {
+    object SaveButtonClicked : NewBirdScreenEvent()
+    object ClearButtonClicked : NewBirdScreenEvent()
+    data class UserInputChanged(val userInput: String) : NewBirdScreenEvent()
 }
 ```
 
@@ -787,6 +824,8 @@ Vegyük föl a szükséges függőséget a modulba. A referenciák már szerepel
     //Wear Input
     implementation(libs.androidx.wear.input)
 ```
+
+Ezek után már össze tudjuk rakni a *remote input* kérést:
 
 `NewBirdScreen`:
 
@@ -810,14 +849,14 @@ val launcher = rememberLauncherForActivityResult(
     }
 }
 
-val intent: Intent = RemoteInputIntentHelper.createActionRemoteInputIntent()
-RemoteInputIntentHelper.putRemoteInputsExtra(intent, remoteInputs)
+val remoteInputIntent: Intent = RemoteInputIntentHelper.createActionRemoteInputIntent()
+RemoteInputIntentHelper.putRemoteInputsExtra(remoteInputIntent, remoteInputs)
 ```
 
 A kérés összerakása után a beviteli gomb eseménykezelőjében ezt a kérést kell elküldeni:
 
 ```kotlin
-onClick = { launcher.launch(input = intent)}
+launcher.launch(input = remoteInputIntent)
 ```
 
 Rakjuk föl a `WearActivity`-re a `NewBirdScreen`t és próbáljuk ki az alkalmazást! 
@@ -828,12 +867,12 @@ Most már működik a bevitelünk, csak a szöveg telefonra való átküldését
 
 #### Wear
 
-A telefon és a *Wear* eszköz között egyszerű adatküldésre ad lehetőséget a [`Data Layer API`](https://developer.android.com/training/wearables/data/overview). Használjuk ennek a funkcionalitását a `hu.bme.aut.android.birdwatchingapp.data` *package*-ben:
+A telefon és a *Wear* eszköz között egyszerű adatküldésre ad lehetőséget a [`Data Layer API`](https://developer.android.com/training/wearables/data/overview). Használjuk ennek a funkcionalitását a `hu.bme.aut.android.birdwatchingapp.data.communication` *package*-ben:
 
 `ISendDataRepository`:
 
 ```kolin
-package hu.bme.aut.android.birdwatchingapp.data
+package hu.bme.aut.android.birdwatchingapp.data.communication
 
 interface ISendDataRepository {
     fun sendMessage(message: String)
@@ -843,7 +882,7 @@ interface ISendDataRepository {
 `SendDataRepository`:
 
 ```kotlin
-package hu.bme.aut.android.birdwatchingapp.data
+package hu.bme.aut.android.birdwatchingapp.data.communication
 
 import android.content.Context
 import android.util.Log
@@ -887,15 +926,15 @@ class SendDataRepository @Inject constructor(
 }
 ```
 
-Vezessük végig az architektúrán ezt a funkciót is, vagyis készítsük el a hozzá tartozó `SendMessageUseCase`-t, illetve az injektálandó kontextushoz a `ContextModule`-t, a *usecase*-hez pedig a `SendMessageUseCaseModule`-t.
+Vezessük végig az architektúrán ezt a funkciót is, vagyis készítsük el a `BirdWearApp`-ban a hozzá tartozó `SendMessageUseCase`-t, a *usecase*-hez pedig a `SendMessageUseCaseModule`-t.
 
 Ha megvagyunk, már fel is használhatjuk ezeket a `NewBirdViewModel`ben:
 
 ```kotlin
+@HiltViewModel
 class NewBirdViewModel @Inject constructor(
-    private val context: Context,
     private val sendMessageUseCase: SendMessageUseCase
-) : ViewModel()
+) : ViewModel() {
 ...
 			is NewBirdScreenEvent.SaveButtonClicked -> {
                 if (state.value.userInput.isNotEmpty())
@@ -915,10 +954,10 @@ A `BirdPhoneApp` modulba visszatérve vegyük föl ide is a *Wear* függőséget
     implementation(libs.play.services.wearable)
 ```
 
-A `domain` *package*-ben készítsük el az üzeneteket feldolgozó *viewModellünket*:
+A `domain.location` *package*-ben készítsük el az üzeneteket feldolgozó *viewModellünket*:
 
 ```kotlin
-package hu.bme.aut.android.birdwatchingapp.domain
+package hu.bme.aut.android.birdwatchingapp.domain.location
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
@@ -928,7 +967,7 @@ import com.google.android.gms.wearable.MessageClient
 import com.google.android.gms.wearable.MessageEvent
 import com.google.firebase.firestore.GeoPoint
 import dagger.hilt.android.lifecycle.HiltViewModel
-import hu.bme.aut.android.birdwatchingapp.data.bird.model.Bird
+import hu.bme.aut.android.birdwatchingapp.domain.model.Bird
 import hu.bme.aut.android.birdwatchingapp.domain.usecases.auth.CurrentUserUseCase
 import hu.bme.aut.android.birdwatchingapp.domain.usecases.bird.SaveBirdUseCase
 import hu.bme.aut.android.birdwatchingapp.domain.usecases.location.RequestLocationUpdatesUseCase
@@ -1013,6 +1052,7 @@ class MainActivity : ComponentActivity() {
 
         messageClient.addListener(clientDataViewModel)
 
+		///TODO Permission handling
         clientDataViewModel.startLocationMonitoring()
     }
 
@@ -1023,6 +1063,8 @@ class MainActivity : ComponentActivity() {
 
 }
 ```
+
+Ne felejtsük el a pozíciómeghatározáshoz a futásidejű engedélykérést!
 
 [Kapcsoljuk össze](https://developer.android.com/training/wearables/get-started/connect-phone) az órát a telefonnal, és próbáljuk ki az almalmazást! 
 
@@ -1036,7 +1078,8 @@ class MainActivity : ComponentActivity() {
 Először is vegyük föl a szükséges függőséget a `BirdPhoneApp` modul `build.gradle.kts` fájljában. A referenciák már szerepelnek a `libs.versions.toml` fájlban, így csak a `build.gradle.kts`-be kell felvennünk a függőséget:
 
 ```gradle
-    implementation(libs.maps.compose.utils)
+//Google Maps Utility Library
+implementation(libs.maps.compose.utils)
 ```
 
 ### API kulcs
@@ -1092,7 +1135,7 @@ Ezek után már használhatjuk a `Google Maps`-et a projektünkben.
 
 ### Felület
 
-Vegyük fel a `hu.bme.aut.android.birdwatchingapp.feature.googlemap` *package*-ben a `GoogleMapScreen`-t valamint a `GoogleMapViewModel`-t és illesszük be őket a navigációba.
+Vegyük fel a `hu.bme.aut.android.birdwatchingapp.presentation.screen.googlemap` *package*-ben a `GoogleMapScreen`-t valamint a `GoogleMapViewModel`-t és illesszük be őket a navigációba.
 
 A felületen több funkciót is szeretnénk megvelósítani:
 
@@ -1100,10 +1143,10 @@ A felületen több funkciót is szeretnénk megvelósítani:
 1. Szeretnénk egy bekapcsolható hőtérképet is megvalósítani.
 1. Egy keresőmezőt is szeretnénk implementálni.
 
-A csoportosításhoz `ClusterItem`-ekre van szükségünk. Valósítsuk meg ezt a `hu.bme.aut.android.birdwatchingapp.ui.model` *package*-ben.
+A csoportosításhoz `ClusterItem`-ekre van szükségünk. Valósítsuk meg ezt a `hu.bme.aut.android.birdwatchingapp.presentation.ui.model` *package*-ben.
 
 ```kotlin
-package hu.bme.aut.android.birdwatchingapp.ui.model
+package hu.bme.aut.android.birdwatchingapp.presentation.ui.model
 
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.clustering.ClusterItem
@@ -1229,18 +1272,47 @@ fun GoogleMapScreen(
 }
 ```
 
-A `GoogleMapViewModel`-ben ennek megfelleően vegyük fön az alábbi függvényeket, majd egészítsük ki őket:
+`GoogleMapState.kt`:
 
 ```kotlin
-package hu.bme.aut.android.birdwatchingapp.feature.googlemap
+package hu.bme.aut.android.birdwatchingapp.presentation.screen.googlemap
+
+import com.google.android.gms.maps.model.CameraPosition
+import com.google.android.gms.maps.model.LatLng
+import hu.bme.aut.android.birdwatchingapp.presentation.ui.model.MyClusterItem
+
+data class GoogleMapState(
+    val cameraPosition: CameraPosition = CameraPosition.fromLatLngZoom(LatLng(47.0, 19.0), 10f),
+    val searchTerm: String = "",
+    val isHeatMapOn: Boolean = false,
+    val isLoading: Boolean = false,
+    val error: Throwable? = null,
+    val isError: Boolean = error != null,
+    val birds: List<MyClusterItem> = emptyList()
+)
+```
+
+`GoogleMapEvent.kt`:
+
+```kotlin
+package hu.bme.aut.android.birdwatchingapp.presentation.screen.googlemap
+
+sealed class GoogleMapEvent {
+    data class SearchTermChanged(val name: String) : GoogleMapEvent()
+    data class GoogleMapModeChanged(val switchState: Boolean) : GoogleMapEvent()
+}
+```
+
+A `GoogleMapViewModel`-ben ennek megfelleően vegyük föl az alábbi függvényeket, majd egészítsük ki őket:
+
+```kotlin
+package hu.bme.aut.android.birdwatchingapp.presentation.screen.googlemap
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import dagger.hilt.android.lifecycle.HiltViewModel
 import hu.bme.aut.android.birdwatchingapp.domain.usecases.bird.AllBirdsUseCases
-import hu.bme.aut.android.birdwatchingapp.ui.model.MyClusterItem
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -1291,21 +1363,6 @@ class GoogleMapViewModel @Inject constructor(
         }
         return list
     }
-}
-
-data class GoogleMapState(
-    val cameraPosition: CameraPosition = CameraPosition.fromLatLngZoom(LatLng(47.0, 19.0), 10f),
-    val searchTerm: String = "",
-    val isHeatMapOn: Boolean = false,
-    val isLoading: Boolean = false,
-    val error: Throwable? = null,
-    val isError: Boolean = error != null,
-    val birds: List<MyClusterItem> = emptyList()
-)
-
-sealed class GoogleMapEvent {
-    data class SearchTermChanged(val name: String) : GoogleMapEvent()
-    data class GoogleMapModeChanged(val switchState: Boolean) : GoogleMapEvent()
 }
 ```
 
