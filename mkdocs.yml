@@ -88,8 +88,8 @@ nav:
   - "Laborok":
       - laborok/snake/index.md
       - laborok/news/index.md
-      - laborok/travel/index.md
       - laborok/wear/index.md
+      - laborok/travel/index.md
       - laborok/ai/index.md
   - "Házi feladat":
       - hf/index.md
