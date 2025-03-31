@@ -21,6 +21,12 @@ A feladat során az alábbi technológiákkal fogunk találkozni:
 *   GraphQL
 *   Biometrikus azonosítás
 
+!!! info "Függőségek"
+Mivel ez a labor elég széles körű technológiákat fed le, ezért a projekt saját könyvtári függőségein kívül egy backend
+és egy MQTT bróker is szükséges hozzá. Ez némileg bonyolultabbá teszi a fejlesztést, de összetett dolgokat sajnos
+csak összetett megoldásokkal lehet kipróbálni, megtanulni. Mindazonáltal igyekeztünk ezeket a lépéseket megkönnyíteni
+azzal, hogy pontos instrukciókat adunk a külső függőségek futtatására Dockerrel is.
+
 Az alkalmazásban mindössze négy lényeges felület lesz. Kezdetben egy login képernyő fogad, amely a projektvázban bármilyen
 felhasználónév-jelszó párosra beenged. A főképernyőn a járatok láthatóak. A menüből navigálhatunk a
 másik két képernyőre. Az egyiken foglalást lehet végezni, a másikon az országok adatai böngészhetők. Az utóbbit kivéve
@@ -78,7 +84,16 @@ Linuxon és Macen:
 
 Vagy ha ismerős számunkra a Docker, akkor a projekt gyökerében elhelyezett `Dockerfile` segítségével készíthetünk egy
 image-et, amit futtatva elindul a backend. Ha így indítod, ügyelj rá, hogy a 8080-as belső portot mappeld a hosztgép
-8080-as portjára!
+8080-as portjára:
+
+```docker build -t travel-backend .```
+
+Majd:
+
+```docker run --rm -p:8080:8080 travel-backend```
+
+(Ezután egy jelentősebb ideig várni kell, mert letöltődnek a függőségek, és elkészül a build is, mielőtt a backend indul,
+de látni fogjuk majd a konzolon, ha elindult a backend.)
 
 Végezetül egy harmadik lehetőség, hogy ha ismerős számunkra a Java (Kotlin) alapú backendfejlesztés, akkor a projektet
 egy fejlesztőkörnyezetben (IntelliJ, Eclipse, VS Code) megnyitva is futtathatjuk a projektet.
@@ -99,7 +114,10 @@ tartalommal:
 ```
 
 Ez a felküldés nem része az Androidos alkalmazás funkcióinak, de ezt elvégezheted az előző laboron megismert `Swagger UI`
-felülettel, amely az OpenAPI leírással együtt most is generálódik. Vagy ha ismered, használhatod a Postman alkalmazást is.
+felülettel, amely az OpenAPI leírással együtt most is generálódik:
+http://localhost:8080/swagger-ui/index.html
+
+Vagy ha ismered, használhatod a Postman alkalmazást is.
 Egy új járat felvétele után a backend konzoljában tudod ellenőrizni, hogy beérkezett a backendhez az ajánlat.
 
 A megoldáshoz a `kotlinx-serialization` technológiát is használni fogjuk, ez kódgeneráláson alapul, ezért egy Gradle
@@ -552,7 +570,8 @@ Az alkalmazás login képernyője ezidáig bármit elfogadott, viszont a backend
 
 Nem feladat az alkalmazásban a regisztráció megvalósítása, de a bejelentkezéshez először egy felhasználót kell
 létrehoznod. A backendben ehhez is készült egy végpont, ezt meghívhatod a már megismert Swagger UI-jal vagy a
-Postmannel is. Nézd meg a hívás pontos módját a generált API-leírásban!
+Postmannel is. Nézd meg a hívás pontos módját a generált API-leírásban:
+http://localhost:8080/swagger-ui/index.html
 
 Ha regisztráltál felhasználót, akkor már használhatod a bejelentkezéshez is. A bejelentkezéshez is egy REST végpontot
 kell hívnod. Ez a sikeres bejelentkezést 200 OK státuszkóddal és egy törzsben visszaadott tokennel jelzi. Ha sikertelen
