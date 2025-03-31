@@ -813,6 +813,13 @@ practice-ek szerint biztonságosan tárolni.</li>
 <li>GraphQL</li>
 <li>Biometrikus azonosítás</li>
 </ul>
+<div class="admonition info">
+<p class="admonition-title">Függőségek</p>
+</div>
+<p>Mivel ez a labor elég széles körű technológiákat fed le, ezért a projekt saját könyvtári függőségein kívül egy backend
+és egy MQTT bróker is szükséges hozzá. Ez némileg bonyolultabbá teszi a fejlesztést, de összetett dolgokat sajnos
+csak összetett megoldásokkal lehet kipróbálni, megtanulni. Mindazonáltal igyekeztünk ezeket a lépéseket megkönnyíteni
+azzal, hogy pontos instrukciókat adunk a külső függőségek futtatására Dockerrel is.</p>
 <p>Az alkalmazásban mindössze négy lényeges felület lesz. Kezdetben egy login képernyő fogad, amely a projektvázban bármilyen
 felhasználónév-jelszó párosra beenged. A főképernyőn a járatok láthatóak. A menüből navigálhatunk a
 másik két képernyőre. Az egyiken foglalást lehet végezni, a másikon az országok adatai böngészhetők. Az utóbbit kivéve
@@ -864,7 +871,12 @@ nélkül indítjuk, akkor JDK 17 vagy újabb szükséges hozzá. A backend egy g
 <p><code>./gradlew bootRun</code></p>
 <p>Vagy ha ismerős számunkra a Docker, akkor a projekt gyökerében elhelyezett <code>Dockerfile</code> segítségével készíthetünk egy
 image-et, amit futtatva elindul a backend. Ha így indítod, ügyelj rá, hogy a 8080-as belső portot mappeld a hosztgép
-8080-as portjára!</p>
+8080-as portjára:</p>
+<p><code>docker build -t travel-backend .</code></p>
+<p>Majd:</p>
+<p><code>docker run --rm -p:8080:8080 travel-backend</code></p>
+<p>(Ezután egy jelentősebb ideig várni kell, mert letöltődnek a függőségek, és elkészül a build is, mielőtt a backend indul,
+de látni fogjuk majd a konzolon, ha elindult a backend.)</p>
 <p>Végezetül egy harmadik lehetőség, hogy ha ismerős számunkra a Java (Kotlin) alapú backendfejlesztés, akkor a projektet
 egy fejlesztőkörnyezetben (IntelliJ, Eclipse, VS Code) megnyitva is futtathatjuk a projektet.</p>
 <p>Az új ajánlatok érkezését (és ezáltal a WebSocketen új üzenet küldését) a backend egy adott végpontjával válthatjuk ki.
@@ -880,7 +892,9 @@ tartalommal:</p>
 <span class="p">}</span>
 </code></pre></div>
 <p>Ez a felküldés nem része az Androidos alkalmazás funkcióinak, de ezt elvégezheted az előző laboron megismert <code>Swagger UI</code>
-felülettel, amely az OpenAPI leírással együtt most is generálódik. Vagy ha ismered, használhatod a Postman alkalmazást is.
+felülettel, amely az OpenAPI leírással együtt most is generálódik:
+<a href="http://localhost:8080/swagger-ui/index.html">http://localhost:8080/swagger-ui/index.html</a></p>
+<p>Vagy ha ismered, használhatod a Postman alkalmazást is.
 Egy új járat felvétele után a backend konzoljában tudod ellenőrizni, hogy beérkezett a backendhez az ajánlat.</p>
 <p>A megoldáshoz a <code>kotlinx-serialization</code> technológiát is használni fogjuk, ez kódgeneráláson alapul, ezért egy Gradle
 plugin is szükséges hozzá. Ezért először a projektszintű <code>build.gradle.kts</code> fájlba vegyük fel a szükséges plugint:</p>
@@ -1266,7 +1280,8 @@ helyen meg kell hívnod az új Screent composable függvényként.</p>
 úgy az alkalmazást, hogy ténylegesen a backend hívásával végezze a bejelentkezést.</p>
 <p>Nem feladat az alkalmazásban a regisztráció megvalósítása, de a bejelentkezéshez először egy felhasználót kell
 létrehoznod. A backendben ehhez is készült egy végpont, ezt meghívhatod a már megismert Swagger UI-jal vagy a
-Postmannel is. Nézd meg a hívás pontos módját a generált API-leírásban!</p>
+Postmannel is. Nézd meg a hívás pontos módját a generált API-leírásban:
+<a href="http://localhost:8080/swagger-ui/index.html">http://localhost:8080/swagger-ui/index.html</a></p>
 <p>Ha regisztráltál felhasználót, akkor már használhatod a bejelentkezéshez is. A bejelentkezéshez is egy REST végpontot
 kell hívnod. Ez a sikeres bejelentkezést 200 OK státuszkóddal és egy törzsben visszaadott tokennel jelzi. Ha sikertelen
 a bejelentkezés, akkor 401 UNAUTHORIZED választ kapsz.</p>
@@ -1303,8 +1318,8 @@ futó alkalmazás az ujjlenyomat-azonosítást kérő dialógussal.</p>
           </path>
         </svg>
       </span>
-      <span title="2025. március 29. 18:03:34">
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2025. március 29. 18:03:34"><span class="timeago" datetime="2025-03-29T18:03:34+01:00" locale="hu"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2025. március 29. 18:03:34">2025-03-29</span>
+      <span title="2025. március 31. 15:41:01">
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2025. március 31. 15:41:01"><span class="timeago" datetime="2025-03-31T15:41:01+02:00" locale="hu"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2025. március 31. 15:41:01">2025-03-31</span>
       </span>
     </span>
 
